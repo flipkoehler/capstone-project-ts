@@ -17,8 +17,7 @@ const GlobalStyles = createGlobalStyle`
         --globalWhite: #fff;
         --lightGray: #F0F2EF;
         --darkBlue: #0D324D;
-        
-        ;
+        --smokeyBlack: #121113;
     }
    
     html,
