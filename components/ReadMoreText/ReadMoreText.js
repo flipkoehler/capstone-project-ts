@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 // this sets set state true or false // the children is the passed text
-export const ReadMore = ({ children }) => {
+export default function ReadMore({ children }) {
   const text = children;
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
@@ -21,7 +21,7 @@ export const ReadMore = ({ children }) => {
       </SpanStyled>
     </p>
   );
-};
+}
 
 // CSS Styling for the link
 const SpanStyled = styled.span`

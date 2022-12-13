@@ -2,9 +2,9 @@
 import styled from "styled-components";
 
 export default function Header() {
-  return <H2Styled>Movie Flip</H2Styled>;
+  return <StyledH2>Movie Flip</StyledH2>;
 }
 
-const H2Styled = styled.h2`
+const StyledH2 = styled.h2`
   text-align: center;
 `;

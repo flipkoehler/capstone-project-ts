@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ReadMore } from "../../components/ReadMoreText/ReadMoreText";
+import ReadMore from "../../components/ReadMoreText/ReadMoreText";
 import Header from "../../components/Header/Header";
 import styled from "styled-components";
 
-export default function RandomMoviePicker({ movieArray }) {
+export default function RandomMoviePicker({ movies }) {
   const [randomPick, setRandomPick] = useState(0); // picks a random number
-  const listItems = movieArray.map((movie) => <li key={movie.id}></li>); // map through the movie Array
-  const productionYear = movieArray[randomPick].release_date.slice(0, 4); // slices down the production year, e.g. 2014-12-04 > 2014
+  const listItems = movies.map((movie) => <li key={movie.id}></li>); // map through the movie Array
+  const productionYear = movies[randomPick].release_date.slice(0, 4); // slices down the production year, e.g. 2014-12-04 > 2014
   useEffect(() => {
     setRandomPick(Math.floor(Math.random() * listItems.length));
   }, [listItems.length]); // calculates a random number on a page load
@@ -18,23 +18,23 @@ export default function RandomMoviePicker({ movieArray }) {
   return (
     <>
       <Header />
-      <SectionStyled aria-label="movie content">
-        <ImageWrap aria-label="Image Wrap Div">
+      <SectionStyled>
+        <ImageWrap>
           <Image
-            src={`https://image.tmdb.org/t/p/w500/${movieArray[randomPick].poster_path}`}
-            alt={movieArray[randomPick].title}
+            src={`https://image.tmdb.org/t/p/w500/${movies[randomPick].poster_path}`}
+            alt={movies[randomPick].title}
             width={203}
             height={304}
           />
         </ImageWrap>
-        <h2>{movieArray[randomPick].title}</h2>
+        <h2>{movies[randomPick].title}</h2>
         <MovieTagsUl>
-          <MovieTags>{movieArray[randomPick].runtime} Minuten</MovieTags>
-          <MovieTags>{movieArray[randomPick].genres[0].name}</MovieTags>
+          <MovieTags>{movies[randomPick].runtime} Minuten</MovieTags>
+          <MovieTags>{movies[randomPick].genres[0].name}</MovieTags>
           <MovieTags>Jahr: {productionYear}</MovieTags>
         </MovieTagsUl>
-        <ReadMore aria-label="mehr lesen oder weniger lesen">
-          {movieArray[randomPick].overview}
+        <ReadMore aria-label="read more or read less">
+          {movies[randomPick].overview}
         </ReadMore>
       </SectionStyled>
     </>
@@ -65,6 +65,8 @@ const MovieTagsUl = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
+  padding: 0;
+  margin: 0;
 `;
 
 const MovieTags = styled.li`
