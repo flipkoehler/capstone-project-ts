@@ -17,7 +17,7 @@ export default function ReadMore({ children }) {
       {isReadMore ? `${text.slice(0, 200)}...` : text}
       <SpanStyled onClick={toggleReadMore}>
         <br></br>
-        {isReadMore ? "... mehr lesen" : "Text wieder einklappen"}
+        {isReadMore ? "...mehr lesen" : "Text wieder einklappen"}
       </SpanStyled>
     </p>
   );
