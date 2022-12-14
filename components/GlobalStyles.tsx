@@ -38,6 +38,21 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
 
     }
+
+    section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--globalWhite);
+    padding: 20px;
+    border-radius: 30px 30px 0px 30px;
+    margin: 5px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
 `;
 
 export default GlobalStyles;

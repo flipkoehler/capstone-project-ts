@@ -18,9 +18,9 @@ export default function RandomMoviePicker({ movies }) {
   return (
     <>
       <Header />
-      <SectionStyled>
+      <section>
         <ImageWrap>
-          <Image
+          <StyledImage
             src={`https://image.tmdb.org/t/p/w500/${movies[randomPick].poster_path}`}
             alt={movies[randomPick].title}
             width={203}
@@ -36,22 +36,10 @@ export default function RandomMoviePicker({ movies }) {
         <ReadMore aria-label="read more or read less">
           {movies[randomPick].overview}
         </ReadMore>
-      </SectionStyled>
+      </section>
     </>
   );
 }
-
-// CSS Styling for the main section
-const SectionStyled = styled.section`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--globalWhite);
-  text-align: center;
-  padding: 20px;
-  border-radius: 30px 30px 0px 30px;
-  margin: 5px;
-`;
 
 // CSS Styling for the container around the Image
 const ImageWrap = styled.div`
@@ -76,4 +64,8 @@ const MovieTags = styled.li`
   margin: 5px 5px;
   background-color: var(--smokeyBlack);
   border-radius: 10px;
+`;
+
+const StyledImage = styled(Image)`
+  border-radius: 5px;
 `;
