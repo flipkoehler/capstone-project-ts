@@ -14,7 +14,7 @@ export default function RandomMoviePicker({ movies }) {
     setRandomPick(Math.floor(Math.random() * listItems.length));
   }, [listItems.length]); // calculates a random number on a page load
 
-  // return the movie details bassed on the random number
+  //return the movie details bassed on the random number
   return (
     <>
       <Header />
@@ -27,7 +27,7 @@ export default function RandomMoviePicker({ movies }) {
             height={304}
           />
         </ImageWrap>
-        <h2>{movies[randomPick].title}</h2>
+        <StyledH2>{movies[randomPick].title}</StyledH2>
         <MovieTagsUl>
           <MovieTags>{movies[randomPick].runtime} Minuten</MovieTags>
           <MovieTags>{movies[randomPick].genres[0].name}</MovieTags>
@@ -68,4 +68,8 @@ const MovieTags = styled.li`
 
 const StyledImage = styled(Image)`
   border-radius: 5px;
+`;
+
+const StyledH2 = styled.h2`
+  text-align: center;
 `;

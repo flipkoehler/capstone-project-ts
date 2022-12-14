@@ -1,7 +1,6 @@
+// This site welcomes the user with content that explains what the user can expect from this page.
+
 import Link from "next/link";
-import HappyIcon from "../../assets/images/clarity_happy-face-line.svg";
-import ClockIcon from "../../assets/images/clarity_clock-line.svg";
-import BullsEyeIcon from "../../assets/images/clarity_bullseye-line.svg";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -19,15 +18,30 @@ export default function WelcomePage() {
         <p>Movie Flip bietet dir folgende Vorteile:</p>
         <StyledUl>
           <StyledLi>
-            <StyledImage src={HappyIcon} width={30} alt="happy Icon" /> Filme
-            passend zur täglichen Stimmung
+            <StyledImage
+              src={"/images/clarity_happy-face-line.svg"}
+              width={30}
+              height={30}
+              alt="happy Icon"
+            />
+            Filme passend zur täglichen Stimmung
           </StyledLi>
           <StyledLi>
-            <StyledImage src={ClockIcon} width={30} alt="Clock Icon" />
+            <StyledImage
+              src={"/images/clarity_clock-line.svg"}
+              width={30}
+              height={30}
+              alt="Clock Icon"
+            />
             passgenau mit deinem Zeitfenster
           </StyledLi>
           <StyledLi>
-            <StyledImage src={BullsEyeIcon} width={30} alt="Bullseye Icon" />
+            <StyledImage
+              src={"/images/clarity_bullseye-line.svg"}
+              width={30}
+              height={30}
+              alt="Bullseye Icon"
+            />
             handverlesene Empfehlungen
           </StyledLi>
         </StyledUl>
@@ -38,6 +52,8 @@ export default function WelcomePage() {
     </>
   );
 }
+
+// CSS Styling
 
 const StyledUl = styled.ul`
   padding: 0;

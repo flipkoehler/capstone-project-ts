@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h2 {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
 `;
