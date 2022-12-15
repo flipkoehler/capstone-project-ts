@@ -72,13 +72,14 @@ const GlobalStyles = createGlobalStyle`
         align-items: center;
         justify-content: center;
         box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
+        
     }
 
     button:hover{
         background-color: var(--darkBlue);
         color: var(--globalWhite);
+        transition: ease-in-out .3s
     }
-
 `;
 
 export default GlobalStyles;

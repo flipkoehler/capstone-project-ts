@@ -45,9 +45,10 @@ export default function WelcomePage() {
             handverlesene Empfehlungen
           </StyledLi>
         </StyledUl>
-        <StyledLink href="/movie-recommendation">
-          Filmempfehlung ansehen!
-        </StyledLink>
+        <StyledLink href="/quiz">Quiz jetzt starten!</StyledLink>
+        <StyledLink2 href="/movie-recommendation">
+          Oder eine zufällige Filmempfehlung!
+        </StyledLink2>
       </section>
     </>
   );
@@ -92,4 +93,16 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const StyledLink2 = styled(Link)`
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--smokey-black);
 `;
