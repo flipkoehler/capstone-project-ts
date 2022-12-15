@@ -1,11 +1,12 @@
-// This function generates the movie details
+// This function generates the movie detail page, which shows all passed data to one picked Movie
 import Header from "../Header/Header";
 import ReadMore from "../ReadMoreText/ReadMoreText";
 import Image from "next/image";
 import styled from "styled-components";
 
 export default function MovieDetailPage({ passedMovie }) {
-  console.log("MovieDetailPage", passedMovie);
+  const productionYear = passedMovie.release_date.slice(0, 4); // slices down the production year, e.g. 2014-12-04 > 2014
+
   return (
     <>
       <Header />
@@ -23,7 +24,7 @@ export default function MovieDetailPage({ passedMovie }) {
         <MovieTagsUl>
           <MovieTags>{passedMovie.runtime} Minuten</MovieTags>
           <MovieTags>{passedMovie.genres[0].name}</MovieTags>
-          {/* <MovieTags>Jahr: {productionYear}</MovieTags> */}
+          <MovieTags>Jahr: {productionYear}</MovieTags>
         </MovieTagsUl>
         <ReadMore aria-label="read more or read less">
           {passedMovie.overview}
