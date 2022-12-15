@@ -49,8 +49,34 @@ const GlobalStyles = createGlobalStyle`
     margin: 5px;
     }
 
+    h1 {
+        text-align: center;
+    }
+
     h2 {
         font-size: 1.4rem;
+    }
+
+    button {
+        width: 300px;
+        max-height: 50px;
+        background-color: var(--globalWhite);
+        color: var(--smokeyBlack);
+        border: var(--darkBlue) 3px solid;
+        margin: 10px auto;
+        padding: 20px;
+        border-radius: 15px;
+        font-size: 1.1rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    button:hover{
+        background-color: var(--darkBlue);
+        color: var(--globalWhite);
     }
 
 `;

@@ -1,15 +1,16 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import styled from "styled-components";
 import { movieData } from "../../assets/data/movieData";
 
 export default function MovieQuiz() {
+  const router = useRouter();
   const [quizStep, setQuizStep] = useState(0); // sets the step the user is currently at the quiz
   const [movieDataStep1, setMovieDataStep1] = useState(movieData); // sets the filtered movie data array
   const [randomPick, setRandomPick] = useState(null); // picks a random number for choosing one movie out of the filtered array
-  const router = useRouter();
-  console.log("RandomPick: ", randomPick, "array: ", movieDataStep1);
 
-  async function handleButton(passedRuntime) {
+  function handleButton(passedRuntime) {
+    // step 1: filter through the array and create an new one "step1movies"
     const step1movies = movieData.filter((movie) => {
       if (passedRuntime === "short") {
         return movie.runtime <= 100;
@@ -24,10 +25,11 @@ export default function MovieQuiz() {
     setQuizStep(quizStep + 1);
     setMovieDataStep1(step1movies);
 
-    // map through the movie Array
-    step1movies.map((movie) => <li key={movie.id}></li>);
+    // step 2: create a random number between 0 and the new array length
     setRandomPick(Math.floor(Math.random() * step1movies.length));
-    await router.push(`/movies/${movieDataStep1[randomPick].id}`);
+
+    // step 3: navigate to the new page
+    router.push(`/movies/${step1movies[randomPick].id}`);
   }
 
   return (
@@ -43,3 +45,8 @@ export default function MovieQuiz() {
     </>
   );
 }
+
+const StyledButton = styled.button`
+  max-width: 250px;
+  height: 100px;
+`;
