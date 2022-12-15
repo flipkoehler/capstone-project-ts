@@ -6,12 +6,11 @@ import { movieData } from "../../assets/data/movieData";
 
 export default function MovieQuiz() {
   const router = useRouter();
-  const [quizStep, setQuizStep] = useState(0); // sets the step the user is currently at the quiz (import for the next steps)
   const [movieDataFiltered, setMovieDataFiltered] = useState(movieData); // sets the filtered movie data array (import for the next steps)
 
   function handleButton(passedRuntime) {
     // step 1: filter through the array and create an new one "step1movies"
-    const step1movies = movieData.filter((movie) => {
+    const step1movies = movieDataFiltered.filter((movie) => {
       if (passedRuntime === "short") {
         return movie.runtime <= 100;
       }
@@ -22,7 +21,7 @@ export default function MovieQuiz() {
         return movie.runtime >= 140;
       } else return movieData;
     });
-    setQuizStep(quizStep + 1);
+
     setMovieDataFiltered(step1movies);
 
     // step 2: create a random number between 0 and the new array length
