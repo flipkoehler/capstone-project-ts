@@ -18,37 +18,22 @@ export default function MovieQuiz() {
   function handleMovieData(givenAnswers) {
     // step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
     if (currentStep >= 1) {
-      const filteredMovies = movieData
-        .filter((movie) => {
-          if (givenAnswers[0].movieChoice === "shortMovies") {
-            return movie.runtime <= 100;
-          }
-          if (givenAnswers[0].movieChoice === "middleMovies") {
-            return movie.runtime >= 100 && movie.runtime <= 140;
-          }
-          if (givenAnswers[0].movieChoice === "longMovies") {
-            return movie.runtime >= 140;
-          } else return movieData;
-        })
-        // step 2: filter to search for the right release dates
-
-        .filter((movie) => {
-          if (givenAnswers[1].movieChoice === "publishedOld") {
-            return movie.release_date <= 1987;
-          }
-          if (givenAnswers[1].movieChoice === "publishedModernClassics") {
-            return movie.release_date >= 1987 && movie.runtime <= 2010;
-          }
-          if (givenAnswers[1].movieChoice === "publishedNew") {
-            return movie.release_date >= 2010;
-          } else return givenAnswers;
-        });
+      const filteredMovies = movieData.filter((movie) => {
+        return (
+          movie.runtime >= givenAnswers[0].movieChoice[0].min &&
+          movie.runtime <= givenAnswers[0].movieChoice[0].max &&
+          movie.release_date >= givenAnswers[1].movieChoice[0].min &&
+          movie.release_date <= givenAnswers[1].movieChoice[0].max
+        );
+      });
 
       // step 3: create a random number between 0 and the filteredMovies length - to pick a random movie
       const randomNumber = Math.floor(Math.random() * filteredMovies.length);
 
       // step 4: navigate to the random movie detail page
-      router.push(`/movies/${filteredMovies[randomNumber].id}`);
+      if (filteredMovies.length > 0) {
+        router.push(`/movies/${filteredMovies[randomNumber].id}`);
+      } else router.push(`/errorpages/no-movie`);
     }
   }
 
@@ -68,7 +53,7 @@ export default function MovieQuiz() {
 
   // this is the html shown. It takes the content from the questionData Array and maps through it
   return (
-    <form>
+    <form onSubmit={handleNext}>
       <section>
         <h1>{questionAnswer[currentStep].question}</h1>
         {questionAnswer[currentStep].answerOptions.map((answer, index) => (
@@ -80,17 +65,14 @@ export default function MovieQuiz() {
               type="radio"
               value="answer.value"
               name="answer"
+              readOnly
               checked={answer.value === givenAnswers[currentStep]?.movieChoice}
             />
             {answer.answer}
           </StyledAnswerWrapper>
         ))}
         <div>
-          <button
-            type="submit"
-            onClick={handleNext}
-            disabled={currentStep === givenAnswers.length}
-          >
+          <button type="submit" disabled={currentStep === givenAnswers.length}>
             {currentStep === 0 ? "Weiter" : "Zur Filmempfehlung"}
           </button>
         </div>
