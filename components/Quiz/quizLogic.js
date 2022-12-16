@@ -68,11 +68,11 @@ export default function MovieQuiz() {
 
   // this is the html shown. It takes the content from the questionData Array and maps through it
   return (
-    <>
+    <form>
       <section>
         <h1>{questionAnswer[currentStep].question}</h1>
         {questionAnswer[currentStep].answerOptions.map((answer, index) => (
-          <StyledDiv
+          <StyledAnswerWrapper
             key={index}
             onClick={() => handleAnswerOption(answer.value)}
           >
@@ -80,11 +80,10 @@ export default function MovieQuiz() {
               type="radio"
               value="answer.value"
               name="answer"
-              onChange={() => handleAnswerOption(answer.value)}
               checked={answer.value === givenAnswers[currentStep]?.movieChoice}
             />
             {answer.answer}
-          </StyledDiv>
+          </StyledAnswerWrapper>
         ))}
         <div>
           <button
@@ -96,12 +95,12 @@ export default function MovieQuiz() {
           </button>
         </div>
       </section>
-    </>
+    </form>
   );
 }
 
 // CSS Styling
-const StyledDiv = styled.div`
+const StyledAnswerWrapper = styled.div`
   width: 320px;
   font-size: 1.2rem;
   margin: 0.4rem auto;
