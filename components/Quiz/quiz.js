@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 import { movieData } from "../../assets/data/movieData";
+import { questionAnswer } from "../../assets/data/questionData";
 
 export default function MovieQuiz() {
   const router = useRouter();
   const [movieDataFiltered, setMovieDataFiltered] = useState(movieData); // sets the filtered movie data array (import for the next steps)
+  const [currentStep, setCurrentStep] = useState(0);
 
   function handleButton(passedRuntime) {
     // step 1: filter through the array and create an new one "step1movies"
@@ -31,16 +33,37 @@ export default function MovieQuiz() {
     router.push(`/movies/${step1movies[randomNumber].id}`);
   }
 
+  function handleNext() {
+    setCurrentStep(currentStep + 1);
+  }
+
+  function handlePrevious() {
+    setCurrentStep(currentStep - 1);
+  }
+
+  console.log(currentStep);
+
   return (
     <>
       <section>
-        <h1>Wie lange darf dein Film heute dauern?</h1>
+        <h1>{questionAnswer[currentStep].question}</h1>
+        {questionAnswer[currentStep].answerOptions.map((answer, index) => (
+          <div key={index}>
+            <input type="radio" value="answer.value}" />
+            {answer.answer}
+          </div>
+        ))}
+        <div>
+          <button onClick={handleNext}>Weiter</button>
+          <button onClick={handlePrevious}>Zurück</button>
+        </div>
+        {/* <h1>Wie lange darf dein Film heute dauern?</h1>
         <button onClick={() => handleButton("short")}>Nur kurz</button>
         <button onClick={() => handleButton("middle")}>
           Normale Lauflänge
         </button>
         <button onClick={() => handleButton("long")}>Ich habe Zeit</button>
-        <StyledLink2 href="/movie-recommendation">ist mir egal</StyledLink2>
+        <StyledLink2 href="/movie-recommendation">ist mir egal</StyledLink2> */}
       </section>
     </>
   );
