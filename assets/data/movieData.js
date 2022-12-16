@@ -83,7 +83,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "1999-10-15",
+    release_date: 1999,
     revenue: 6203044,
     runtime: 111,
     spoken_languages: [
@@ -214,7 +214,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "2020-12-23",
+    release_date: 2020,
     revenue: 21029340,
     runtime: 97,
     spoken_languages: [
@@ -277,7 +277,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "1999-12-10",
+    release_date: 1999,
     revenue: 48451803,
     runtime: 188,
     spoken_languages: [
@@ -378,7 +378,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "2019-10-18",
+    release_date: 2019,
     revenue: 82468705,
     runtime: 108,
     spoken_languages: [
@@ -440,7 +440,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "1957-04-10",
+    release_date: 1957,
     revenue: 1000000,
     runtime: 96,
     spoken_languages: [
@@ -523,7 +523,7 @@ export const movieData = [
         name: "Italy",
       },
     ],
-    release_date: "1984-05-23",
+    release_date: 1984,
     revenue: 5472914,
     runtime: 229,
     spoken_languages: [
@@ -600,7 +600,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "2014-06-05",
+    release_date: 2014,
     revenue: 48137666,
     runtime: 165,
     spoken_languages: [
@@ -742,7 +742,7 @@ export const movieData = [
         name: "Sweden",
       },
     ],
-    release_date: "2021-10-13",
+    release_date: 2021,
     revenue: 11800000,
     runtime: 128,
     spoken_languages: [
@@ -807,7 +807,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "2020-12-13",
+    release_date: 2020,
     revenue: 13868965,
     runtime: 113,
     spoken_languages: [
@@ -870,7 +870,7 @@ export const movieData = [
         name: "United States of America",
       },
     ],
-    release_date: "1997-10-07",
+    release_date: 1997,
     revenue: 43101594,
     runtime: 147,
     spoken_languages: [

@@ -6,46 +6,62 @@ import { movieData } from "../../assets/data/movieData";
 import { questionAnswer } from "../../assets/data/questionData";
 
 export default function MovieQuiz() {
+  // uesd for routing
   const router = useRouter();
-  // const [movieDataFiltered, setMovieDataFiltered] = useState(movieData); // sets the filtered movie data array (import for the next steps)
-  const [currentStep, setCurrentStep] = useState(0); // sets the current question step the user is in
-  const [givenAnswers, setGivenAnswers] = useState([]); // saves the given answer in an array
+  // sets the current question step the user is in (e.g. Step 1 out of 4)
+  const [currentStep, setCurrentStep] = useState(0);
+  // saves the given answer in an array (e.g. Question 1 - short movies)
+  const [givenAnswers, setGivenAnswers] = useState([]);
 
-  function handleButton(passedRuntime) {
-    if (currentStep !== 0) {
+  function handleMovieData(givenAnswers) {
+    console.log(givenAnswers[0].movieChoice);
+    if (currentStep >= 1) {
       // step 1: filter through the array and create an new one "step1movies"
-      const step1movies = movieData.filter((movie) => {
-        if (passedRuntime === "short") {
-          return movie.runtime <= 100;
-        }
-        if (passedRuntime === "middle") {
-          return movie.runtime >= 100 && movie.runtime <= 140;
-        }
-        if (passedRuntime === "long") {
-          return movie.runtime >= 140;
-        } else return movieData;
-      });
+      const step1movies = movieData
+        .filter((movie) => {
+          if (givenAnswers[0].movieChoice === "shortMovies") {
+            return movie.runtime <= 100;
+          }
+          if (givenAnswers[0].movieChoice === "middleMovies") {
+            return movie.runtime >= 100 && movie.runtime <= 140;
+          }
+          if (givenAnswers[0].movieChoice === "longMovies") {
+            return movie.runtime >= 140;
+          } else return movieData;
+          // step 2: filter to search for the right production
+        })
+        .filter((movie) => {
+          if (givenAnswers[1].movieChoice === "publishedOld") {
+            return movie.release_date <= 1987;
+          }
+          if (givenAnswers[1].movieChoice === "publishedModernClassics") {
+            return movie.release_date >= 1987 && movie.runtime <= 2010;
+          }
+          if (givenAnswers[1].movieChoice === "publishedNew") {
+            return movie.release_date >= 2010;
+          } else return givenAnswers;
+        });
 
-      // setMovieDataFiltered(step1movies);
-
-      // step 2: create a random number between 0 and the new array length
+      // step 3: create a random number between 0 and the new array length - to pick a random movie
       const randomNumber = Math.floor(Math.random() * step1movies.length);
 
-      // step 3: navigate to the new page
+      // step 4: navigate to the random movie detail page
       router.push(`/movies/${step1movies[randomNumber].id}`);
     }
   }
 
-  const handleAnswerOption = (answer) => {
+  // Function takes the input value and add it to the array with the current answers
+  function handleAnswerOption(answer) {
     setGivenAnswers([(givenAnswers[currentStep] = { movieChoice: answer })]);
     setGivenAnswers([...givenAnswers]);
-    console.log(givenAnswers);
-  };
+  }
 
+  // Function handels the Click on the Button. It sets the current step the user is in
+  // and it gives the current array with the given answers to the main function that calculates the movie
   function handleNext(event) {
     event.preventDefault();
     setCurrentStep(currentStep + 1);
-    handleButton();
+    handleMovieData(givenAnswers);
   }
 
   return (
@@ -60,13 +76,20 @@ export default function MovieQuiz() {
                 value="answer.value"
                 name="answer"
                 onChange={(e) => handleAnswerOption(answer.value)}
+                checked={
+                  answer.value === givenAnswers[currentStep]?.movieChoice
+                }
               />
               {answer.answer}
             </div>
           ))}
           <div>
-            <button type="submit" onClick={handleNext}>
-              Weiter
+            <button
+              type="submit"
+              onClick={handleNext}
+              disabled={currentStep === givenAnswers.length}
+            >
+              {currentStep === 0 ? "Weiter" : "Zur Filmempfehlung"}
             </button>
           </div>
         </form>
@@ -86,34 +109,3 @@ const StyledLink2 = styled(Link)`
   justify-content: center;
   color: var(--smokey-black);
 `;
-
-// function handleButton(passedRuntime) {
-//   // step 1: filter through the array and create an new one "step1movies"
-//   const step1movies = movieDataFiltered.filter((movie) => {
-//     if (passedRuntime === "short") {
-//       return movie.runtime <= 100;
-//     }
-//     if (passedRuntime === "middle") {
-//       return movie.runtime >= 100 && movie.runtime <= 140;
-//     }
-//     if (passedRuntime === "long") {
-//       return movie.runtime >= 140;
-//     } else return movieData;
-//   });
-
-//   setMovieDataFiltered(step1movies);
-
-//   // step 2: create a random number between 0 and the new array length
-//   const randomNumber = Math.floor(Math.random() * step1movies.length);
-
-//   // step 3: navigate to the new page
-//   router.push(`/movies/${step1movies[randomNumber].id}`);
-// }
-
-//  <h1>Wie lange darf dein Film heute dauern?</h1>
-//   <button onClick={() => handleButton("short")}>Nur kurz</button>
-//   <button onClick={() => handleButton("middle")}>
-//     Normale Lauflänge
-//   </button>
-//   <button onClick={() => handleButton("long")}>Ich habe Zeit</button>
-//   <StyledLink2 href="/movie-recommendation">ist mir egal</StyledLink2>
