@@ -58,7 +58,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     button {
-        width: 300px;
+        width: 240px;
         max-height: 50px;
         background-color: var(--darkBlue);
         color: var(--globalWhite);
