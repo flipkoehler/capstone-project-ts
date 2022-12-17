@@ -58,11 +58,11 @@ const GlobalStyles = createGlobalStyle`
     }
 
     button {
-        width: 300px;
+        width: 240px;
         max-height: 50px;
-        background-color: var(--globalWhite);
-        color: var(--smokeyBlack);
-        border: var(--darkBlue) 3px solid;
+        background-color: var(--darkBlue);
+        color: var(--globalWhite);
+        border: var(--globalWhite) 3px solid;
         margin: 10px auto;
         padding: 20px;
         border-radius: 15px;
@@ -79,6 +79,11 @@ const GlobalStyles = createGlobalStyle`
         background-color: var(--darkBlue);
         color: var(--globalWhite);
         transition: ease-in-out .3s
+    }
+
+    button:disabled{
+        background-color: rgba(13, 50, 77, 0.4);
+        border: none;
     }
 `;
 
