@@ -83,22 +83,22 @@ export const questionAnswer = [
       },
     ],
   },
-  {
-    question: "Frage3",
-    answerOptions: [
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-    ],
-  },
-  {
-    question: "Frage4",
-    answerOptions: [
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-    ],
-  },
+  // {
+  //   question: "Frage3",
+  //   answerOptions: [
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //   ],
+  // },
+  // {
+  //   question: "Frage4",
+  //   answerOptions: [
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //   ],
+  // },
 ];
