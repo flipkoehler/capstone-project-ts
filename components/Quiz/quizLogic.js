@@ -16,14 +16,13 @@ export default function MovieQuiz() {
   // it is called when the User hits the "next" Button (only possible if an answer is picked)
 
   function handleMovieData(givenAnswers) {
-    console.log(givenAnswers);
     // step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
     const filteredMovies = movieData.filter((movie) => {
       return (
-        movie.runtime >= givenAnswers[0].movieChoice[0].min &&
-        movie.runtime <= givenAnswers[0].movieChoice[0].max &&
-        movie.release_date >= givenAnswers[1].movieChoice[0].min &&
-        movie.release_date <= givenAnswers[1].movieChoice[0].max
+        movie.runtime >= givenAnswers[0].min &&
+        movie.runtime <= givenAnswers[0].max &&
+        movie.release_date >= givenAnswers[1].min &&
+        movie.release_date <= givenAnswers[1].max
       );
     });
 
@@ -37,10 +36,9 @@ export default function MovieQuiz() {
   }
 
   // Function takes the input value and stores it in the array with the current answers
-  function handleAnswerOption(answer) {
-    setGivenAnswers([(givenAnswers[currentStep] = { movieChoice: answer })]);
-    setGivenAnswers([...givenAnswers]);
-  }
+  // function handleAnswerOption(answer) {
+  //   setGivenAnswers([...givenAnswers, (givenAnswers[currentStep] = answer)]);
+  // }
 
   // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
@@ -59,14 +57,19 @@ export default function MovieQuiz() {
         {questionAnswer[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
-            onClick={() => handleAnswerOption(answer.value)}
+            onClick={() =>
+              setGivenAnswers([
+                ...givenAnswers,
+                (givenAnswers[currentStep] = answer.value),
+              ])
+            }
           >
             <StyledInput
               type="radio"
               value="answer.value"
               name="answer"
               readOnly
-              checked={answer.value === givenAnswers[currentStep]?.movieChoice}
+              checked={answer.value === givenAnswers[currentStep]}
             />
             {answer.answer}
           </StyledAnswerWrapper>
