@@ -17,38 +17,36 @@ export default function MovieQuiz() {
 
   function handleMovieData(givenAnswers) {
     // step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
-    if (currentStep >= 1) {
-      const filteredMovies = movieData.filter((movie) => {
-        return (
-          movie.runtime >= givenAnswers[0].movieChoice[0].min &&
-          movie.runtime <= givenAnswers[0].movieChoice[0].max &&
-          movie.release_date >= givenAnswers[1].movieChoice[0].min &&
-          movie.release_date <= givenAnswers[1].movieChoice[0].max
-        );
-      });
+    const filteredMovies = movieData.filter((movie) => {
+      return (
+        movie.runtime >= givenAnswers[0].min &&
+        movie.runtime <= givenAnswers[0].max &&
+        movie.release_date >= givenAnswers[1].min &&
+        movie.release_date <= givenAnswers[1].max
+      );
+    });
 
-      // step 3: create a random number between 0 and the filteredMovies length - to pick a random movie
-      const randomNumber = Math.floor(Math.random() * filteredMovies.length);
+    // step 3: create a random number between 0 and the filteredMovies length - to pick a random movie
+    const randomNumber = Math.floor(Math.random() * filteredMovies.length);
 
-      // step 4: navigate to the random movie detail page
-      if (filteredMovies.length > 0) {
-        router.push(`/movies/${filteredMovies[randomNumber].id}`);
-      } else router.push(`/errorpages/no-movie`);
-    }
+    // step 4: navigate to the random movie detail page
+    if (filteredMovies.length > 0) {
+      router.push(`/movies/${filteredMovies[randomNumber].id}`);
+    } else router.push(`/errorpages/no-movie`);
   }
 
   // Function takes the input value and stores it in the array with the current answers
-  function handleAnswerOption(answer) {
-    setGivenAnswers([(givenAnswers[currentStep] = { movieChoice: answer })]);
-    setGivenAnswers([...givenAnswers]);
-  }
+  // function handleAnswerOption(answer) {
+  //   setGivenAnswers([...givenAnswers, (givenAnswers[currentStep] = answer)]);
+  // }
 
   // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
   function handleNext(event) {
     event.preventDefault();
-    setCurrentStep(currentStep + 1);
-    handleMovieData(givenAnswers);
+    if (currentStep === questionAnswer.length - 1) {
+      handleMovieData(givenAnswers);
+    } else setCurrentStep(currentStep + 1);
   }
 
   // this is the html shown. It takes the content from the questionData Array and maps through it
@@ -59,21 +57,28 @@ export default function MovieQuiz() {
         {questionAnswer[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
-            onClick={() => handleAnswerOption(answer.value)}
+            onClick={() =>
+              setGivenAnswers([
+                ...givenAnswers,
+                (givenAnswers[currentStep] = answer.value),
+              ])
+            }
           >
             <StyledInput
               type="radio"
               value="answer.value"
               name="answer"
               readOnly
-              checked={answer.value === givenAnswers[currentStep]?.movieChoice}
+              checked={answer.value === givenAnswers[currentStep]}
             />
             {answer.answer}
           </StyledAnswerWrapper>
         ))}
         <div>
           <button type="submit" disabled={currentStep === givenAnswers.length}>
-            {currentStep === 0 ? "Weiter" : "Zur Filmempfehlung"}
+            {currentStep < questionAnswer.length - 1
+              ? "Weiter"
+              : "Zur Filmempfehlung"}
           </button>
         </div>
       </section>

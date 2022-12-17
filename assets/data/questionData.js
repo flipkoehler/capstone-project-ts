@@ -6,39 +6,31 @@ export const questionAnswer = [
     answerOptions: [
       {
         answer: "Nur kurz",
-        value: [
-          {
-            min: 0,
-            max: 99,
-          },
-        ],
+        value: {
+          min: 0,
+          max: 99,
+        },
       },
       {
         answer: "Normale Lauflänge",
-        value: [
-          {
-            min: 100,
-            max: 139,
-          },
-        ],
+        value: {
+          min: 100,
+          max: 139,
+        },
       },
       {
         answer: "Ich habe Zeit",
-        value: [
-          {
-            min: 140,
-            max: 9999,
-          },
-        ],
+        value: {
+          min: 140,
+          max: 9999,
+        },
       },
       {
         answer: "Ist mir egal",
-        value: [
-          {
-            min: 0,
-            max: 9999,
-          },
-        ],
+        value: {
+          min: 0,
+          max: 9999,
+        },
       },
     ],
   },
@@ -47,58 +39,50 @@ export const questionAnswer = [
     answerOptions: [
       {
         answer: "Oldies",
-        value: [
-          {
-            min: 0,
-            max: 1987,
-          },
-        ],
+        value: {
+          min: 0,
+          max: 1987,
+        },
       },
       {
         answer: "Moderne Klassiker",
-        value: [
-          {
-            min: 1988,
-            max: 2010,
-          },
-        ],
+        value: {
+          min: 1988,
+          max: 2010,
+        },
       },
       {
         answer: "Aus der heutigen Zeit",
-        value: [
-          {
-            min: 2011,
-            max: 9999,
-          },
-        ],
+        value: {
+          min: 2011,
+          max: 9999,
+        },
       },
       {
         answer: "Ist mir egal",
-        value: [
-          {
-            min: 0,
-            max: 9999,
-          },
-        ],
+        value: {
+          min: 0,
+          max: 9999,
+        },
       },
     ],
   },
-  {
-    question: "Frage3",
-    answerOptions: [
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-    ],
-  },
-  {
-    question: "Frage4",
-    answerOptions: [
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-      { answer: "x", value: "x" },
-    ],
-  },
+  // {
+  //   question: "Frage3",
+  //   answerOptions: [
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //   ],
+  // },
+  // {
+  //   question: "Frage4",
+  //   answerOptions: [
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //     { answer: "x", value: "x" },
+  //   ],
+  // },
 ];
