@@ -11,6 +11,7 @@ export default function MovieQuiz() {
   const [currentStep, setCurrentStep] = useState(0);
   // saves the given answer in an array (e.g. Question 1 - short movies)
   const [givenAnswers, setGivenAnswers] = useState([]);
+  console.log(givenAnswers);
 
   // this function is the main component here. As a parameter it takes an Array with the given answers
   // it is called when the User hits the "next" Button (only possible if an answer is picked)
@@ -57,12 +58,10 @@ export default function MovieQuiz() {
         {questionAnswer[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
-            onClick={() =>
-              setGivenAnswers([
-                ...givenAnswers,
-                (givenAnswers[currentStep] = answer.value),
-              ])
-            }
+            onClick={() => {
+              setGivenAnswers([(givenAnswers[currentStep] = answer.value)]);
+              setGivenAnswers([...givenAnswers]);
+            }}
           >
             <StyledInput
               type="radio"
