@@ -5,7 +5,7 @@ import { movieData } from "../../assets/data/movieData";
 import { questionAnswer } from "../../assets/data/questionData";
 
 export default function MovieQuiz() {
-  // uesd for routing
+  // used for routing
   const router = useRouter();
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
@@ -37,13 +37,13 @@ export default function MovieQuiz() {
     }
   }
 
-  // Function takes the input value and add store it to the array with the current answers
+  // Function takes the input value and stores it in the array with the current answers
   function handleAnswerOption(answer) {
     setGivenAnswers([(givenAnswers[currentStep] = { movieChoice: answer })]);
     setGivenAnswers([...givenAnswers]);
   }
 
-  // Function handels the Click on the Button. It sets the current step the user is in
+  // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
   function handleNext(event) {
     event.preventDefault();
