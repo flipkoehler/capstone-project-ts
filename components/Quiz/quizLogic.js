@@ -5,7 +5,7 @@ import { questionAnswer } from "../../assets/data/questionData";
 import useFetch from "../../lib/fetch";
 
 export default function MovieQuiz() {
-  const movieData = useFetch("http://localhost:3000/api/");
+  const movieData = useFetch("/api/");
   const router = useRouter();
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);

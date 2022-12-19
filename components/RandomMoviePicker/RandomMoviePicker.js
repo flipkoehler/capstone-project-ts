@@ -4,7 +4,7 @@ import useFetch from "../../lib/fetch";
 import { useRouter } from "next/router";
 
 export default function RandomMoviePicker() {
-  const movieData = useFetch("http://localhost:3000/api/");
+  const movieData = useFetch("/api/");
   const router = useRouter();
   const randomNumber = Math.floor(Math.random() * movieData.length);
   const pickedMovie = movieData[randomNumber];
