@@ -6,11 +6,13 @@ import useFetch from "../../lib/fetch";
 
 export default function MovieId() {
   const movieData = useFetch("http://localhost:3000/api/");
+  // wird zu https://movieflip.vercel.app/
 
   const router = useRouter();
   const passedUrl = parseInt(router.query.id);
   const currentMovie = movieData.find((movie) => movie.id === passedUrl);
 
+  console.log(movieData);
   if (!currentMovie) {
     return null;
   }

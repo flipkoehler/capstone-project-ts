@@ -1,19 +1,15 @@
 /// This function is rendering through the passed movie data array and is picking one random movie to show.
 
-import { useEffect, useState } from "react";
-import MovieDetailPage from "../MovieDetailPage/MovieDetailPage";
+import useFetch from "../../lib/fetch";
+import { useRouter } from "next/router";
 
-export default function RandomMoviePicker({ movies }) {
-  const [randomPick, setRandomPick] = useState(0); // picks a random number
-
-  useEffect(() => {
-    setRandomPick(Math.floor(Math.random() * movies.length));
-  }, [movies.length]); // calculates a random number on a page load
-
-  //return the movie details bassed on the random number
-  return (
-    <>
-      <MovieDetailPage passedMovie={movies[randomPick]} />
-    </>
-  );
+export default function RandomMoviePicker() {
+  const movieData = useFetch("http://localhost:3000/api/");
+  const router = useRouter();
+  const randomNumber = Math.floor(Math.random() * movieData.length);
+  const pickedMovie = movieData[randomNumber];
+  if (!pickedMovie) {
+    return null;
+  }
+  router.push(`/movies/${pickedMovie.id}`);
 }

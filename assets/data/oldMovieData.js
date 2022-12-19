@@ -1,4 +1,4 @@
-// this is my movieData Array with 10 films. Later on I will use a database. I use TMDB data.
+// this movie data will no longe be used. It may be important for the tests, so I won't remove it for now.
 
 export const movieData = [
   {
