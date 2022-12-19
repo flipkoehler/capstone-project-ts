@@ -1,24 +1,19 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
-// import { movieData } from "../../assets/data/movieData";
 import { questionAnswer } from "../../assets/data/questionData";
 import useFetch from "../../lib/fetch";
 
 export default function MovieQuiz() {
   const movieData = useFetch("http://localhost:3000/api/");
-
-  // used for routing
   const router = useRouter();
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
   // saves the given answer in an array (e.g. Question 1 - short movies)
   const [givenAnswers, setGivenAnswers] = useState([]);
-  console.log(givenAnswers);
 
-  // this function is the main component here. As a parameter it takes an Array with the given answers
-  // it is called when the User hits the "next" Button (only possible if an answer is picked)
-
+  // this function is the main component. As a parameter it takes an Array with the given answers
+  // it is called when the User hits the "Zur Filmempfehlung" Button
   function handleMovieData(givenAnswers) {
     // step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
     const filteredMovies = movieData.filter((movie) => {
@@ -30,10 +25,10 @@ export default function MovieQuiz() {
       );
     });
 
-    // step 3: create a random number between 0 and the filteredMovies length - to pick a random movie
+    // step 2: create a random number between 0 and the filteredMovies length - to pick a random movie
     const randomNumber = Math.floor(Math.random() * filteredMovies.length);
 
-    // step 4: navigate to the random movie detail page
+    // step 3: navigate to the random movie detail page
     if (filteredMovies.length > 0) {
       router.push(`/movies/${filteredMovies[randomNumber].id}`);
     } else router.push(`/errorpages/no-movie`);
