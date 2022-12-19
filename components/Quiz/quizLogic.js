@@ -1,10 +1,13 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
-import { movieData } from "../../assets/data/movieData";
+// import { movieData } from "../../assets/data/movieData";
 import { questionAnswer } from "../../assets/data/questionData";
+import useFetch from "../../lib/fetch";
 
 export default function MovieQuiz() {
+  const movieData = useFetch("http://localhost:3000/api/");
+
   // used for routing
   const router = useRouter();
   // sets the current question step the user is in (e.g. Step 1 out of 4)
@@ -35,11 +38,6 @@ export default function MovieQuiz() {
       router.push(`/movies/${filteredMovies[randomNumber].id}`);
     } else router.push(`/errorpages/no-movie`);
   }
-
-  // Function takes the input value and stores it in the array with the current answers
-  // function handleAnswerOption(answer) {
-  //   setGivenAnswers([...givenAnswers, (givenAnswers[currentStep] = answer)]);
-  // }
 
   // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
