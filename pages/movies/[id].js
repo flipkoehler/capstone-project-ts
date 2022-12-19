@@ -5,7 +5,9 @@ import MovieDetailPage from "../../components/MovieDetailPage/MovieDetailPage";
 import useFetch from "../../lib/fetch";
 
 export default function MovieId() {
-  const movieData = useFetch("/api/movies");
+  const movieData = useFetch(
+    "https://movieflip-git-feature-backend-add-a-database-flipkoehler.vercel.app/api"
+  );
   // wird zu https://movieflip.vercel.app/
 
   const router = useRouter();

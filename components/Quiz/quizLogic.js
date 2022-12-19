@@ -5,7 +5,9 @@ import { questionAnswer } from "../../assets/data/questionData";
 import useFetch from "../../lib/fetch";
 
 export default function MovieQuiz() {
-  const movieData = useFetch("/api/movies");
+  const movieData = useFetch(
+    "https://movieflip-git-feature-backend-add-a-database-flipkoehler.vercel.app/api/"
+  );
   const router = useRouter();
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
