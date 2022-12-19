@@ -5,7 +5,7 @@ import MovieDetailPage from "../../components/MovieDetailPage/MovieDetailPage";
 import useFetch from "../../lib/fetch";
 
 export default function MovieId() {
-  const movieData = useFetch("http://localhost:3000/api/");
+  const movieData = useFetch("/api/");
   // wird zu https://movieflip.vercel.app/
 
   const router = useRouter();
