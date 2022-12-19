@@ -2,6 +2,7 @@
 
 import useFetch from "../../lib/fetch";
 import { useRouter } from "next/router";
+import MovieDetailPage from "../MovieDetailPage/MovieDetailPage";
 
 export default function RandomMoviePicker() {
   const movieData = useFetch("http://localhost:3000/api");
@@ -11,5 +12,5 @@ export default function RandomMoviePicker() {
   if (!pickedMovie) {
     return null;
   }
-  router.push(`/movies/${pickedMovie.id}`);
+  return <MovieDetailPage passedMovie={pickedMovie} />;
 }
