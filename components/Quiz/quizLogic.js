@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { questionAnswer } from "../../assets/data/questionData";
 import useFetch from "../../lib/fetch";
+import RandomMoviePicker from "../RandomMoviePicker/RandomMoviePicker";
 
 export default function MovieQuiz() {
   const movieData = useFetch("/api");
@@ -15,7 +16,7 @@ export default function MovieQuiz() {
   // this function is the main component. As a parameter it takes an Array with the given answers
   // it is called when the User hits the "Zur Filmempfehlung" Button
   function handleMovieData(givenAnswers) {
-    // step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
+    //step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
     const filteredMovies = movieData.filter((movie) => {
       return (
         movie.runtime >= givenAnswers[0].min &&
@@ -25,12 +26,12 @@ export default function MovieQuiz() {
       );
     });
 
-    // step 2: create a random number between 0 and the filteredMovies length - to pick a random movie
-    const randomNumber = Math.floor(Math.random() * filteredMovies.length);
+    // Step 2: gets a random number for the URL
+    const movieURL = RandomMoviePicker(filteredMovies);
 
     // step 3: navigate to the random movie detail page
     if (filteredMovies.length > 0) {
-      router.push(`/movies/${filteredMovies[randomNumber].id}`);
+      router.push(`/movies/${movieURL.id}`);
     } else router.push(`/errorpages/no-movie`);
   }
 

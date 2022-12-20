@@ -11,7 +11,6 @@ export default function MovieId() {
   const passedUrl = parseInt(router.query.id);
   const currentMovie = movieData.find((movie) => movie.id === passedUrl);
 
-  console.log(movieData);
   if (!currentMovie) {
     return null;
   }
