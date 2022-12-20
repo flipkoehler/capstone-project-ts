@@ -26,12 +26,12 @@ export default function MovieQuiz() {
       );
     });
 
-    // Step 2: gets a random number for the URL
-    const movieURL = RandomMoviePicker(filteredMovies);
+    // Step 2: shuffles a random movie based on the array
+    const randomMovie = RandomMoviePicker(filteredMovies);
 
     // step 3: navigate to the random movie detail page
     if (filteredMovies.length > 0) {
-      router.push(`/movies/${movieURL.id}`);
+      router.push(`/movies/${randomMovie.id}`);
     } else router.push(`/errorpages/no-movie`);
   }
 
