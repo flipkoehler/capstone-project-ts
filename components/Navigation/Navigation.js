@@ -54,7 +54,7 @@ const StyledLink = styled(Link)`
     text-decoration: underline;
   }
 
-  @media (max-width: 550px) {
+  @media (max-width: 650px) {
     padding: 15px;
     background-color: var(--globalWhite);
   }
