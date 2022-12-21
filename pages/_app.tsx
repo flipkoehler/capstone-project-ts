@@ -10,10 +10,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>🎬 Movie Flip 🎬</title>
         <meta
           name="Movie Flip"
-          content="Die beste Adresse für schnelle Filmemfephlungen"
+          content="Die beste Adresse für schnelle Filmempfehlungen"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Component {...pageProps} />
     </>
   );

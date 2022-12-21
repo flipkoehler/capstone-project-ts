@@ -1,8 +1,13 @@
-// This site is for showing a random movie, based on the passed movie Array
-
-import { movieData } from "../../assets/data/movieData";
-import RandomMoviePicker from "../../components/RandomMoviePicker/RandomMoviePicker";
+import useFetch from "../../lib/fetch";
+import { useRouter } from "next/router";
+import randomMoviePicker from "../../lib/randomMoviePicker";
 
 export default function randomMovie() {
-  return <RandomMoviePicker movies={movieData} />;
+  const router = useRouter();
+  const movieData = useFetch("/api");
+  const randomMovie = randomMoviePicker(movieData);
+  if (!randomMovie) {
+    return null;
+  }
+  router.push(`/movies/${randomMovie.id}`);
 }
