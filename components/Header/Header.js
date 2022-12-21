@@ -1,4 +1,4 @@
-// this is my header component that will contain logo and menu later on
+// this is my header component that contains the logo and menu
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
@@ -13,55 +13,63 @@ export default function Header() {
   }
 
   return (
-    <StyledHeader>
-      <StyledLogoDiv>
-        <Link href="/">
-          <Image
-            src={"/images/movie-flip-logo.svg"}
-            alt="Movie Flip Logo"
-            width={200}
-            height={200}
-            priority
+    <>
+      <StyledHeader>
+        <StyledLogoDiv>
+          <Link href="/">
+            <Image
+              src={"/images/movie-flip-logo.svg"}
+              alt="Movie Flip Logo"
+              width={280}
+              height={50}
+              priority
+            />
+          </Link>
+        </StyledLogoDiv>
+        {menuIsOpen ? (
+          <StyledBurgerImage
+            src={"/images/clarity_menu-line.svg"}
+            alt="Menu Icon open"
+            width={40}
+            height={40}
+            onClick={() => handleMenuIcon()}
           />
-        </Link>
-      </StyledLogoDiv>
-      <StyledBurgerImage
-        src={"/images/clarity_menu-line.svg"}
-        alt="Menu Icon"
-        width={40}
-        height={40}
-        onClick={() => handleMenuIcon()}
-      />
-      <Navigation menuIsOpen={menuIsOpen} />
-    </StyledHeader>
+        ) : (
+          <StyledBurgerImage
+            src={"/images/clarity_remove-line.svg"}
+            alt="Menu Icon close"
+            width={40}
+            height={40}
+            onClick={() => handleMenuIcon()}
+          />
+        )}
+
+        <Navigation menuIsOpen={menuIsOpen} />
+      </StyledHeader>
+    </>
   );
 }
+
 const StyledLogoDiv = styled.div`
-  display: flex;
-  align-items: center;
   justify-content: flex-start;
-  height: 4.5rem;
-  padding-left: 30px;
-  background-color: green;
+  margin: 13px 0 0 20px;
+  align-self: flex-start;
 `;
 
 const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  height: 4.5rem;
   @media (max-width: 550px) {
-    width: 100%;
+    height: 100%;
     flex-direction: column;
   }
 `;
 
 const StyledBurgerImage = styled(Image)`
   position: absolute;
-  right: 5px;
-  background-color: lightblue;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
+  top: 17px;
+  right: 20px;
   display: none;
 
   @media (max-width: 550px) {
