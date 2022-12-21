@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { questionAnswer } from "../../assets/data/questionData";
 import useFetch from "../../lib/fetch";
-import RandomMoviePicker from "../RandomMoviePicker/RandomMoviePicker";
+import randomMoviePicker from "../../lib/randomMoviePicker";
 
 export default function MovieQuiz() {
   const movieData = useFetch("/api");
@@ -27,7 +27,7 @@ export default function MovieQuiz() {
     });
 
     // Step 2: shuffles a random movie based on the array
-    const randomMovie = RandomMoviePicker(filteredMovies);
+    const randomMovie = randomMoviePicker(filteredMovies);
 
     // step 3: navigate to the random movie detail page
     if (filteredMovies.length > 0) {
