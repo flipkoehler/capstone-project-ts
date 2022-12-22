@@ -3,10 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
+import Benefits from "../Benefits/Benefits";
 
 export default function WelcomePage() {
-
-  
   return (
     <>
       <section>
@@ -17,36 +16,7 @@ export default function WelcomePage() {
           wir dir eine wunderbare Filmempfehlung für deinen nächsten Filmabend.
           Alle Filme sind handverlesen und garantieren beste Unterhaltung!
         </p>
-        <p>Movie Flip bietet dir folgende Vorteile:</p>
-        <StyledUl>
-          <StyledLi>
-            <StyledImage
-              src={"/images/clarity_happy-face-line.svg"}
-              width={30}
-              height={30}
-              alt="happy Icon"
-            />
-            Filme passend zur täglichen Stimmung
-          </StyledLi>
-          <StyledLi>
-            <StyledImage
-              src={"/images/clarity_clock-line.svg"}
-              width={30}
-              height={30}
-              alt="Clock Icon"
-            />
-            passgenau mit deinem Zeitfenster
-          </StyledLi>
-          <StyledLi>
-            <StyledImage
-              src={"/images/clarity_bullseye-line.svg"}
-              width={30}
-              height={30}
-              alt="Bullseye Icon"
-            />
-            handverlesene Empfehlungen
-          </StyledLi>
-        </StyledUl>
+        <Benefits />
         <StyledLink href="/quiz">Quiz jetzt starten!</StyledLink>
         <StyledLink2 href="/movie-recommendation">
           Oder eine zufällige Filmempfehlung!
