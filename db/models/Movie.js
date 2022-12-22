@@ -19,7 +19,7 @@ const movieSchema = new Schema({
   popularity: { type: Number, required: false },
   poster_path: { type: String, required: true },
   release_date: { type: String, required: true },
-  runtime: { type: Number, required: true },
+  runtime: { type: Number, required: false },
   status: { type: String, required: false },
   tagline: { type: String, required: false },
   title: { type: String, required: true },

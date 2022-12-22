@@ -1,46 +1,52 @@
-import { useEffect, useState } from "react";
-import useFetch from "../../lib/fetch";
-// import getMovieData from "../../lib/getMovieData";
+import { useState } from "react";
 
 export default function AddAMovie() {
-  const [data, setData] = useState(null);
-  // const [card, setCard] = useState([]);
-  console.log(data);
+  const defaultArrayForTheSearch = {
+    results: [],
+  };
 
-  // const testData = {
-  //   backdrop_path: "/veiWT3UYVvEOGCfGZLGDJtjJvdV.jpg",
-  //   title: "testi",
-  // };
+  const [searchResults, setSearchResults] = useState(defaultArrayForTheSearch);
+  const [pickedMovie, setPickedMovie] = useState();
+  console.log(pickedMovie, "picked");
 
-  const handleChange = async () => {
+  // 1 Step: Serch for movies that machtes the searchterm
+  async function handleSearch(event) {
     event.preventDefault();
-    const addedUrl = event.target.value;
-
+    const searchKeyWord = event.target.searchMovie.value;
     try {
       const data = await (
         await fetch(
-          `https://api.themoviedb.org/3/movie/${addedUrl}?api_key=e69cd3d9de9dbb86cdfd7f170e8fae1b`
+          `https://api.themoviedb.org/3/search/movie?api_key=e69cd3d9de9dbb86cdfd7f170e8fae1b&query=${searchKeyWord}&language=de`
         )
       ).json();
-      setData(data);
+      setSearchResults(data);
     } catch (err) {
       console.log(err.message);
     }
-  };
+  }
 
-  // async function getMovies() {
-  //   const response = await fetch("/api/");
-  //   const questionList = await response.json();
-  //   setCard(questionList);
-  // }
+  // 2 Step: Get the detail movie data - and set the picked movie
 
-  // useEffect(() => {
-  //   getMovies();
-  // }, []);
+  async function getDetailData(passedData) {
+    console.log(passedData);
+    const movieToGetDetailsFor = passedData.id;
+    console.log(movieToGetDetailsFor, "moviestogetdetailsfor");
+    try {
+      const data = await (
+        await fetch(
+          `https://api.themoviedb.org/3/movie/${movieToGetDetailsFor}?api_key=e69cd3d9de9dbb86cdfd7f170e8fae1b&language=de`
+        )
+      ).json();
+      setPickedMovie(data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
 
-  async function createData(passedData) {
+  // 3 Step: Send the generated data to the database
+
+  async function handleCreateData(event, passedData) {
     event.preventDefault();
-
     await fetch("/api/", {
       method: "POST",
       headers: {
@@ -50,38 +56,33 @@ export default function AddAMovie() {
     });
   }
 
-  function handleSubmit(event, movie) {
-    console.log(movie, "movie");
-    event.preventDefault();
-    // const postData = data;
-    // console.log("huhutesti", postData);
-    createData(movie);
-  }
+  // 4 Step: generate the html
 
   return (
     <section>
-      <h1>Einen neuen Film hinzufügen 🪄</h1>
-
-      <p>Hier steht ein Text</p>
-      <form onSubmit={() => handleSubmit(event, data)}>
-        <label htmlFor="addmovie">Film hinzufügen</label>
+      <form onSubmit={() => handleSearch(event)}>
+        <h1>Einen neuen Film hinzufügen 🪄</h1>
+        <p>Bitte Film suchen</p>
+        <label htmlFor="searchMovie"> </label>
+        Film hinzufügen
         <input
           type="text"
-          className="form-control"
-          name="addmovie"
-          placeholder="z.B.: https://www.themoviedb.org/movie/8193-napoleon-dynamite"
-          onChange={() => handleChange()}
+          name="searchMovie"
+          placeholder="z.B.: napoleon dynamite"
           required="required"
         />
-        {/* {(if (data !== null) {
-            return "test"} 
-            if (status_code === 34) return { ""
-            }
-            else return "huhu")} */}
-
-        <p>
-          {data !== null ? "Die Zahl ist gültig" : "Bitte eine Zahl eingeben"}
-        </p>
+        <button type="submit">Film suchen</button>
+      </form>
+      <ul>
+        {searchResults.results.map((movie, index) => {
+          return (
+            <li key={index} onClick={() => getDetailData(movie)}>
+              {movie.title} ({movie.release_date})
+            </li>
+          );
+        })}
+      </ul>
+      <form onSubmit={() => handleCreateData(event, pickedMovie)}>
         <button type="submit">Film jetzt einreichen</button>
       </form>
     </section>
