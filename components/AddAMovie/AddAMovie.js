@@ -4,7 +4,13 @@ import useFetch from "../../lib/fetch";
 
 export default function AddAMovie() {
   const [data, setData] = useState(null);
+  // const [card, setCard] = useState([]);
   console.log(data);
+
+  // const testData = {
+  //   backdrop_path: "/veiWT3UYVvEOGCfGZLGDJtjJvdV.jpg",
+  //   title: "testi",
+  // };
 
   const handleChange = async () => {
     event.preventDefault();
@@ -22,12 +28,34 @@ export default function AddAMovie() {
     }
   };
 
-  function handleSubmit() {
-    preventDefault();
-    const addedUrl = event.target.addmovie.value;
-    setMovieData(addedUrl);
+  // async function getMovies() {
+  //   const response = await fetch("/api/");
+  //   const questionList = await response.json();
+  //   setCard(questionList);
+  // }
 
-    console.log("formular abgeschickt");
+  // useEffect(() => {
+  //   getMovies();
+  // }, []);
+
+  async function createData(passedData) {
+    event.preventDefault();
+
+    await fetch("/api/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(passedData),
+    });
+  }
+
+  function handleSubmit(event, movie) {
+    console.log(movie, "movie");
+    event.preventDefault();
+    // const postData = data;
+    // console.log("huhutesti", postData);
+    createData(movie);
   }
 
   return (
@@ -35,11 +63,11 @@ export default function AddAMovie() {
       <h1>Einen neuen Film hinzufügen 🪄</h1>
 
       <p>Hier steht ein Text</p>
-      <form onSubmit={() => handleClick(event)}>
+      <form onSubmit={() => handleSubmit(event, data)}>
         <label htmlFor="addmovie">Film hinzufügen</label>
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           name="addmovie"
           placeholder="z.B.: https://www.themoviedb.org/movie/8193-napoleon-dynamite"
           onChange={() => handleChange()}
