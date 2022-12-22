@@ -1,7 +1,6 @@
 // This site welcomes the user with content that explains what the user can expect from this page.
 
 import Link from "next/link";
-import Image from "next/image";
 import styled from "styled-components";
 import Benefits from "../Benefits/Benefits";
 
@@ -25,32 +24,6 @@ export default function WelcomePage() {
     </>
   );
 }
-
-// CSS Styling
-
-const StyledUl = styled.ul`
-  padding: 0;
-  margin: -5px 0 20px 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledLi = styled.li`
-  align-items: center;
-  padding: 0;
-  margin: 0 0 12px 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-`;
-
-const StyledImage = styled(Image)`
-  margin-right: 10px;
-`;
 
 const StyledLink = styled(Link)`
   max-width: 300px;
