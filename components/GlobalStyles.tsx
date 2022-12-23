@@ -23,7 +23,6 @@ const GlobalStyles = createGlobalStyle`
     html,
     body {
         padding: 0;
-        margin: 0;
         background-color: var(--lightGray);
         color: var(--smokeyBlack);
         max-width: 800px;
@@ -72,7 +71,7 @@ const GlobalStyles = createGlobalStyle`
         align-items: center;
         justify-content: center;
         box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
-        
+        cursor: pointer;
     }
 
     button:hover{
@@ -84,6 +83,7 @@ const GlobalStyles = createGlobalStyle`
     button:disabled{
         background-color: rgba(13, 50, 77, 0.4);
         border: none;
+        cursor: not-allowed;
     }
 `;
 

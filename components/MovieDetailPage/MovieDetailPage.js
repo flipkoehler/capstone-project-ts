@@ -22,7 +22,7 @@ export default function MovieDetailPage({ passedMovie }) {
         <MovieTagsUl>
           <MovieTags>{passedMovie.runtime} Minuten</MovieTags>
           <MovieTags>{passedMovie.genres[0].name}</MovieTags>
-          <MovieTags>Jahr: {passedMovie.release_date}</MovieTags>
+          <MovieTags>Jahr: {passedMovie.release_date.slice(0, 4)}</MovieTags>
         </MovieTagsUl>
         <ReadMore aria-label="read more or read less">
           {passedMovie.overview}

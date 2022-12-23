@@ -1,15 +1,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
+import ReadMore from "../ReadMoreText/ReadMoreText";
+import { useRouter } from "next/router";
 
-export default function AddAMovie({ entryIsClicked }) {
-  const defaultArrayForTheSearch = {
-    results: [],
-  };
-
-  const [searchResults, setSearchResults] = useState(defaultArrayForTheSearch);
+export default function AddAMovie() {
+  const [searchResults, setSearchResults] = useState({ results: [] });
   const [pickedMovie, setPickedMovie] = useState();
-  console.log(pickedMovie);
+  const router = useRouter();
 
   // 1 Step: Serch for movies that machtes the searchterm
   async function handleSearch(event) {
@@ -27,12 +25,9 @@ export default function AddAMovie({ entryIsClicked }) {
     }
   }
 
-  // 2 Step: Get the detail movie data - and set the picked movie
-
+  // 2 Step: Get the detail movie data, based on the picked movie
   async function getDetailData(passedData) {
-    console.log(passedData);
     const movieToGetDetailsFor = passedData.id;
-    console.log(movieToGetDetailsFor, "moviestogetdetailsfor");
     try {
       const data = await (
         await fetch(
@@ -46,7 +41,6 @@ export default function AddAMovie({ entryIsClicked }) {
   }
 
   // 3 Step: Send the generated data to the database
-
   async function handleCreateData(event, passedData) {
     event.preventDefault();
     await fetch("/api/", {
@@ -56,10 +50,10 @@ export default function AddAMovie({ entryIsClicked }) {
       },
       body: JSON.stringify(passedData),
     });
+    router.push(`/movies/${passedData.id}`);
   }
 
-  // 4 Step: generate the html
-
+  // The output including a form and a submit button
   return (
     <section>
       <StyledForm onSubmit={() => handleSearch(event)}>
@@ -69,21 +63,56 @@ export default function AddAMovie({ entryIsClicked }) {
           Ergebnisliste mit Klick den richtigen Film aus.
         </p>
         <label htmlFor="searchMovie"> </label>
+        <StyledSearchBarWrapper>
+          <StyledInput
+            type="text"
+            name="searchMovie"
+            placeholder='z.B.: "Napoleon Dynamite"'
+            required="required"
+          />
+          <StyledButton type="submit">🔍</StyledButton>
+        </StyledSearchBarWrapper>
 
-        <StyledInput
-          type="text"
-          name="searchMovie"
-          placeholder='z.B.: "Napoleon Dynamite"'
-          required="required"
-        />
-        <StyledButton type="submit">🔍</StyledButton>
         <StyledSpan>
           {searchResults.results.length > 19 &&
-            "Der eingegeben Suchbegriff hat mehr als 20 Treffer. Bitte verfeinere deine Eingabe für bessere Treffer."}
+            "Der eingegeben Suchbegriff hat mehr als 20 Treffer. Bitte verfeinere deine Eingabe für bessere Suchergebnisse."}
           {searchResults.total_pages === 0 &&
             "Es wurde kein passender Eintrag zu deinem Suchbegriff gefunden. Bitte verwende einen anderen Suchbegriff."}
         </StyledSpan>
+        <StyledPickedMoviePreview>
+          {pickedMovie !== undefined && (
+            <>
+              <div>
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500/${pickedMovie.poster_path}`}
+                  alt={pickedMovie.title}
+                  width={142}
+                  height={213}
+                  priority
+                />
+              </div>
+              <div>
+                <p>Deine aktuelle Filmauswahl:</p>
+                <h2>{pickedMovie.title}</h2>
+                <p>{pickedMovie.runtime} Minuten</p>
+                <p>Aus dem Jahr: {pickedMovie.release_date.slice(0, 4)} </p>
+              </div>
+
+              <p>
+                <ReadMore>{pickedMovie.overview}</ReadMore>
+              </p>
+            </>
+          )}
+        </StyledPickedMoviePreview>
       </StyledForm>
+      <form onSubmit={() => handleCreateData(event, pickedMovie)}>
+        <button
+          type="submit"
+          disabled={pickedMovie !== undefined ? false : true}
+        >
+          Film jetzt einreichen
+        </button>
+      </form>
       <StyledSearchResultParent>
         {searchResults.results.map((movie, index) => {
           return (
@@ -100,25 +129,71 @@ export default function AddAMovie({ entryIsClicked }) {
                   priority
                 />
               </ImageDiv>
-              {movie.title} ({movie.release_date})
+              {movie.title} ({movie.release_date.slice(0, 4)})
             </StyledSearchResult>
           );
         })}
       </StyledSearchResultParent>
-      <form onSubmit={() => handleCreateData(event, pickedMovie)}>
-        {pickedMovie !== undefined && (
-          <button type="submit">Film jetzt einreichen</button>
-        )}
-      </form>
     </section>
   );
 }
+
+// Searchbar (Div around, Input and Button)
+
+const StyledSearchBarWrapper = styled.div`
+  display: flex;
+  border: 2px solid var(--smokeyBlack);
+  border-radius: 15px;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+const StyledInput = styled.input`
+  width: 175px;
+  height: 25px;
+  border: none;
+  margin-left: 5px;
+  // eliminates the outline when focused and the background color when autofill is used
+  &:focus {
+    outline: none;
+  }
+  &:-webkit-autofill,
+  -webkit-autofill:hover,
+  -webkit-autofill:focus {
+    box-shadow: 0 0 0px 40rem #ffff inset;
+  }
+`;
+
+const StyledButton = styled.button`
+  background-color: transparent;
+  box-shadow: none;
+  width: 50px;
+  height: 25px;
+  border: none;
+  margin: 0px;
+  &:hover {
+    background-color: transparent;
+    cursor: pointer;
+  }
+`;
+
+// Search Results
+const StyledSearchResultParent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+// Search Result
 
 const StyledSearchResult = styled.div`
   display: flex;
   margin: 5px;
   width: 300px;
-  border: 2px solid var(--smokeyBlack);
+  background-color: var(--lightGray);
+  align-items: center;
+
+  /* border: 2px solid var(--smokeyBlack); */
   padding: 2px;
 
   &:hover {
@@ -127,35 +202,12 @@ const StyledSearchResult = styled.div`
   }
 `;
 
-const StyledSearchResultParent = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
 const StyledForm = styled.form`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
-`;
-
-const StyledInput = styled.input`
-  border: 3px solid var(--smokeyBlack);
-  border-radius: 15px;
-  width: 200px;
-  height: 50px;
-  margin: 0 0 20px 0;
-  text-align: center;
-`;
-
-const StyledButton = styled.button`
-  background-color: transparent;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  margin: 0 0 20px 20px;
 `;
 
 const StyledH1 = styled.h1`
@@ -167,9 +219,20 @@ const ImageDiv = styled.div`
 `;
 
 const StyledSpan = styled.span`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-align: center;
   font-style: italic;
   width: 80%;
-  margin: 20px;
+  margin-top: 10px;
+`;
+
+const StyledPickedMoviePreview = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 2px solid var(--lightGray);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 15px;
+  box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
 `;
