@@ -125,18 +125,20 @@ export default function AddAMovie() {
               key={movie.id}
               onClick={() => getDetailData(movie)}
             >
-              <ImageDiv>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                  width={40}
-                  height={50}
-                  priority
-                />
-              </ImageDiv>
-              {movie.title}{" "}
-              {movie.release_date !== undefined &&
-                movie.release_date.slice(0, 4)}
+              {movie.poster_path ? (
+                <ImageDiv>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                    width={40}
+                    height={50}
+                    priority
+                  />
+                </ImageDiv>
+              ) : (
+                <ImageDiv></ImageDiv>
+              )}
+              {movie.title} {movie.release_date?.slice(0, 4)}
             </StyledSearchResult>
           );
         })}
