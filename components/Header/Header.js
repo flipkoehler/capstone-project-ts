@@ -38,8 +38,8 @@ export default function Header() {
           <StyledBurgerImage
             src={"/images/clarity_remove-line.svg"}
             alt="Menu Icon close"
-            width={40}
-            height={40}
+            width={45}
+            height={45}
             onClick={() => handleMenuIcon()}
           />
         )}

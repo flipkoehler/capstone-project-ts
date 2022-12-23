@@ -70,7 +70,14 @@ export default function AddAMovie() {
             placeholder='z.B.: "Napoleon Dynamite"'
             required="required"
           />
-          <StyledButton type="submit">🔍</StyledButton>
+          <StyledButton type="submit">
+            <Image
+              src={"/images/clarity_search-line.svg"}
+              width={25}
+              height={25}
+              alt="Search Icon"
+            />
+          </StyledButton>
         </StyledSearchBarWrapper>
 
         <StyledSpan>
@@ -79,8 +86,8 @@ export default function AddAMovie() {
           {searchResults.total_pages === 0 &&
             "Es wurde kein passender Eintrag zu deinem Suchbegriff gefunden. Bitte verwende einen anderen Suchbegriff."}
         </StyledSpan>
-        <StyledPickedMoviePreview>
-          {pickedMovie !== undefined && (
+        {pickedMovie !== undefined && (
+          <StyledPickedMoviePreview>
             <>
               <div>
                 <Image
@@ -102,8 +109,8 @@ export default function AddAMovie() {
                 <ReadMore>{pickedMovie.overview}</ReadMore>
               </p>
             </>
-          )}
-        </StyledPickedMoviePreview>
+          </StyledPickedMoviePreview>
+        )}
       </StyledForm>
       <form onSubmit={() => handleCreateData(event, pickedMovie)}>
         <button
