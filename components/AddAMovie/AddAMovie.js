@@ -105,9 +105,7 @@ export default function AddAMovie() {
                 <p>Aus dem Jahr: {pickedMovie.release_date.slice(0, 4)} </p>
               </div>
 
-              <p>
-                <ReadMore>{pickedMovie.overview}</ReadMore>
-              </p>
+              <ReadMore>{pickedMovie.overview}</ReadMore>
             </>
           </StyledPickedMoviePreview>
         )}
@@ -136,7 +134,9 @@ export default function AddAMovie() {
                   priority
                 />
               </ImageDiv>
-              {movie.title} ({movie.release_date.slice(0, 4)})
+              {movie.title}{" "}
+              {movie.release_date !== undefined &&
+                movie.release_date.slice(0, 4)}
             </StyledSearchResult>
           );
         })}
