@@ -49,7 +49,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h1 {
-        text-align: center;
+        text-align: left;
     }
 
     h2 {

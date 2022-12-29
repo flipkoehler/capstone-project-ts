@@ -8,6 +8,7 @@ export default function AddAMovie() {
   const [searchResults, setSearchResults] = useState({ results: [] });
   const [pickedMovie, setPickedMovie] = useState();
   const router = useRouter();
+  const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
 
   // 1 Step: Serch for movies that machtes the searchterm
   async function handleSearch(event) {
@@ -16,7 +17,7 @@ export default function AddAMovie() {
     try {
       const data = await (
         await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=e69cd3d9de9dbb86cdfd7f170e8fae1b&query=${searchKeyWord}&language=de`
+          `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${searchKeyWord}&language=de`
         )
       ).json();
       setSearchResults(data);
@@ -31,7 +32,7 @@ export default function AddAMovie() {
     try {
       const data = await (
         await fetch(
-          `https://api.themoviedb.org/3/movie/${movieToGetDetailsFor}?api_key=e69cd3d9de9dbb86cdfd7f170e8fae1b&language=de`
+          `https://api.themoviedb.org/3/movie/${movieToGetDetailsFor}?api_key=${TMDB_KEY}&language=de`
         )
       ).json();
       setPickedMovie(data);
@@ -53,14 +54,14 @@ export default function AddAMovie() {
     router.push(`/movies/${passedData.id}`);
   }
 
-  // The output including a form and a submit button
   return (
     <section>
+      {/* Search Field  */}
       <StyledForm onSubmit={() => handleSearch(event)}>
-        <StyledH1>Einen neuen Film hinzufügen 🪄</StyledH1>
+        <h1>Einen neuen Film hinzufügen 🪄</h1>
         <p>
-          Schritt 1: Suche nach dem passenden Film und wähle aus der
-          Ergebnisliste mit Klick den richtigen Film aus.
+          Suche nach dem passenden Film und wähle aus der Ergebnisliste mit
+          Klick den richtigen Film aus.
         </p>
         <label htmlFor="searchMovie"> </label>
         <StyledSearchBarWrapper>
@@ -70,6 +71,7 @@ export default function AddAMovie() {
             placeholder='z.B.: "Napoleon Dynamite"'
             required="required"
           />
+
           <StyledButton type="submit">
             <Image
               src={"/images/clarity_search-line.svg"}
@@ -79,13 +81,14 @@ export default function AddAMovie() {
             />
           </StyledButton>
         </StyledSearchBarWrapper>
-
+        {/* Notes that only will show up if the search term matches one of the conditions */}
         <StyledSpan>
           {searchResults.results.length > 19 &&
             "Der eingegeben Suchbegriff hat mehr als 20 Treffer. Bitte verfeinere deine Eingabe für bessere Suchergebnisse."}
           {searchResults.total_pages === 0 &&
             "Es wurde kein passender Eintrag zu deinem Suchbegriff gefunden. Bitte verwende einen anderen Suchbegriff."}
         </StyledSpan>
+        {/* Preview of the picked Movie  */}
         {pickedMovie !== undefined && (
           <StyledPickedMoviePreview>
             <>
@@ -110,16 +113,18 @@ export default function AddAMovie() {
           </StyledPickedMoviePreview>
         )}
       </StyledForm>
+      {/* Add movie Button */}
       <form onSubmit={() => handleCreateData(event, pickedMovie)}>
         <button
           type="submit"
           disabled={pickedMovie !== undefined ? false : true}
         >
-          Film jetzt einreichen
+          Film hinzufügen
         </button>
       </form>
+      {/* Movie list based on the search term */}
       <StyledSearchResultParent>
-        {searchResults.results.map((movie, index) => {
+        {searchResults.results.map((movie) => {
           return (
             <StyledSearchResult
               key={movie.id}
@@ -138,7 +143,7 @@ export default function AddAMovie() {
               ) : (
                 <ImageDiv></ImageDiv>
               )}
-              {movie.title} {movie.release_date?.slice(0, 4)}
+              {movie.title} ({movie.release_date?.slice(0, 4)})
             </StyledSearchResult>
           );
         })}
@@ -147,18 +152,22 @@ export default function AddAMovie() {
   );
 }
 
-// Searchbar (Div around, Input and Button)
+// Searchbar
+const StyledForm = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 const StyledSearchBarWrapper = styled.div`
   display: flex;
   border: 2px solid var(--smokeyBlack);
   border-radius: 15px;
   align-items: center;
-  margin: 0 auto;
+  width: 100%;
 `;
 
 const StyledInput = styled.input`
-  width: 175px;
+  width: 100%;
   height: 25px;
   border: none;
   margin-left: 5px;
@@ -172,7 +181,6 @@ const StyledInput = styled.input`
     box-shadow: 0 0 0px 40rem #ffff inset;
   }
 `;
-
 const StyledButton = styled.button`
   background-color: transparent;
   box-shadow: none;
@@ -186,62 +194,48 @@ const StyledButton = styled.button`
   }
 `;
 
-// Search Results
+// Notes for the search result
+const StyledSpan = styled.span`
+  font-size: 0.8rem;
+  font-style: italic;
+  width: 100%;
+  margin-top: 10px;
+`;
+
+// Search Result List
 const StyledSearchResultParent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 `;
-
-// Search Result
 
 const StyledSearchResult = styled.div`
   display: flex;
-  margin: 5px;
-  width: 300px;
+  border: 2px solid var(--globalWhite);
   background-color: var(--lightGray);
-  align-items: center;
-
-  /* border: 2px solid var(--smokeyBlack); */
-  padding: 2px;
+  width: 50%;
+  padding: 3px;
 
   &:hover {
     background-color: var(--lightGray);
     cursor: pointer;
   }
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
-  text-align: center;
-`;
-
-const StyledH1 = styled.h1`
-  width: 100%;
+  @media (max-width: 650px) {
+    width: 100%;
+  }
 `;
 
 const ImageDiv = styled.div`
   width: 60px;
 `;
 
-const StyledSpan = styled.span`
-  font-size: 0.8rem;
-  text-align: center;
-  font-style: italic;
-  width: 80%;
-  margin-top: 10px;
-`;
-
+// Movie Preview
 const StyledPickedMoviePreview = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   border: 2px solid var(--lightGray);
   padding: 10px;
-  margin: 5px;
+  margin: 15px;
   border-radius: 15px;
   box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
 `;
