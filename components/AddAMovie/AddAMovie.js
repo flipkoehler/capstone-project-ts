@@ -228,7 +228,7 @@ const ImageDiv = styled.div`
   width: 60px;
 `;
 
-// Movie Preview
+// Movie Preview Site
 const StyledPickedMoviePreview = styled.div`
   display: flex;
   flex-wrap: wrap;
