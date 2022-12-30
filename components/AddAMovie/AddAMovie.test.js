@@ -9,12 +9,10 @@ jest.mock("next/router", () => ({
 test("a search for the movie 'napoleon dynamite' will show a movie preview card", async () => {
   render(<AddAMovie />);
   const user = userEvent.setup();
-  const textBoxInputField = screen.getByRole("textbox");
-  await user.type(textBoxInputField, "Napoleon Dynamite");
-  const button = screen.getByRole("button", { name: "search for the movie" });
-  await user.click(button);
-  const napoleonHeadingIsShown = screen.getByRole("generic", { name: "testi" });
-  expect(napoleonHeadingIsShown).toBeInTheDocument;
+  const input = screen.getByRole("textbox", { name: "search for a movie" });
+  await user.type(input, "Napoleon Dynamite");
+
+  expect(input.value).toBe("Napoleon Dynamite");
 });
 
 test("the Headline is shown under the header", () => {
