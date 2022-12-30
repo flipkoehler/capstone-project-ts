@@ -11,7 +11,6 @@ test("a search for the movie 'napoleon dynamite' will show a movie preview card"
   const user = userEvent.setup();
   const input = screen.getByRole("textbox", { name: "search for a movie" });
   await user.type(input, "Napoleon Dynamite");
-
   expect(input.value).toBe("Napoleon Dynamite");
 });
 
