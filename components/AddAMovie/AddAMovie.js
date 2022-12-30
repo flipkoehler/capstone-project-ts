@@ -70,9 +70,14 @@ export default function AddAMovie() {
             name="searchMovie"
             placeholder='z.B.: "Napoleon Dynamite"'
             required="required"
+            aria-label="search for a movie"
           />
 
-          <StyledButton type="submit">
+          <StyledButton
+            type="submit"
+            aria-label="search for the movie"
+            name="search-movie"
+          >
             <Image
               src={"/images/clarity_search-line.svg"}
               width={25}
@@ -123,7 +128,7 @@ export default function AddAMovie() {
         </button>
       </form>
       {/* Movie list based on the search term */}
-      <StyledSearchResultParent>
+      <StyledSearchResultParent aria-label="testi">
         {searchResults.results.map((movie) => {
           return (
             <StyledSearchResult
