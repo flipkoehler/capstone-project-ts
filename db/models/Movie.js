@@ -8,7 +8,7 @@ const genresChildSchema = new Schema({
 });
 
 const movieSchema = new Schema({
-  _id: { type: String, required: false },
+  // _id: { type: String, required: false },
   backdrop_path: { type: String, required: false },
   genres: [genresChildSchema],
   id: { type: Number, required: true },
@@ -18,8 +18,8 @@ const movieSchema = new Schema({
   overview: { type: String, required: true },
   popularity: { type: Number, required: false },
   poster_path: { type: String, required: true },
-  release_date: { type: Number, required: true },
-  runtime: { type: Number, required: true },
+  release_date: { type: String, required: true },
+  runtime: { type: Number, required: false },
   status: { type: String, required: false },
   tagline: { type: String, required: false },
   title: { type: String, required: true },

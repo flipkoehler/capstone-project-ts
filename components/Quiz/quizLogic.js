@@ -8,6 +8,10 @@ import randomMoviePicker from "../../lib/randomMoviePicker";
 export default function MovieQuiz() {
   const movieData = useFetch("/api");
   const router = useRouter();
+  //step 0: shorten the release date
+  const movieDataWithEditedReleaseYear = movieData.map((movie) => {
+    return { ...movie, release_date: movie.release_date.slice(0, 4) };
+  });
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
   // saves the given answer in an array (e.g. Question 1 - short movies)
@@ -17,7 +21,7 @@ export default function MovieQuiz() {
   // it is called when the User hits the "Zur Filmempfehlung" Button
   function handleMovieData(givenAnswers) {
     //step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration
-    const filteredMovies = movieData.filter((movie) => {
+    const filteredMovies = movieDataWithEditedReleaseYear.filter((movie) => {
       return (
         movie.runtime >= givenAnswers[0].min &&
         movie.runtime <= givenAnswers[0].max &&

@@ -6,10 +6,10 @@ export default function Navigation({ menuIsOpen }) {
     <StyledNav menuIsOpen={menuIsOpen}>
       <StyledUl>
         <li>
-          <StyledLink href={"/"}>Home</StyledLink>
+          <StyledLink href={"/quiz"}>Quiz</StyledLink>
         </li>
         <li>
-          <StyledLink href={"/quiz"}>Quiz</StyledLink>
+          <StyledLink href={"/add-a-movie"}>Film hinzufügen</StyledLink>
         </li>
         <li>
           <StyledLink href={"/about"}>Über Movie Flip</StyledLink>
