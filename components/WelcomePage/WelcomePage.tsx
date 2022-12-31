@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Benefits from "../Benefits/Benefits";
 
-export default function WelcomePage() {
+export default function WelcomePage(): JSX.Element {
   return (
     <>
       <section>
