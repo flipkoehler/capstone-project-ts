@@ -17,13 +17,14 @@ export default function ReadMore({ children }: PassedProps): JSX.Element {
 
   // this returns the whole text or the reduced text sliced down to x characters
   return (
-    <p>
-      {isReadMore ? `${text.slice(0, 200)}...` : text}
-      <SpanStyled onClick={toggleReadMore}>
-        <br></br>
+    <>
+      <p aria-label="movie description" data-testid="movie-description">
+        {isReadMore ? `${text.slice(0, 200)}...` : text}
+      </p>
+      <SpanStyled onClick={toggleReadMore} data-testid="read-more-link">
         {isReadMore ? "...mehr lesen" : "Text wieder einklappen"}
       </SpanStyled>
-    </p>
+    </>
   );
 }
 
