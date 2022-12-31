@@ -3,8 +3,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+type PassedProps = {
+  children: string;
+};
+
 // this sets set state true or false // the children is the passed text
-export default function ReadMore({ children }) {
+export default function ReadMore({ children }: PassedProps): JSX.Element {
   const text = children;
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
