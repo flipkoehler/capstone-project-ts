@@ -8,7 +8,6 @@ const genresChildSchema = new Schema({
 });
 
 const movieSchema = new Schema({
-  // _id: { type: String, required: false },
   backdrop_path: { type: String, required: false },
   genres: [genresChildSchema],
   id: { type: Number, required: true },

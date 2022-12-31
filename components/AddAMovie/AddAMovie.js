@@ -10,7 +10,7 @@ export default function AddAMovie() {
   const router = useRouter();
   const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
 
-  // 1 Step: Serch for movies that machtes the searchterm
+  // 1 Step: Search for movies that match the searchterm
   async function handleSearch(event) {
     event.preventDefault();
     const searchKeyWord = event.target.searchMovie.value;
@@ -69,7 +69,7 @@ export default function AddAMovie() {
             type="text"
             name="searchMovie"
             placeholder='z.B.: "Napoleon Dynamite"'
-            required="required"
+            required
             aria-label="search for a movie"
           />
 
@@ -128,7 +128,7 @@ export default function AddAMovie() {
         </button>
       </form>
       {/* Movie list based on the search term */}
-      <StyledSearchResultParent aria-label="testi">
+      <StyledSearchResultParent aria-label="search results">
         {searchResults.results.map((movie) => {
           return (
             <StyledSearchResult
@@ -165,17 +165,17 @@ const StyledForm = styled.form`
 
 const StyledSearchBarWrapper = styled.div`
   display: flex;
-  border: 2px solid var(--smokeyBlack);
-  border-radius: 15px;
+  border: 0.1rem solid var(--smokeyBlack);
+  border-radius: 1.5rem;
   align-items: center;
   width: 100%;
 `;
 
 const StyledInput = styled.input`
   width: 100%;
-  height: 25px;
+  height: 1.5rem;
   border: none;
-  margin-left: 5px;
+  margin-left: 0.5rem;
   // eliminates the outline when focused and the background color when autofill is used
   &:focus {
     outline: none;
@@ -183,14 +183,14 @@ const StyledInput = styled.input`
   &:-webkit-autofill,
   -webkit-autofill:hover,
   -webkit-autofill:focus {
-    box-shadow: 0 0 0px 40rem #ffff inset;
+    box-shadow: 0 0 0px 4rem #ffff inset;
   }
 `;
 const StyledButton = styled.button`
   background-color: transparent;
   box-shadow: none;
-  width: 50px;
-  height: 25px;
+  width: 4rem;
+  height: 2rem;
   border: none;
   margin: 0px;
   &:hover {
@@ -204,7 +204,7 @@ const StyledSpan = styled.span`
   font-size: 0.8rem;
   font-style: italic;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 1rem;
 `;
 
 // Search Result List
@@ -239,8 +239,8 @@ const StyledPickedMoviePreview = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   border: 2px solid var(--lightGray);
-  padding: 10px;
-  margin: 15px;
-  border-radius: 15px;
+  padding: 1rem;
+  margin: 1.2rem;
+  border-radius: 1.2rem;
   box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
 `;

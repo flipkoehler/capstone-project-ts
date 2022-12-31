@@ -1,6 +1,6 @@
 // this movie data will no longer be used. It may be important for the tests, so I won't remove it for now.
 
-export const movieData = [
+export const movieData: any = [
   {
     adult: false,
     backdrop_path: "/veiWT3UYVvEOGCfGZLGDJtjJvdV.jpg",
