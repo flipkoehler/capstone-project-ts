@@ -2,7 +2,8 @@
 
 export const questionAnswer = [
   {
-    question: "Frage 1/2: Wie lange darf dein Film heute dauern?",
+    question: "Frage 1/3: Wie lange darf dein Film heute dauern?",
+    questionStyling: "short",
     answerOptions: [
       {
         answer: "Nur kurz",
@@ -10,6 +11,7 @@ export const questionAnswer = [
           min: 0,
           max: 99,
         },
+        isSelected: false,
       },
       {
         answer: "Normale Lauflänge",
@@ -17,6 +19,7 @@ export const questionAnswer = [
           min: 100,
           max: 139,
         },
+        isSelected: false,
       },
       {
         answer: "Ich habe Zeit",
@@ -24,6 +27,7 @@ export const questionAnswer = [
           min: 140,
           max: 9999,
         },
+        isSelected: false,
       },
       {
         answer: "Ist mir egal",
@@ -31,11 +35,13 @@ export const questionAnswer = [
           min: 0,
           max: 9999,
         },
+        isSelected: false,
       },
     ],
   },
   {
-    question: "Frage 2/2: Wie alt darf dein Film sein?",
+    question: "Frage 2/3: Wie alt darf dein Film sein?",
+    questionStyling: "short",
     answerOptions: [
       {
         answer: "Oldies",
@@ -43,6 +49,7 @@ export const questionAnswer = [
           min: 0,
           max: 1987,
         },
+        isSelected: false,
       },
       {
         answer: "Moderne Klassiker",
@@ -50,6 +57,7 @@ export const questionAnswer = [
           min: 1988,
           max: 2010,
         },
+        isSelected: false,
       },
       {
         answer: "Aus der heutigen Zeit",
@@ -57,6 +65,7 @@ export const questionAnswer = [
           min: 2011,
           max: 9999,
         },
+        isSelected: false,
       },
       {
         answer: "Ist mir egal",
@@ -64,6 +73,30 @@ export const questionAnswer = [
           min: 0,
           max: 9999,
         },
+        isSelected: false,
+      },
+    ],
+  },
+  {
+    question:
+      "Frage 3/3: Welche Stimmung oder Gefühl soll der Film übermitteln?",
+    questionStyling: "mood",
+    answerOptions: [
+      {
+        answer: "😀 Unterhaltsame Filme",
+        value: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      },
+      {
+        answer: "🥰 Feelgood Filme",
+        value: [10, 11, 12, 13, 14, 15, 16, 17, 9, 18, 19],
+      },
+      {
+        answer: "😥 Bewegende Filme",
+        value: [20, 21, 22, 23, 24, 25, 26, 27, 28],
+      },
+      {
+        answer: "😌 Entspannte Filme",
+        value: [29, 30, 11, 16],
       },
     ],
   },

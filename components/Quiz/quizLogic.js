@@ -12,6 +12,7 @@ export default function MovieQuiz() {
   const movieDataWithEditedReleaseYear = movieData.map((movie) => {
     return { ...movie, release_date: movie.release_date.slice(0, 4) };
   });
+  console.log(questionAnswer);
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
   // saves the given answer in an array (e.g. Question 1 - short movies)
