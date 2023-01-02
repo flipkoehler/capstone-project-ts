@@ -6,36 +6,40 @@ export const questionAnswer = [
     questionStyling: "short",
     answerOptions: [
       {
+        id: 1,
         answer: "Nur kurz",
         value: {
           min: 0,
           max: 99,
         },
-        isSelected: false,
+        checked: false,
       },
       {
+        id: 2,
         answer: "Normale Lauflänge",
         value: {
           min: 100,
           max: 139,
         },
-        isSelected: false,
+        checked: false,
       },
       {
+        id: 3,
         answer: "Ich habe Zeit",
         value: {
           min: 140,
           max: 9999,
         },
-        isSelected: false,
+        checked: false,
       },
       {
+        id: 4,
         answer: "Ist mir egal",
         value: {
           min: 0,
           max: 9999,
         },
-        isSelected: false,
+        checked: false,
       },
     ],
   },
@@ -92,7 +96,7 @@ export const questionAnswer = [
       },
       {
         answer: "😥 Bewegende Filme",
-        value: [20, 21, 22, 23, 24, 25, 26, 27, 28],
+        value: [20, 21, 22, 4, 24, 25, 26, 27, 7],
       },
       {
         answer: "😌 Entspannte Filme",

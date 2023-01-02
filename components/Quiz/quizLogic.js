@@ -12,11 +12,11 @@ export default function MovieQuiz() {
   const movieDataWithEditedReleaseYear = movieData.map((movie) => {
     return { ...movie, release_date: movie.release_date.slice(0, 4) };
   });
-  console.log(questionAnswer);
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
   // saves the given answer in an array (e.g. Question 1 - short movies)
   const [givenAnswers, setGivenAnswers] = useState([]);
+  const [data, setData] = useState({ questionAnswer });
 
   // this function is the main component. As a parameter it takes an Array with the given answers
   // it is called when the User hits the "Zur Filmempfehlung" Button
@@ -40,6 +40,16 @@ export default function MovieQuiz() {
     } else router.push(`/errorpages/no-movie`);
   }
 
+  const updateState = (id) => {
+    const updatedItems = [...data.questionAnswer[currentStep].answerOptions];
+    const itemId = updatedItems.findIndex((obj) => obj.id === id);
+    updatedItems[itemId].checked = !updatedItems[itemId].checked;
+    setData({
+      ...data,
+      items: updatedItems,
+    });
+  };
+
   // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
   function handleNext(event) {
@@ -55,21 +65,21 @@ export default function MovieQuiz() {
       <section>
         <h1>{questionAnswer[currentStep].question}</h1>
         {questionAnswer[currentStep].answerOptions.map((answer, index) => (
-          <StyledAnswerWrapper
-            key={index}
-            onClick={() => {
-              setGivenAnswers([(givenAnswers[currentStep] = answer.value)]);
-              setGivenAnswers([...givenAnswers]);
-            }}
-          >
+          <StyledAnswerWrapper key={index}>
             <StyledInput
-              type="radio"
-              value="answer.value"
-              name="answer"
+              type="checkbox"
+              id="check"
+              value={answer.value}
+              // name="answer"
+              checked={answer.checked}
+              onChange={() => updateState(answer.id)}
+              // setGivenAnswers([(givenAnswers[currentStep] = answer.value)]);
+              // setGivenAnswers([...givenAnswers]);
+
               readOnly
-              checked={answer.value === givenAnswers[currentStep]}
+              // checked={answer.value === givenAnswers[currentStep]}
             />
-            {answer.answer}
+            {answer.answer} {answer.id}
           </StyledAnswerWrapper>
         ))}
         <div>
@@ -102,11 +112,11 @@ const StyledAnswerWrapper = styled.div`
 // okay - I may be stupid. But I really hate the native radio buttons. So here is my styling...
 const StyledInput = styled.input`
   //remove the native radio input styles
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0 6px 0 0;
+  /* -webkit-appearance: none;
+  appearance: none; */
+  /* margin: 0 6px 0 0; */
   // styling the input field
-  color: var(--darkBlue);
+  /* color: var(--darkBlue);
   width: 1.15em;
   height: 1.15em;
   border: 0.15em solid var(--darkBlue);
@@ -120,5 +130,5 @@ const StyledInput = styled.input`
     box-shadow: inset 1em 1em var(--darkBlue);
     transform: scale(1.2);
     background-color: var(--darkBlue);
-  }
+  } */
 `;

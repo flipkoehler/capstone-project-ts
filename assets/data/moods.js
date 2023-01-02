@@ -23,12 +23,10 @@ export const movieMood = {
   20: traurig,
   21: ernst,
   22: fordernd,
-  23: rau,
   24: brutal,
   25: düster,
   26: inspirierend,
   27: hautnah,
-  28: bittersüß,
   29: gemütlich,
   30: ruhig,
 };
