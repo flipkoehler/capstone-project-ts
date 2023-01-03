@@ -81,7 +81,7 @@ export default function MovieQuiz() {
       filteredMovies
     ).filter((movie) => movie !== "no-movie");
 
-    console.log("filteredMoviesWithMood", filteredMoviesWithMood);
+    console.log("filteredMoviesWithMood ", filteredMoviesWithMood);
 
     // Step 2: shuffles a random movie based on the array
     const randomMovie = randomMoviePicker(filteredMoviesWithMood);
