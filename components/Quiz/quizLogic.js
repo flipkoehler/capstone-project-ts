@@ -63,23 +63,28 @@ export default function MovieQuiz() {
 
     console.log("filteredmovies", filteredMovies);
 
-    function handleIncludedMoods(checkedMoods, filteredMovies) {
-      for (const mood of checkedMoods) {
-        const filteredMoviesWithMood = filteredMovies.map((movie) => {
-          if (movie.mood.includes(mood)) {
-            return movie;
+    const filteredMoviesWithMood = filteredMovies
+      .map((movie) => {
+        let result = [];
+        const a = checkedMoods;
+        let b = movie.mood;
+        while (a.length > 0 && b.length > 0) {
+          if (a[0] < b[0]) {
+            a.shift();
+          } else if (a[0] > b[0]) {
+            b.shift();
           } else {
-            return "no-movie";
+            result.push(a.shift());
+            b.shift();
           }
-        });
-        return filteredMoviesWithMood;
-      }
-    }
-
-    const filteredMoviesWithMood = handleIncludedMoods(
-      checkedMoods,
-      filteredMovies
-    ).filter((movie) => movie !== "no-movie");
+        }
+        if (Array.from(new Set(result))[0] === undefined) {
+          return "no-movie";
+        } else {
+          return movie;
+        }
+      })
+      .filter((movie) => movie !== "no-movie");
 
     console.log("filteredMoviesWithMood ", filteredMoviesWithMood);
 

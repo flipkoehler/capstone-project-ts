@@ -25,13 +25,15 @@ export default function QuizSteps({
       <section>
         <h1>{givenAnswers[currentStep].question}</h1>
         {givenAnswers[currentStep].answerOptions.map((answer, index) => (
-          <StyledAnswerWrapper key={index}>
+          <StyledAnswerWrapper
+            key={index}
+            onClick={() => updateState(answer.id)}
+          >
             <StyledInput
               type="checkbox"
               id="check"
               value={answer.value}
               checked={answer.checked}
-              onChange={() => updateState(answer.id)}
               readOnly
             />
             {answer.answer}
@@ -39,6 +41,13 @@ export default function QuizSteps({
         ))}
         <div>
           <button
+            disabled={
+              givenAnswers[currentStep].answerOptions.filter(
+                (answer) => answer.checked === true
+              ).length === 0
+                ? true
+                : false
+            }
             onClick={(event) => handleNext(event, givenAnswers[currentStep])}
           >
             {isLastStep ? "Zur Filmempfehlung" : "Weiter"}
