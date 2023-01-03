@@ -1,5 +1,5 @@
 import Header from "../../components/Header/Header";
-import MovieQuiz from "../../components/Quiz/quizLogic";
+import MovieQuiz from "../../components/Quiz/QuizLogic";
 
 export default function quiz() {
   return (
