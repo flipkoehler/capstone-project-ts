@@ -45,7 +45,7 @@ export default function QuizSteps({
               <StyledSpan>
                 {movieMood
                   .filter((mood) => answer.value.includes(mood.id))
-                  .map((mood) => mood.value + ", ")}
+                  .map((mood, index) => (index ? ", " : "") + mood.value)}
               </StyledSpan>
             )}
           </StyledAnswerWrapper>
@@ -72,20 +72,19 @@ export default function QuizSteps({
 // CSS Styling
 const StyledAnswerWrapper = styled.div`
   width: 100%;
-  font-size: 1.2rem;
-  margin: 0.4rem auto;
-  padding: 0.5rem 0.5rem;
+  margin: 0.2rem auto;
+  padding: 0.4rem;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: left;
   background-color: var(--lightGray);
-  border-radius: 15px;
   cursor: pointer;
 `;
 
 const StyledAnswer = styled.p`
+  display: flex;
   width: 80%;
   margin-left: 1rem;
 `;
@@ -98,4 +97,5 @@ const StyledInput = styled.input`
 
 const StyledSpan = styled.span`
   font-size: 0.7rem;
+  padding-left: 3rem;
 `;
