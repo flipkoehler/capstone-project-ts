@@ -24,7 +24,7 @@ export default function MovieQuiz() {
   // this function is the main component. As a parameter it takes an Array with the given answers
   // it is called when the User hits the "Zur Filmempfehlung" Button
   function handleMovieData(updatedQuestionAnswer) {
-    // this calculates the min/max values for the runtime
+    // Quiz Step 1: this calculates the min/max values for the runtime
     const minRuntime = updatedQuestionAnswer[0].answerOptions.find(
       (answer) => answer.checked && answer
     ).value.min;
@@ -33,7 +33,7 @@ export default function MovieQuiz() {
       (answer) => answer.checked && answer
     ).value.max;
 
-    // this calculates the min/max values for the release date
+    // Quiz Step 2: this calculates the min/max values for the release date
     const minReleaseDate = updatedQuestionAnswer[1].answerOptions.find(
       (answer) => answer.checked && answer
     ).value.min;
@@ -42,15 +42,8 @@ export default function MovieQuiz() {
       (answer) => answer.checked && answer
     ).value.max;
 
-    const checkedMoods = updatedQuestionAnswer[2].answerOptions
-      .filter((answer) => answer.checked && answer)
-      .map((a) => a.value)
-      .reduce((a, b) => [...a, ...b], []);
-
-    console.log("checkedMoods", checkedMoods);
-
-    //step 1: filter through the array and create an new one "filteredMovies" only including movies with the correct duration and release date
-    const filteredMovies = movieDataWithEditedReleaseYear
+    // filter through the array and create an new one "Step1and2" only including movies with the correct duration and release date
+    const filteredMoviesStep1andStep2 = movieDataWithEditedReleaseYear
       .filter((movie) => {
         return (
           movie.runtime >= minRuntime &&
@@ -61,44 +54,29 @@ export default function MovieQuiz() {
       })
       .filter((movie) => movie.mood && movie);
 
-    console.log("filteredmovies", filteredMovies);
+    // Quiz Step 3: this collects the given answers for the checked moods and put it in an array
+    const checkedMoods = updatedQuestionAnswer[2].answerOptions
+      .filter((answer) => answer.checked && answer)
+      .map((a) => a.value)
+      .reduce((a, b) => [...a, ...b], []);
 
-    const filteredMoviesWithMood = filteredMovies
-      .map((movie) => {
-        let result = [];
-        const a = checkedMoods;
-        let b = movie.mood;
-        while (a.length > 0 && b.length > 0) {
-          if (a[0] < b[0]) {
-            a.shift();
-          } else if (a[0] > b[0]) {
-            b.shift();
-          } else {
-            result.push(a.shift());
-            b.shift();
-          }
-        }
-        if (Array.from(new Set(result))[0] === undefined) {
-          return "no-movie";
-        } else {
-          return movie;
-        }
-      })
-      .filter((movie) => movie !== "no-movie");
-
-    console.log("filteredMoviesWithMood ", filteredMoviesWithMood);
+    const filteredArray = filteredMoviesStep1andStep2.filter((item) => {
+      return item.mood.some((mood) => checkedMoods.includes(mood));
+    });
 
     // Step 2: shuffles a random movie based on the array
-    const randomMovie = randomMoviePicker(filteredMoviesWithMood);
+    const randomMovie = randomMoviePicker(filteredArray);
 
     // step 3: navigate to the random movie detail page
-    if (filteredMoviesWithMood.length > 0) {
+
+    if (filteredArray.length > 0) {
       router.push(`/movies/${randomMovie.id}`);
     } else router.push(`/errorpages/no-movie`);
   }
 
   // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
+
   function handleNext(event, givenAnswers) {
     event.preventDefault();
     const updatedItems = [...updatedQuestionAnswer];
