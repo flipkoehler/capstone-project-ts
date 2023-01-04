@@ -8,6 +8,8 @@ export const questionAnswer = [
       {
         id: 1,
         answer: "Nur kurz",
+        information:
+          "Manchmal muss es schnell gehen. Hier zeigen wir nur Filme mit kurzer Lauflänge",
         value: {
           min: 0,
           max: 99,
@@ -17,6 +19,8 @@ export const questionAnswer = [
       {
         id: 2,
         answer: "Normale Lauflänge",
+        information:
+          "Diese Kategorie entspricht dem klassichen Durchschnitt. Nicht zu lang - nicht zu kurz",
         value: {
           min: 100,
           max: 139,
@@ -26,6 +30,8 @@ export const questionAnswer = [
       {
         id: 3,
         answer: "Ich habe Zeit",
+        information:
+          "Und hier verbergen sich die Überlängefilme. Manchmal muss es auch ein Epos sein!",
         value: {
           min: 140,
           max: 9999,
@@ -35,6 +41,8 @@ export const questionAnswer = [
       {
         id: 4,
         answer: "Ist mir egal",
+        information:
+          "Du bist offen für alles? Perfekt! Hier gibt es die größte Auswahl",
         value: {
           min: 0,
           max: 9999,
@@ -50,6 +58,8 @@ export const questionAnswer = [
       {
         id: 5,
         answer: "Oldies",
+        information:
+          "Hier verstecken sich die die Perlen der Filmgeschichte. Manchmal auch in Schwarz weiß, aber alle gut geeignet für die heutige Zeit",
         value: {
           min: 0,
           max: 1987,
@@ -59,6 +69,7 @@ export const questionAnswer = [
       {
         id: 6,
         answer: "Moderne Klassiker",
+        information: "Wunderbare Filme, die nie verstauben werden",
         value: {
           min: 1988,
           max: 2010,
@@ -68,6 +79,7 @@ export const questionAnswer = [
       {
         id: 7,
         answer: "Aus der heutigen Zeit",
+        information: "Meisterwerke aus den letzten Jahren",
         value: {
           min: 2011,
           max: 9999,
@@ -77,6 +89,8 @@ export const questionAnswer = [
       {
         id: 8,
         answer: "Ist mir egal",
+        information:
+          "Du bist offen für alles? Perfekt! Hier gibt es die größte Auswahl",
         value: {
           min: 0,
           max: 9999,

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { movieMood } from "../../assets/data/moods";
 
 export default function QuizSteps({
   currentQuestion,
@@ -36,7 +37,17 @@ export default function QuizSteps({
               checked={answer.checked}
               readOnly
             />
-            {answer.answer}
+            <StyledAnswer>{answer.answer}</StyledAnswer>
+            {(currentStep === 0) | 1 && (
+              <StyledSpan>{answer.information}</StyledSpan>
+            )}
+            {currentStep === 2 && (
+              <StyledSpan>
+                {movieMood
+                  .filter((mood) => answer.value.includes(mood.id))
+                  .map((mood) => mood.value + ", ")}
+              </StyledSpan>
+            )}
           </StyledAnswerWrapper>
         ))}
         <div>
@@ -60,10 +71,10 @@ export default function QuizSteps({
 
 // CSS Styling
 const StyledAnswerWrapper = styled.div`
-  width: 320px;
+  width: 100%;
   font-size: 1.2rem;
   margin: 0.4rem auto;
-  padding: 1.1rem 1.5rem;
+  padding: 0.5rem 0.5rem;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -71,7 +82,20 @@ const StyledAnswerWrapper = styled.div`
   justify-content: left;
   background-color: var(--lightGray);
   border-radius: 15px;
+  cursor: pointer;
+`;
+
+const StyledAnswer = styled.p`
+  width: 80%;
+  margin-left: 1rem;
 `;
 
 // okay - I may be stupid. But I really hate the native radio buttons. So here is my styling...
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  width: 1.5rem;
+  height: 1.5rem;
+`;
+
+const StyledSpan = styled.span`
+  font-size: 0.7rem;
+`;

@@ -42,7 +42,7 @@ export default function MovieQuiz() {
       (answer) => answer.checked && answer
     ).value.max;
 
-    // filter through the array and create an new one "Step1and2" only including movies with the correct duration and release date
+    // Quiz Step 1 + 2: filter through the array and create an new one "Step1and2" only including movies with the correct duration and release date
     const filteredMoviesStep1andStep2 = movieDataWithEditedReleaseYear
       .filter((movie) => {
         return (
@@ -60,16 +60,17 @@ export default function MovieQuiz() {
       .map((a) => a.value)
       .reduce((a, b) => [...a, ...b], []);
 
-    const filteredArray = filteredMoviesStep1andStep2.filter((item) => {
+    // Quiz Step 3: this filters through the filtered array of Step1 and 3 and reduce it by the checked moods
+    const filteredMoviesStep3 = filteredMoviesStep1andStep2.filter((item) => {
       return item.mood.some((mood) => checkedMoods.includes(mood));
     });
 
-    // Step 2: shuffles a random movie based on the array
-    const randomMovie = randomMoviePicker(filteredArray);
+    // navigation: shuffles a random movie based on the array
+    const randomMovie = randomMoviePicker(filteredMoviesStep3);
 
-    // step 3: navigate to the random movie detail page
+    // navigation: navigate to the random movie detail page
 
-    if (filteredArray.length > 0) {
+    if (filteredMoviesStep3.length > 0) {
       router.push(`/movies/${randomMovie.id}`);
     } else router.push(`/errorpages/no-movie`);
   }
