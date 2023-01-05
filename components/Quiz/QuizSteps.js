@@ -87,12 +87,13 @@ const StyledAnswerWrapper = styled.div`
 const StyledAnswer = styled.p`
   display: flex;
   width: 80%;
-  margin-left: 1rem;
+  margin: 0 0 0 1rem;
 `;
 
 const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
+  margin-top: 1rem;
 `;
 
 const StyledSpan = styled.span`

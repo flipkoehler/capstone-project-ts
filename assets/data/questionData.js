@@ -38,7 +38,7 @@ export const questionAnswer = [
       {
         id: 4,
         answer: "Ist mir egal",
-        information: "",
+        information: "keine Beschränkung bei der Suche",
         value: {
           min: 0,
           max: 9999,
@@ -85,7 +85,7 @@ export const questionAnswer = [
       {
         id: 8,
         answer: "Ist mir egal",
-        information: "",
+        information: "keine Beschränkung bei der Suche",
         value: {
           min: 0,
           max: 9999,
@@ -141,22 +141,21 @@ export const questionAnswer = [
       {
         id: 15,
         answer: "Ich schaue den Film alleine",
-        information: "Es werden alle Filme angezeigt.",
+        information: "Es werden alle Filme angezeigt",
         value: 1,
         checked: false,
       },
       {
         id: 16,
         answer: "Zusammen mit Freunden",
-        information:
-          "Ihr könnt zwischendurch quatschen oder das laute Kauen von Nachos ertragen",
-        value: 2,
+        information: "Ihr könnt zwischendurch auch mal quatschen",
+        value: 3,
         checked: false,
       },
       {
         id: 17,
         answer: "Mit meinem Date",
-        information: "Es ist Okay wenn ihr das Ende verpasst",
+        information: "Es ist okay wenn ihr das Ende verpasst...",
         value: 2,
         checked: false,
       },
