@@ -78,10 +78,10 @@ export default function MovieQuiz() {
   // Function handles the Click on the Button. It sets the current step the user is in
   // and it gives the current array with the given answers to the main function
 
-  function handleNext(event, givenAnswers) {
+  function handleNext(event, updateAnswer) {
     event.preventDefault();
     const updatedItems = [...updatedQuestionAnswer];
-    updatedItems[currentStep] = givenAnswers;
+    updatedItems[currentStep] = updateAnswer;
     setUpdatedQuestionAnswer([...updatedItems]);
 
     if (currentStep === questionAnswer.length - 1) {
@@ -92,7 +92,7 @@ export default function MovieQuiz() {
   return (
     <QuizSteps
       currentQuestion={updatedQuestionAnswer}
-      handleNext={handleNext}
+      onNext={handleNext}
       isLastStep={currentStep === questionAnswer.length - 1}
       currentStep={currentStep}
     />

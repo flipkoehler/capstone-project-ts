@@ -4,19 +4,19 @@ import { movieMood } from "../../assets/data/moods";
 
 export default function QuizSteps({
   currentQuestion,
-  handleNext,
+  onNext,
   isLastStep,
   currentStep,
 }) {
   // sets the given answers in an array (e.g. Question 1 - short movies)
-  const [givenAnswers, setGivenAnswers] = useState(currentQuestion);
+  const [updateAnswer, setUpdateAnswer] = useState(currentQuestion);
 
   const updateState = (id) => {
-    const updatedItems = [...givenAnswers[currentStep].answerOptions];
+    const updatedItems = [...updateAnswer[currentStep].answerOptions];
     const itemIndex = updatedItems.findIndex((obj) => obj.id === id);
     updatedItems[itemIndex].checked = !updatedItems[itemIndex].checked;
-    setGivenAnswers({
-      ...givenAnswers,
+    setUpdateAnswer({
+      ...updateAnswer,
       answerOptions: updatedItems,
     });
   };
@@ -24,9 +24,9 @@ export default function QuizSteps({
   return (
     <form>
       <section>
-        <h1>{givenAnswers[currentStep].question}</h1>
+        <h1>{updateAnswer[currentStep].question}</h1>
         <p>Frage {currentStep + 1} von 3</p>
-        {givenAnswers[currentStep].answerOptions.map((answer, index) => (
+        {updateAnswer[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
             onClick={() => updateState(answer.id)}
@@ -54,13 +54,13 @@ export default function QuizSteps({
         <div>
           <button
             disabled={
-              givenAnswers[currentStep].answerOptions.filter(
+              updateAnswer[currentStep].answerOptions.filter(
                 (answer) => answer.checked === true
               ).length === 0
                 ? true
                 : false
             }
-            onClick={(event) => handleNext(event, givenAnswers[currentStep])}
+            onClick={(event) => onNext(event, updateAnswer[currentStep])}
           >
             {isLastStep ? "Zur Filmempfehlung" : "Weiter"}
           </button>
