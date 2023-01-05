@@ -25,7 +25,7 @@ export default function QuizSteps({
     <form>
       <section>
         <h1>{updateAnswer[currentStep].question}</h1>
-        <p>Frage {currentStep + 1} von 3</p>
+        <p>Frage {currentStep + 1} von 4</p>
         {updateAnswer[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
