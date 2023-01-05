@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import ReadMore from "../ReadMoreText/ReadMoreText";
 import Image from "next/image";
 import styled from "styled-components";
+import { movieMood } from "../../assets/data/moods";
 
 export default function MovieDetailPage({ passedMovie }) {
   return (
@@ -23,6 +24,11 @@ export default function MovieDetailPage({ passedMovie }) {
           <MovieTags>{passedMovie.runtime} Minuten</MovieTags>
           <MovieTags>{passedMovie.genres[0].name}</MovieTags>
           <MovieTags>Jahr: {passedMovie.release_date.slice(0, 4)}</MovieTags>
+          <MovieTags>
+            {movieMood
+              .filter((mood) => passedMovie.mood.includes(mood.id))
+              .map((mood, index) => (index ? ", " : "") + mood.value)}
+          </MovieTags>
         </MovieTagsUl>
         <ReadMore aria-label="read more or read less">
           {passedMovie.overview}

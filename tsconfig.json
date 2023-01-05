@@ -20,6 +20,6 @@
     "**/*.ts",
     "**/*.tsx",
     "components/Benefits/Benefits copy.js"
-  ],
+, "components/Quiz/QuizSteps.js"  ],
   "exclude": ["node_modules"]
 }
