@@ -39,7 +39,7 @@ export default function QuizSteps({
               readOnly
             />
             <StyledAnswer>{answer.answer}</StyledAnswer>
-            {(currentStep === 0) | 1 && (
+            {(currentStep === 0) | 1 | 3 && (
               <StyledSpan>{answer.information}</StyledSpan>
             )}
             {currentStep === 2 && (
