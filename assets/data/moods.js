@@ -29,10 +29,7 @@ export const movieMood = [
     id: 8,
     value: "unterhaltsam",
   },
-  {
-    id: 9,
-    value: "mitreißend",
-  },
+
   {
     id: 10,
     value: "liebevoll",

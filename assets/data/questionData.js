@@ -2,14 +2,12 @@
 
 export const questionAnswer = [
   {
-    question: "Frage 1/3: Wie lange darf dein Film heute dauern?",
-    questionStyling: "short",
+    question: "Wie lange darf dein Film heute dauern?",
     answerOptions: [
       {
         id: 1,
         answer: "Nur kurz",
-        information:
-          "Manchmal muss es schnell gehen. Hier zeigen wir nur Filme mit kurzer Lauflänge",
+        information: "Filme mit besonders kurzer Laufzeit",
         value: {
           min: 0,
           max: 99,
@@ -20,7 +18,7 @@ export const questionAnswer = [
         id: 2,
         answer: "Normale Lauflänge",
         information:
-          "Diese Kategorie entspricht dem klassichen Durchschnitt. Nicht zu lang - nicht zu kurz",
+          "Der klassiche Durchschnitt. Nicht zu lang - nicht zu kurz",
         value: {
           min: 100,
           max: 139,
@@ -30,8 +28,7 @@ export const questionAnswer = [
       {
         id: 3,
         answer: "Ich habe Zeit",
-        information:
-          "Und hier verbergen sich die Überlängefilme. Manchmal muss es auch ein Epos sein!",
+        information: "Filme mit Überlänge",
         value: {
           min: 140,
           max: 9999,
@@ -41,8 +38,7 @@ export const questionAnswer = [
       {
         id: 4,
         answer: "Ist mir egal",
-        information:
-          "Du bist offen für alles? Perfekt! Hier gibt es die größte Auswahl",
+        information: "",
         value: {
           min: 0,
           max: 9999,
@@ -52,14 +48,14 @@ export const questionAnswer = [
     ],
   },
   {
-    question: "Frage 2/3: Wie alt darf dein Film sein?",
+    question: "Wie alt darf dein Film sein?",
     questionStyling: "short",
     answerOptions: [
       {
         id: 5,
         answer: "Oldies",
         information:
-          "Hier verstecken sich die die Perlen der Filmgeschichte. Manchmal auch in Schwarz weiß, aber alle gut geeignet für die heutige Zeit",
+          "Perlen der Filmgeschichte. Manchmal auch in Schwarz weiß, aber gut geeignet für die heutige Zeit",
         value: {
           min: 0,
           max: 1987,
@@ -69,7 +65,7 @@ export const questionAnswer = [
       {
         id: 6,
         answer: "Moderne Klassiker",
-        information: "Wunderbare Filme, die nie verstauben werden",
+        information: "Wunderbare Filme, die nie verstauben",
         value: {
           min: 1988,
           max: 2010,
@@ -89,8 +85,7 @@ export const questionAnswer = [
       {
         id: 8,
         answer: "Ist mir egal",
-        information:
-          "Du bist offen für alles? Perfekt! Hier gibt es die größte Auswahl",
+        information: "",
         value: {
           min: 0,
           max: 9999,
@@ -100,8 +95,7 @@ export const questionAnswer = [
     ],
   },
   {
-    question:
-      "Frage 3/3: Welche Stimmung oder Gefühl soll der Film übermitteln?",
+    question: "Welche Stimmung oder Gefühl soll der Film übermitteln?",
     questionStyling: "mood",
     answerOptions: [
       {

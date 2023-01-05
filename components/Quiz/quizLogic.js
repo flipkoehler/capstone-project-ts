@@ -42,7 +42,7 @@ export default function MovieQuiz() {
       (answer) => answer.checked && answer
     ).value.max;
 
-    // Quiz Step 1 + 2: filter through the array and create an new one "Step1and2" only including movies with the correct duration and release date
+    // Quiz Step 1 + 2: filter through the array and create an new array called "filteredMoviesStep1andStep2" only including movies with the correct duration and release date
     const filteredMoviesStep1andStep2 = movieDataWithEditedReleaseYear
       .filter((movie) => {
         return (
@@ -54,13 +54,13 @@ export default function MovieQuiz() {
       })
       .filter((movie) => movie.mood && movie);
 
-    // Quiz Step 3: this collects the given answers for the checked moods and put it in an array
+    // Quiz Step 3: this collects the given answers for the checked moods and put them in an array e.g. [1,2,3,4,5...]
     const checkedMoods = updatedQuestionAnswer[2].answerOptions
       .filter((answer) => answer.checked && answer)
       .map((a) => a.value)
       .reduce((a, b) => [...a, ...b], []);
 
-    // Quiz Step 3: this filters through the filtered array of Step1 and 3 and reduce it by the checked moods
+    // Quiz Step 3: this filters through the array of Step1 and 2 and reduces it by the checked moods
     const filteredMoviesStep3 = filteredMoviesStep1andStep2.filter((item) => {
       return item.mood.some((mood) => checkedMoods.includes(mood));
     });
@@ -89,7 +89,6 @@ export default function MovieQuiz() {
     } else setCurrentStep(currentStep + 1);
   }
 
-  // this is the html shown. It takes the content from the questionData Array and maps through it
   return (
     <QuizSteps
       currentQuestion={updatedQuestionAnswer}

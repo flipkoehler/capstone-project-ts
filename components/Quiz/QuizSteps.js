@@ -8,7 +8,7 @@ export default function QuizSteps({
   isLastStep,
   currentStep,
 }) {
-  // saves the given answer in an array (e.g. Question 1 - short movies)
+  // sets the given answers in an array (e.g. Question 1 - short movies)
   const [givenAnswers, setGivenAnswers] = useState(currentQuestion);
 
   const updateState = (id) => {
@@ -25,6 +25,7 @@ export default function QuizSteps({
     <form>
       <section>
         <h1>{givenAnswers[currentStep].question}</h1>
+        <p>Frage {currentStep + 1} von 3</p>
         {givenAnswers[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
@@ -89,7 +90,6 @@ const StyledAnswer = styled.p`
   margin-left: 1rem;
 `;
 
-// okay - I may be stupid. But I really hate the native radio buttons. So here is my styling...
 const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
