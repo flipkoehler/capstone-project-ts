@@ -9,7 +9,7 @@ import Slider from "../Slider/Slider";
 
 export default function WelcomePage(): JSX.Element {
   return (
-    <>
+    <StyledContentBox>
       <StyledDivStart>
         <h1>
           Deine Filmempfehlung in <StyledSpan>vier einfachen</StyledSpan>{" "}
@@ -31,13 +31,14 @@ export default function WelcomePage(): JSX.Element {
       <Slider />
 
       <Benefits />
-      <StyledLink href="/quiz">Quiz jetzt starten!</StyledLink>
-      <StyledLink2 href="/movie-recommendation">
-        Oder eine zufällige Filmempfehlung!
-      </StyledLink2>
-    </>
+    </StyledContentBox>
   );
 }
+
+const StyledContentBox = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+`;
 
 const StyledSpan = styled.span`
   background: var(--darkBlue);
@@ -59,18 +60,6 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const StyledLink2 = styled(Link)`
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  text-decoration: underline;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--smokey-black);
 `;
 
 const StyledDivStart = styled.div`

@@ -2,6 +2,7 @@ import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
 import { useCallback } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
 type PropType = {
   options?: EmblaOptionsType;
@@ -37,8 +38,8 @@ export default function Slider() {
               <h3>Das Quiz</h3>
             </StyledHeadlineDiv>
             <p>
-              Beantworte vier kurze Fragen, nach deiner aktuellen Stimmung. Auf
-              dieser Basis wird dir dann ein Film empfohlen
+              Beantworte vier kurze Fragen. Auf dieser Grundlage wird dir dann
+              ein Film empfohlen.
             </p>
             <StyledLink href="/quiz">Quiz jetzt starten!</StyledLink>
           </StyledSliderItemDiv>
@@ -47,7 +48,10 @@ export default function Slider() {
               <StyledNumberDiv>2</StyledNumberDiv>
               <h3>Zufälliger Film</h3>
             </StyledHeadlineDiv>
-            <p>Du hast keine Lust auf die Fragen und willst sofort starten?</p>
+            <p>
+              Du hast keine Lust auf die Fragen und willst sofort starten?
+              Klicke hier für eine zufällige Empfehlung.
+            </p>
             <StyledLink href="/movie-recommendation">
               Direkt zum Film
             </StyledLink>
@@ -66,8 +70,22 @@ export default function Slider() {
         </StyledSliderContainerParentDiv>
       </StyledSliderContainerDiv>
       <StyledControlsDiv>
-        <StyledButton onClick={scrollPrev}>Prev</StyledButton>
-        <StyledButton onClick={scrollNext}>Next</StyledButton>
+        <StyledButton onClick={scrollPrev}>
+          <StyledImage
+            src={"/images/clarity_arrow-line_left.svg"}
+            width={30}
+            height={30}
+            alt="go back"
+          />
+        </StyledButton>
+        <StyledButton onClick={scrollNext}>
+          <StyledImage
+            src={"/images/clarity_arrow-line_right.svg"}
+            width={30}
+            height={30}
+            alt="go forward"
+          />
+        </StyledButton>
       </StyledControlsDiv>
     </>
   );
@@ -87,18 +105,14 @@ const StyledSliderItemDiv = styled.div`
   min-width: 0;
   max-width: 100%;
   background-color: var(--globalWhite);
-  border-radius: 30px 30px 0px 30px;
-
-  margin-right: 1.2rem;
+  border-radius: 1rem 1rem 0px 1rem;
+  box-shadow: 0px -0.5rem 0.8rem rgba(0, 0, 0, 0.07);
+  margin: 1.5rem 1.2rem 0 0.2rem;
   padding: 2rem;
   @media screen and (max-width: 600px) {
     flex: 0 0 92%;
     margin: 0 1rem 0 1rem;
   }
-`;
-
-const StyledSliderCardDiv = styled.div`
-  background-color: lightblue;
 `;
 
 const StyledButton = styled.button`
@@ -108,18 +122,24 @@ const StyledButton = styled.button`
   color: var(--smokey-black);
   border: var(--globalWhite) 3px solid;
   margin: 10px auto;
-  padding: 20px;
-  border-radius: 15px;
+  border-radius: none;
   font-size: 1.1rem;
   text-decoration: none;
-  box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
+  box-shadow: none;
+  border: none;
   cursor: pointer;
+  & .not:hover {
+    background-color: var(--globalWhite);
+    color: var(--globalWhite);
+    transition: ease-in-out 0.3s;
+  }
 `;
 
 const StyledControlsDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  margin: 0 auto;
+  width: 15rem;
 `;
 
 const StyledHeadlineDiv = styled.div`
@@ -154,3 +174,5 @@ const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
 `;
+
+const StyledImage = styled(Image)``;

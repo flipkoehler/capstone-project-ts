@@ -57,9 +57,11 @@ const StyledLogoDiv = styled.div`
 `;
 
 const StyledHeader = styled.div`
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   height: 4.5rem;
+
   @media (max-width: 650px) {
     height: 100%;
     flex-direction: column;

@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
     :root {
         --globalWhite: #fff;
-        --lightGray: #F0F2EF;
+        --lightGray: #f5f6f4;
         --darkBlue: #0D324D;
         --smokeyBlack: #121113;
     }
@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         background-color: var(--lightGray);
         color: var(--smokeyBlack);
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 auto;
         font-family: Poppins, sans-serif;
     }
@@ -45,7 +45,8 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--globalWhite);
     padding: 20px;
     border-radius: 30px 30px 0px 30px;
-    margin: 5px;
+    max-width: 900px;
+  margin: 1.5rem auto;
     }
 
     h1 {
@@ -75,11 +76,6 @@ const GlobalStyles = createGlobalStyle`
         cursor: pointer;
     }
 
-    button:hover{
-        background-color: var(--darkBlue);
-        color: var(--globalWhite);
-        transition: ease-in-out .3s
-    }
 
     button:disabled{
         background-color: rgba(13, 50, 77, 0.4);
