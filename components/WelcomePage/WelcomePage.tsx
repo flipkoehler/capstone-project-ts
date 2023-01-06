@@ -16,8 +16,8 @@ export default function WelcomePage(): JSX.Element {
           Schritten
         </h1>
         <StyledPIntroText>
-          Du hast das ewige Scrollen durch Netflix, Amazon und Co. satt?! Mit
-          der Hilfe von vier kurzen Fragen geben wir dir eine wunderbare
+          Du hast das ewige Scrollen durch Netflix, Amazon und Co. satt? Mit der
+          Hilfe von vier kurzen Fragen geben wir dir eine wunderbare
           Filmempfehlung für deinen nächsten Filmabend. Alle Filme sind
           handverlesen und garantieren beste Unterhaltung!
           <StyledLink href="/quiz">Quiz jetzt starten!</StyledLink>
