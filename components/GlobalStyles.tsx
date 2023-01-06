@@ -50,6 +50,7 @@ const GlobalStyles = createGlobalStyle`
 
     h1 {
         text-align: left;
+        font-size: 1.6rem;
     }
 
     h2 {
