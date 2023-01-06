@@ -24,12 +24,14 @@ export default function MovieDetailPage({ passedMovie }) {
           <MovieTags>{passedMovie.runtime} Minuten</MovieTags>
           <MovieTags>{passedMovie.genres[0].name}</MovieTags>
           <MovieTags>Jahr: {passedMovie.release_date.slice(0, 4)}</MovieTags>
-          <MovieTags>
-            {movieMood
-              .filter((mood) => passedMovie.mood.includes(mood.id))
-              .map((mood, index) => (index ? ", " : "") + mood.value)}
-          </MovieTags>
         </MovieTagsUl>
+        <MovieTagsUlshort>
+          {movieMood
+            .filter((mood) => passedMovie.mood.includes(mood.id))
+            .map((mood) => (
+              <MovieTags>{mood.value}</MovieTags>
+            ))}
+        </MovieTagsUlshort>
         <ReadMore aria-label="read more or read less">
           {passedMovie.overview}
         </ReadMore>
@@ -52,6 +54,16 @@ const MovieTagsUl = styled.ul`
   align-content: center;
   padding: 0;
   margin: 0;
+`;
+
+const MovieTagsUlshort = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
 `;
 
 const MovieTags = styled.li`

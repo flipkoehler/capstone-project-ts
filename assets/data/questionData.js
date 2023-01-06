@@ -38,7 +38,7 @@ export const questionAnswer = [
       {
         id: 4,
         answer: "Ist mir egal",
-        information: "",
+        information: "keine Beschränkung bei der Suche",
         value: {
           min: 0,
           max: 9999,
@@ -85,7 +85,7 @@ export const questionAnswer = [
       {
         id: 8,
         answer: "Ist mir egal",
-        information: "",
+        information: "keine Beschränkung bei der Suche",
         value: {
           min: 0,
           max: 9999,
@@ -96,7 +96,6 @@ export const questionAnswer = [
   },
   {
     question: "Welche Stimmung oder Gefühl soll der Film übermitteln?",
-    questionStyling: "mood",
     answerOptions: [
       {
         id: 9,
@@ -132,6 +131,46 @@ export const questionAnswer = [
         id: 14,
         answer: "Spannende Filme 🫣",
         value: [6, 9, 31, 32, 33],
+        checked: false,
+      },
+    ],
+  },
+  {
+    question: "Mit wem möchtest du den Film schauen?",
+    answerOptions: [
+      {
+        id: 15,
+        answer: "Ich schaue den Film alleine",
+        information: "Es werden alle Filme angezeigt",
+        value: 1,
+        checked: false,
+      },
+      {
+        id: 16,
+        answer: "Zusammen mit Freunden",
+        information: "Ihr könnt zwischendurch auch mal quatschen",
+        value: 3,
+        checked: false,
+      },
+      {
+        id: 17,
+        answer: "Mit meinem Date",
+        information: "Es ist okay wenn ihr das Ende verpasst...",
+        value: 2,
+        checked: false,
+      },
+      {
+        id: 18,
+        answer: "Mit Kindern",
+        information: "Kinderfreunliche Inhalte",
+        value: 4,
+        checked: false,
+      },
+      {
+        id: 19,
+        answer: "Mit meiner Familie",
+        information: "weniger nackte Haut, weniger unangenehme Situationen",
+        value: 5,
         checked: false,
       },
     ],

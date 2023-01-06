@@ -25,7 +25,7 @@ export default function QuizSteps({
     <form>
       <section>
         <h1>{updateAnswer[currentStep].question}</h1>
-        <p>Frage {currentStep + 1} von 3</p>
+        <p>Frage {currentStep + 1} von 4</p>
         {updateAnswer[currentStep].answerOptions.map((answer, index) => (
           <StyledAnswerWrapper
             key={index}
@@ -39,7 +39,7 @@ export default function QuizSteps({
               readOnly
             />
             <StyledAnswer>{answer.answer}</StyledAnswer>
-            {(currentStep === 0) | 1 && (
+            {(currentStep === 0) | 1 | 3 && (
               <StyledSpan>{answer.information}</StyledSpan>
             )}
             {currentStep === 2 && (
@@ -87,12 +87,13 @@ const StyledAnswerWrapper = styled.div`
 const StyledAnswer = styled.p`
   display: flex;
   width: 80%;
-  margin-left: 1rem;
+  margin: 0 0 0 1rem;
 `;
 
 const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
+  margin-top: 1rem;
 `;
 
 const StyledSpan = styled.span`

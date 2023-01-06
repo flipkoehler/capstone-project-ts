@@ -61,16 +61,29 @@ export default function MovieQuiz() {
       .reduce((a, b) => [...a, ...b], []);
 
     // Quiz Step 3: this filters through the array of Step1 and 2 and reduces it by the checked moods
-    const filteredMoviesStep3 = filteredMoviesStep1andStep2.filter((item) => {
-      return item.mood.some((mood) => checkedMoods.includes(mood));
+    const filteredMoviesStep3 = filteredMoviesStep1andStep2
+      .filter((item) => {
+        return item.mood.some((mood) => checkedMoods.includes(mood));
+      })
+      .filter((movie) => movie.occasion && movie);
+
+    // Quiz Step 4: this filters through the array of Step 3 and reduces it by selected occasion
+    const checkedOccasion = updatedQuestionAnswer[3].answerOptions
+      .filter((answer) => answer.checked && answer)
+      .map((a) => a.value);
+
+    const filteredMoviesStep4 = filteredMoviesStep3.filter((movie) => {
+      return movie.occasion.some((occasion) =>
+        checkedOccasion.includes(occasion)
+      );
     });
 
     // navigation: shuffles a random movie based on the array
-    const randomMovie = randomMoviePicker(filteredMoviesStep3);
+    const randomMovie = randomMoviePicker(filteredMoviesStep4);
 
     // navigation: navigate to the random movie detail page
 
-    if (filteredMoviesStep3.length > 0) {
+    if (filteredMoviesStep4.length > 0) {
       router.push(`/movies/${randomMovie.id}`);
     } else router.push(`/errorpages/no-movie`);
   }
