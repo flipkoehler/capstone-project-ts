@@ -61,7 +61,6 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   height: 4.5rem;
-
   @media (max-width: 650px) {
     height: 100%;
     flex-direction: column;

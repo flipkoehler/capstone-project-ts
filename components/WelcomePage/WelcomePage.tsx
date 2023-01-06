@@ -27,7 +27,7 @@ export default function WelcomePage(): JSX.Element {
           <Lottie animationData={movieCouchRelaxe} loop={true} />
         </StyledDivLottie>
       </StyledDivStart>
-      <h2>Und so kommst du zu deinem Film</h2>
+      <StyledH2>Und so kommst du zu deinem Film</StyledH2>
       <Slider />
 
       <Benefits />
@@ -38,6 +38,10 @@ export default function WelcomePage(): JSX.Element {
 const StyledContentBox = styled.div`
   max-width: 900px;
   margin: 0 auto;
+`;
+
+const StyledH2 = styled.h2`
+  margin-left: 1rem;
 `;
 
 const StyledSpan = styled.span`

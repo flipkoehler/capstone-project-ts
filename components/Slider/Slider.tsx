@@ -106,12 +106,10 @@ const StyledSliderItemDiv = styled.div`
   max-width: 100%;
   background-color: var(--globalWhite);
   border-radius: 1rem 1rem 0px 1rem;
-  box-shadow: 0px -0.5rem 0.8rem rgba(0, 0, 0, 0.07);
-  margin: 1.5rem 1.2rem 0 0.2rem;
   padding: 2rem;
   @media screen and (max-width: 600px) {
-    flex: 0 0 92%;
-    margin: 0 1rem 0 1rem;
+    flex: 0 0 90%;
+    margin: 0 0.8rem 0 1rem;
   }
 `;
 
