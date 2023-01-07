@@ -10,6 +10,7 @@ interface SliderContent {
   content: string;
   buttonText: string;
   isButtonDissabled: boolean;
+  url: string;
 }
 
 type SliderContentArrayType = {
@@ -47,7 +48,13 @@ export default function Slider({ sliderContent }: SliderContentArrayType) {
                   <h3>{content.title}</h3>
                 </StyledHeadlineDiv>
                 <p>{content.content}</p>
-                <StyledLink href="/quiz">{content.buttonText}</StyledLink>
+                {content.isButtonDissabled ? (
+                  <p>folgt bald!</p>
+                ) : (
+                  <StyledLink href={content.url}>
+                    {content.buttonText}
+                  </StyledLink>
+                )}
               </StyledSliderItemDiv>
             );
           })}
