@@ -34,7 +34,7 @@ export default function Slider({ sliderContent }: SliderContentArrayType) {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  // this modul shows content an the main page
+  // this modul recives an Array as a prop and renders through the content to generate a slider with n childs
   return (
     <>
       <StyledSliderContainerDiv ref={emblaRef}>
