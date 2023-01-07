@@ -6,6 +6,7 @@ import Benefits from "../Benefits/Benefits";
 import Lottie from "lottie-react";
 import movieCouchRelaxe from "../../public/AwMMLBI1Tn.json";
 import Slider from "../Slider/Slider";
+import { mainPageSliderContent } from "../../assets/data/mainpageSliderContent";
 
 export default function WelcomePage(): JSX.Element {
   return (
@@ -28,8 +29,7 @@ export default function WelcomePage(): JSX.Element {
         </StyledDivLottie>
       </StyledDivStart>
       <StyledH2>Und so kommst du zu deinem Film</StyledH2>
-      <Slider />
-
+      <Slider sliderContent={mainPageSliderContent} />
       <Benefits />
     </StyledContentBox>
   );

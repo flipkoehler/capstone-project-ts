@@ -25,7 +25,7 @@ const StyledNav = styled.nav`
   height: 100%;
   justify-content: flex-end;
   align-items: center;
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     display: ${(props) => (props.menuIsOpen ? "none" : "flex")};
   }
 `;
@@ -35,7 +35,7 @@ const StyledUl = styled.ul`
   padding: 0;
   display: flex;
   list-style: none;
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     margin: 20px 10px;
     width: 100%;
     flex-direction: column;
@@ -54,7 +54,7 @@ const StyledLink = styled(Link)`
     text-decoration: underline;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     padding: 15px;
     background-color: var(--globalWhite);
   }

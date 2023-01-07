@@ -4,19 +4,25 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 
-type PropType = {
-  options?: EmblaOptionsType;
+interface SliderContent {
+  id: number;
+  title: string;
+  content: string;
+  buttonText: string;
+  isButtonDissabled: boolean;
+}
+
+type SliderContentProps = {
+  sliderContent: SliderContent[];
 };
 
-const OPTIONS: EmblaOptionsType = {
-  slidesToScroll: "auto",
-  containScroll: "trimSnaps",
-  align: "start",
-};
-
-export default function Slider() {
-  //   const options = props;
-  //   const [emblaRef, emblaApi] = useEmblaCarousel(options);
+export default function Slider({ sliderContent }: SliderContentProps) {
+  // settings for the slider modul
+  const OPTIONS: EmblaOptionsType = {
+    slidesToScroll: "auto",
+    containScroll: "trimSnaps",
+    align: "start",
+  };
 
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
 
@@ -28,50 +34,28 @@ export default function Slider() {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  // this modul shows content an the main page
   return (
     <>
       <StyledSliderContainerDiv ref={emblaRef}>
         <StyledSliderContainerParentDiv>
-          <StyledSliderItemDiv>
-            <StyledHeadlineDiv>
-              <StyledNumberDiv>1</StyledNumberDiv>
-              <h3>Das Quiz</h3>
-            </StyledHeadlineDiv>
-            <p>
-              Beantworte vier kurze Fragen. Auf dieser Grundlage wird dir dann
-              ein Film empfohlen.
-            </p>
-            <StyledLink href="/quiz">Quiz jetzt starten!</StyledLink>
-          </StyledSliderItemDiv>
-          <StyledSliderItemDiv>
-            <StyledHeadlineDiv>
-              <StyledNumberDiv>2</StyledNumberDiv>
-              <h3>Zufälliger Film</h3>
-            </StyledHeadlineDiv>
-            <p>
-              Du hast keine Lust auf die Fragen und willst sofort starten?
-              Klicke hier für eine zufällige Empfehlung.
-            </p>
-            <StyledLink href="/movie-recommendation">
-              Direkt zum Film
-            </StyledLink>
-          </StyledSliderItemDiv>
-          <StyledSliderItemDiv>
-            <StyledHeadlineDiv>
-              <StyledNumberDiv>3</StyledNumberDiv>
-              <h3>Ein Film mit</h3>
-            </StyledHeadlineDiv>
-            <p>
-              Manchmal hat man einfach Lust auf einen Film mit Kevin Costner.
-              Oder vielleicht Tom Hanks?!
-            </p>
-            <h3>folgt bald!</h3>
-          </StyledSliderItemDiv>
+          {sliderContent.map((content) => {
+            return (
+              <StyledSliderItemDiv>
+                <StyledHeadlineDiv>
+                  <StyledNumberDiv>{content.id}</StyledNumberDiv>
+                  <h3>{content.title}</h3>
+                </StyledHeadlineDiv>
+                <p>{content.content}</p>
+                <StyledLink href="/quiz">{content.buttonText}</StyledLink>
+              </StyledSliderItemDiv>
+            );
+          })}
         </StyledSliderContainerParentDiv>
       </StyledSliderContainerDiv>
       <StyledControlsDiv>
         <StyledButton onClick={scrollPrev}>
-          <StyledImage
+          <Image
             src={"/images/clarity_arrow-line_left.svg"}
             width={30}
             height={30}
@@ -79,7 +63,7 @@ export default function Slider() {
           />
         </StyledButton>
         <StyledButton onClick={scrollNext}>
-          <StyledImage
+          <Image
             src={"/images/clarity_arrow-line_right.svg"}
             width={30}
             height={30}
@@ -107,8 +91,9 @@ const StyledSliderItemDiv = styled.div`
   background-color: var(--globalWhite);
   border-radius: 1rem 1rem 0px 1rem;
   padding: 2rem;
+  margin: 1rem;
   @media screen and (max-width: 600px) {
-    flex: 0 0 90%;
+    flex: 0 0 95%;
     margin: 0 0.8rem 0 1rem;
   }
 `;
@@ -172,5 +157,3 @@ const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
 `;
-
-const StyledImage = styled(Image)``;

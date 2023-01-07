@@ -61,7 +61,7 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   height: 4.5rem;
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     height: 100%;
     flex-direction: column;
   }
@@ -69,11 +69,11 @@ const StyledHeader = styled.div`
 
 const StyledBurgerImage = styled(Image)`
   position: absolute;
-  top: 17px;
+  top: 2.1rem;
   right: 20px;
   display: none;
 
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     display: flex;
   }
 `;
