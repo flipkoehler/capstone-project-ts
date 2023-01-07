@@ -12,12 +12,12 @@ interface SliderContent {
   isButtonDissabled: boolean;
 }
 
-type SliderContentProps = {
+type SliderContentArrayType = {
   sliderContent: SliderContent[];
 };
 
-export default function Slider({ sliderContent }: SliderContentProps) {
-  // settings for the slider modul
+export default function Slider({ sliderContent }: SliderContentArrayType) {
+  // setup for the slider modul
   const OPTIONS: EmblaOptionsType = {
     slidesToScroll: "auto",
     containScroll: "trimSnaps",
