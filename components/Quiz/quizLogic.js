@@ -17,6 +17,8 @@ export default function MovieQuiz() {
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
 
+  console.log(currentStep);
+
   // updates the questions with true/false for the answer options
   const [updatedQuestionAnswer, setUpdatedQuestionAnswer] =
     useState(questionAnswer);
@@ -102,12 +104,21 @@ export default function MovieQuiz() {
     } else setCurrentStep(currentStep + 1);
   }
 
+  function handlePrev(event, updateAnswer) {
+    event.preventDefault();
+    const updatedItems = [...updatedQuestionAnswer];
+    updatedItems[currentStep] = updateAnswer;
+    setUpdatedQuestionAnswer([...updatedItems]);
+    setCurrentStep(currentStep - 1);
+  }
+
   return (
     <QuizSteps
       currentQuestion={updatedQuestionAnswer}
       onNext={handleNext}
       isLastStep={currentStep === questionAnswer.length - 1}
       currentStep={currentStep}
+      onPrev={handlePrev}
     />
   );
 }
