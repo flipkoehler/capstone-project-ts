@@ -7,15 +7,17 @@ export default function FourOhFour() {
   return (
     <>
       <Header />
-      <h1>404 - Die gewünschte Film konnte leider nicht gefunden werden</h1>
-      <Image
-        src={"/images/john-travolta.gif"}
-        alt="good old John Travolta searching for Mia Wallace"
-        width={380}
-        height={200}
-      />
-      <p>...aber es wird mal wieder Zeit für Pulp Fiction, oder?!</p>
-      <StyledLink href="/movies/680">Gib mir Pulp Fiction!</StyledLink>
+      <section>
+        <h1>404 - Die gewünschte Seite konnte leider nicht gefunden werden</h1>
+        <Image
+          src={"/images/john-travolta.gif"}
+          alt="good old John Travolta searching for Mia Wallace"
+          width={380}
+          height={200}
+        />
+        <p>...aber es wird mal wieder Zeit für Pulp Fiction, oder?!</p>
+        <StyledLink href="/movies/680">Gib mir Pulp Fiction!</StyledLink>
+      </section>
     </>
   );
 }

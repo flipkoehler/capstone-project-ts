@@ -4,62 +4,73 @@ import Image from "next/image";
 export default function Benefits() {
   return (
     <>
-      <p>Movie Flip bietet dir folgende Vorteile:</p>
-      <StyledUl>
-        <StyledLi>
-          <StyledImage
-            src={"/images/clarity_happy-face-line.svg"}
-            width={30}
-            height={30}
-            alt="happy Icon"
-          />
-          Filme passend zur täglichen Stimmung
-        </StyledLi>
-        <StyledLi>
-          <StyledImage
-            src={"/images/clarity_clock-line.svg"}
-            width={30}
-            height={30}
-            alt="Clock Icon"
-          />
-          passgenau mit deinem Zeitfenster
-        </StyledLi>
-        <StyledLi>
-          <StyledImage
-            src={"/images/clarity_bullseye-line.svg"}
-            width={30}
-            height={30}
-            alt="Bullseye Icon"
-          />
-          handverlesene Empfehlungen
-        </StyledLi>
-      </StyledUl>
+      <StyledBoxAroundDiv>
+        <StyledParentDiv>
+          <StyledImageContainerDiv>
+            <Image
+              src={"/images/clarity_happy-face-line.svg"}
+              width={45}
+              height={45}
+              alt="happy Icon"
+            />
+          </StyledImageContainerDiv>
+          <p>Filme passend zu deiner heutigen Stimmung</p>
+        </StyledParentDiv>
+
+        <StyledParentDiv>
+          <StyledImageContainerDiv>
+            <Image
+              src={"/images/clarity_clock-line.svg"}
+              width={45}
+              height={45}
+              alt="Clock Icon"
+            />
+          </StyledImageContainerDiv>
+          <p>Kein langes Suchen mehr in ewig langen Katalogen</p>
+        </StyledParentDiv>
+        <StyledParentDiv>
+          <StyledImageContainerDiv>
+            <Image
+              src={"/images/clarity_bullseye-line.svg"}
+              width={45}
+              height={45}
+              alt="Bullseye Icon"
+            />
+          </StyledImageContainerDiv>
+          <p>Ausschließlich handverlesene Empfehlungen</p>
+        </StyledParentDiv>
+      </StyledBoxAroundDiv>
     </>
   );
 }
 
 // CSS Styling
 
-const StyledUl = styled.ul`
-  padding: 0;
-  margin: -5px 0 20px 0;
-  list-style: none;
+const StyledBoxAroundDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  align-content: center;
+  margin-bottom: 5rem;
 `;
 
-const StyledLi = styled.li`
+const StyledParentDiv = styled.div`
   align-items: center;
-  padding: 0;
-  margin: 0 0 12px 0;
-  width: 100%;
+  max-width: 17rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  text-align: center;
 `;
 
-const StyledImage = styled(Image)`
-  margin-right: 10px;
+const StyledImageContainerDiv = styled.div`
+  background-color: var(--globalWhite);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
