@@ -17,8 +17,6 @@ export default function MovieQuiz() {
   // sets the current question step the user is in (e.g. Step 1 out of 4)
   const [currentStep, setCurrentStep] = useState(0);
 
-  console.log(currentStep);
-
   // updates the questions with true/false for the answer options
   const [updatedQuestionAnswer, setUpdatedQuestionAnswer] =
     useState(questionAnswer);
