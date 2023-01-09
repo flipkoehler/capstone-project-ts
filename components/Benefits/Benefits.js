@@ -7,7 +7,7 @@ export default function Benefits() {
       <StyledBoxAroundDiv>
         <StyledParentDiv>
           <StyledImageContainerDiv>
-            <StyledImage
+            <Image
               src={"/images/clarity_happy-face-line.svg"}
               width={45}
               height={45}
@@ -19,7 +19,7 @@ export default function Benefits() {
 
         <StyledParentDiv>
           <StyledImageContainerDiv>
-            <StyledImage
+            <Image
               src={"/images/clarity_clock-line.svg"}
               width={45}
               height={45}
@@ -30,7 +30,7 @@ export default function Benefits() {
         </StyledParentDiv>
         <StyledParentDiv>
           <StyledImageContainerDiv>
-            <StyledImage
+            <Image
               src={"/images/clarity_bullseye-line.svg"}
               width={45}
               height={45}
@@ -74,5 +74,3 @@ const StyledImageContainerDiv = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const StyledImage = styled(Image)``;
