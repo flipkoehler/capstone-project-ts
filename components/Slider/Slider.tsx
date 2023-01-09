@@ -84,6 +84,7 @@ export default function Slider({ sliderContent }: SliderContentArrayType) {
 
 const StyledSliderContainerDiv = styled.div`
   overflow: hidden;
+  margin: 0 1rem;
 `;
 
 const StyledSliderContainerParentDiv = styled.div`
@@ -98,10 +99,8 @@ const StyledSliderItemDiv = styled.div`
   background-color: var(--globalWhite);
   border-radius: 1rem 1rem 0px 1rem;
   padding: 2rem;
-  margin: 1rem;
   @media screen and (max-width: 600px) {
-    flex: 0 0 95%;
-    margin: 0 0.8rem 0 1rem;
+    flex: 0 0 100%;
   }
 `;
 
