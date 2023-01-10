@@ -3,6 +3,7 @@
 export const questionAnswer = [
   {
     question: "Wie lange darf dein Film heute dauern?",
+    imagePath: "/images/quiz_time_movieflip.svg",
     answerOptions: [
       {
         id: 1,
@@ -49,7 +50,7 @@ export const questionAnswer = [
   },
   {
     question: "Wie alt darf dein Film sein?",
-    questionStyling: "short",
+    imagePath: "/images/quiz_generation_movieflip.svg",
     answerOptions: [
       {
         id: 5,
@@ -96,6 +97,7 @@ export const questionAnswer = [
   },
   {
     question: "Welche Stimmung oder Gefühl soll der Film übermitteln?",
+    imagePath: "/images/quiz_mood_movieflip.svg",
     answerOptions: [
       {
         id: 9,
@@ -137,6 +139,7 @@ export const questionAnswer = [
   },
   {
     question: "Mit wem möchtest du den Film schauen?",
+    imagePath: "/images/quiz_friends_movieflip.svg",
     answerOptions: [
       {
         id: 15,

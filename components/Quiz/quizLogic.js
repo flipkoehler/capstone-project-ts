@@ -102,12 +102,21 @@ export default function MovieQuiz() {
     } else setCurrentStep(currentStep + 1);
   }
 
+  function handlePrev(event, updateAnswer) {
+    event.preventDefault();
+    const updatedItems = [...updatedQuestionAnswer];
+    updatedItems[currentStep] = updateAnswer;
+    setUpdatedQuestionAnswer([...updatedItems]);
+    setCurrentStep(currentStep - 1);
+  }
+
   return (
     <QuizSteps
       currentQuestion={updatedQuestionAnswer}
       onNext={handleNext}
       isLastStep={currentStep === questionAnswer.length - 1}
       currentStep={currentStep}
+      onPrev={handlePrev}
     />
   );
 }

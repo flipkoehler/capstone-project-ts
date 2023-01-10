@@ -59,11 +59,11 @@ const GlobalStyles = createGlobalStyle`
     }
 
     button {
-        width: 240px;
-        max-height: 50px;
+        width: 10rem;
+        height: 3rem;
         background-color: var(--darkBlue);
         color: var(--globalWhite);
-        border: var(--globalWhite) 3px solid;
+        border: none;
         margin: 10px auto;
         padding: 20px;
         border-radius: 15px;
@@ -72,7 +72,6 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
         cursor: pointer;
     }
 
