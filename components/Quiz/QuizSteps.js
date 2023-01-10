@@ -12,7 +12,9 @@ export default function QuizSteps({
 }) {
   // sets the given answers in an array (e.g. Question 1 - short movies)
   const [updateAnswer, setUpdateAnswer] = useState(currentQuestion);
-  console.log(updateAnswer);
+
+  const [hasDetailViewClicked, setHasDetailViewClicked] = useState([0, false]);
+  console.log("hasDetailViewClicked", hasDetailViewClicked);
 
   const updateState = (id) => {
     const updatedItems = [...updateAnswer[currentStep].answerOptions];
@@ -23,6 +25,11 @@ export default function QuizSteps({
       answerOptions: updatedItems,
     });
   };
+
+  function foldOutMoods(answer) {
+    setHasDetailViewClicked([answer.id, !hasDetailViewClicked[1]]);
+    console.log(answer);
+  }
 
   return (
     <form>
@@ -54,16 +61,53 @@ export default function QuizSteps({
                 checked={answer.checked}
                 readOnly
               />
-              <StyledAnswer>{answer.answer}</StyledAnswer>
+              <StyledAnswer>
+                {currentStep === 2 ? (
+                  <div>
+                    {answer.answer}
+                    <StyledArrowImage
+                      src={"/images/clarity_caret-line.svg"}
+                      width={30}
+                      height={30}
+                      alt={"arrow"}
+                      onClick={() => foldOutMoods(answer)}
+                    />
+                  </div>
+                ) : (
+                  answer.answer
+                )}
+              </StyledAnswer>
+
               {(currentStep === 0) | 1 | 3 && (
                 <StyledSpan>{answer.information}</StyledSpan>
               )}
               {currentStep === 2 && (
-                <StyledSpan>
-                  {movieMood
-                    .filter((mood) => answer.value.includes(mood.id))
-                    .map((mood, index) => (index ? ", " : "") + mood.value)}
-                </StyledSpan>
+                <>
+                  <StyledSpan>
+                    {movieMood
+                      .filter((mood) => answer.value.includes(mood.id))
+                      .map((mood, index) => (index ? ", " : "") + mood.value)}
+                  </StyledSpan>
+                  {hasDetailViewClicked[0] === answer.id &&
+                    hasDetailViewClicked[1] === true && (
+                      <ul>
+                        {movieMood
+                          .filter((mood) => answer.value.includes(mood.id))
+                          .map((mood, index) => (
+                            <>
+                              <StyledInput
+                                type="checkbox"
+                                id="check"
+                                value={answer.value}
+                                checked={answer.checked}
+                                readOnly
+                              />
+                              <p>{mood.value}</p>
+                            </>
+                          ))}
+                      </ul>
+                    )}
+                </>
               )}
             </StyledAnswerWrapper>
           ))}
@@ -204,4 +248,10 @@ const StyledButtonDiv = styled.div`
   align-items: center;
   max-width: 600px;
   margin: 0 auto;
+`;
+
+const StyledArrowImage = styled(Image)`
+  background-color: hotpink;
+  position: absolute;
+  right: 2rem;
 `;
