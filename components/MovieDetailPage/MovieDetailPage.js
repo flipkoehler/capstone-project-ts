@@ -28,8 +28,8 @@ export default function MovieDetailPage({ passedMovie }) {
         <MovieTagsUlshort>
           {movieMood
             .filter((mood) => passedMovie.mood.includes(mood.id))
-            .map((mood) => (
-              <MovieTags>{mood.value}</MovieTags>
+            .map((mood, index) => (
+              <MovieTags key={index}>{mood.value}</MovieTags>
             ))}
         </MovieTagsUlshort>
         <ReadMore aria-label="read more or read less">

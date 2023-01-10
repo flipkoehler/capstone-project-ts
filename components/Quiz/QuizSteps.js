@@ -14,7 +14,7 @@ export default function QuizSteps({
   const [updateAnswer, setUpdateAnswer] = useState(currentQuestion);
 
   const [hasDetailViewClicked, setHasDetailViewClicked] = useState([0, false]);
-  console.log("hasDetailViewClicked", hasDetailViewClicked);
+  // console.log("hasDetailViewClicked", hasDetailViewClicked);
 
   const updateState = (id) => {
     const updatedItems = [...updateAnswer[currentStep].answerOptions];
@@ -26,9 +26,13 @@ export default function QuizSteps({
     });
   };
 
+  const updateDetailState = (answer, index) => {
+    const clickedAnswer = answer.value[index];
+    console.log(clickedAnswer);
+  };
+
   function foldOutMoods(answer) {
     setHasDetailViewClicked([answer.id, !hasDetailViewClicked[1]]);
-    console.log(answer);
   }
 
   return (
@@ -50,16 +54,14 @@ export default function QuizSteps({
       <StyledBottomDiv>
         <StyledAnswerWrapperParentDiv>
           {updateAnswer[currentStep].answerOptions.map((answer, index) => (
-            <StyledAnswerWrapper
-              key={index}
-              onClick={() => updateState(answer.id)}
-            >
+            <StyledAnswerWrapper key={index}>
               <StyledInput
                 type="checkbox"
-                id="check"
+                id={Object.keys(answer.value)}
                 value={answer.value}
                 checked={answer.checked}
                 readOnly
+                onClick={() => updateState(answer.id)}
               />
               <StyledAnswer>
                 {currentStep === 2 ? (
@@ -95,14 +97,19 @@ export default function QuizSteps({
                           .filter((mood) => answer.value.includes(mood.id))
                           .map((mood, index) => (
                             <>
-                              <StyledInput
-                                type="checkbox"
-                                id="check"
-                                value={answer.value}
-                                checked={answer.checked}
-                                readOnly
-                              />
-                              <p>{mood.value}</p>
+                              <StyledDetailMoodContainerDiv key={index}>
+                                <StyledInput
+                                  type="checkbox"
+                                  id={answer.value}
+                                  value={answer.value}
+                                  checked={answer.checked}
+                                  readOnly
+                                  onClick={() =>
+                                    updateDetailState(answer, index)
+                                  }
+                                />
+                                <span>{mood.value}</span>
+                              </StyledDetailMoodContainerDiv>
                             </>
                           ))}
                       </ul>
@@ -234,7 +241,7 @@ const StyledAnswer = styled.p`
 const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
-  margin-top: 1rem;
+  margin-right: 0.5rem;
 `;
 
 const StyledSpan = styled.span`
@@ -254,4 +261,11 @@ const StyledArrowImage = styled(Image)`
   background-color: hotpink;
   position: absolute;
   right: 2rem;
+  z-index: 1000;
+`;
+
+const StyledDetailMoodContainerDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 `;
