@@ -3,12 +3,15 @@ import Image from "next/image";
 import styled from "styled-components";
 import ReadMore from "../ReadMoreText/ReadMoreText";
 import { useRouter } from "next/router";
+import AddStepTwo from "./AddStepTwo";
 
 export default function AddAMovie() {
   const [searchResults, setSearchResults] = useState({ results: [] });
   const [pickedMovie, setPickedMovie] = useState();
   const router = useRouter();
   const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
+  const [currentStep, setCurrentStep] = useState(0);
+  console.log(currentStep);
 
   // 1 Step: Search for movies that match the searchterm
   async function handleSearch(event) {
@@ -41,7 +44,17 @@ export default function AddAMovie() {
     }
   }
 
-  // 3 Step: Send the generated data to the database
+  // 3 Step: set the current step and check where to "route" the user
+  function handleNext(event, passedData) {
+    event.preventDefault();
+    currentStep === 0
+      ? setCurrentStep(currentStep + 1)
+      : currentStep === 1
+      ? setCurrentStep(currentStep + 1)
+      : handleCreateData(event, passedData);
+  }
+
+  // 4 Step: Send the generated data to the database
   async function handleCreateData(event, passedData) {
     event.preventDefault();
     await fetch("/api/", {
@@ -56,103 +69,116 @@ export default function AddAMovie() {
 
   return (
     <section>
+      <h1>Einen neuen Film hinzufügen 🪄</h1>
+      <p>Schritt {currentStep + 1} von 3</p>
       {/* Search Field  */}
-      <StyledForm onSubmit={() => handleSearch(event)}>
-        <h1>Einen neuen Film hinzufügen 🪄</h1>
-        <p>
-          Suche nach dem passenden Film und wähle aus der Ergebnisliste mit
-          Klick den richtigen Film aus.
-        </p>
-        <label htmlFor="searchMovie"> </label>
-        <StyledSearchBarWrapper>
-          <StyledInput
-            type="text"
-            name="searchMovie"
-            placeholder='z.B.: "Napoleon Dynamite"'
-            required
-            aria-label="search for a movie"
-          />
-
-          <StyledButton
-            type="submit"
-            aria-label="search for the movie"
-            name="search-movie"
-          >
-            <Image
-              src={"/images/clarity_search-line.svg"}
-              width={25}
-              height={25}
-              alt="Search Icon"
+      {currentStep === 0 ? (
+        <StyledForm onSubmit={() => handleSearch(event)}>
+          <p>
+            Suche nach dem passenden Film und wähle aus der Ergebnisliste mit
+            Klick den richtigen Film aus.
+          </p>
+          <label htmlFor="searchMovie"> </label>
+          <StyledSearchBarWrapper>
+            <StyledInput
+              type="text"
+              name="searchMovie"
+              placeholder='z.B.: "Napoleon Dynamite"'
+              required
+              aria-label="search for a movie"
             />
-          </StyledButton>
-        </StyledSearchBarWrapper>
-        {/* Notes that only will show up if the search term matches one of the conditions */}
-        <StyledSpan>
-          {searchResults.results.length > 19 &&
-            "Der eingegeben Suchbegriff hat mehr als 20 Treffer. Bitte verfeinere deine Eingabe für bessere Suchergebnisse."}
-          {searchResults.total_pages === 0 &&
-            "Es wurde kein passender Eintrag zu deinem Suchbegriff gefunden. Bitte verwende einen anderen Suchbegriff."}
-        </StyledSpan>
-        {/* Preview of the picked Movie  */}
-        {pickedMovie !== undefined && (
-          <StyledPickedMoviePreview>
-            <>
-              <div>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${pickedMovie.poster_path}`}
-                  alt={pickedMovie.title}
-                  width={142}
-                  height={213}
-                  priority
-                />
-              </div>
-              <div>
-                <p>Deine aktuelle Filmauswahl:</p>
-                <h2>{pickedMovie.title}</h2>
-                <p>{pickedMovie.runtime} Minuten</p>
-                <p>Aus dem Jahr: {pickedMovie.release_date.slice(0, 4)} </p>
-              </div>
 
-              <ReadMore>{pickedMovie.overview}</ReadMore>
-            </>
-          </StyledPickedMoviePreview>
-        )}
-      </StyledForm>
-      {/* Add movie Button */}
-      <form onSubmit={() => handleCreateData(event, pickedMovie)}>
-        <button
-          type="submit"
-          disabled={pickedMovie !== undefined ? false : true}
-        >
-          Film hinzufügen
-        </button>
-      </form>
-      {/* Movie list based on the search term */}
-      <StyledSearchResultParent aria-label="search results">
-        {searchResults.results.map((movie) => {
-          return (
-            <StyledSearchResult
-              key={movie.id}
-              onClick={() => getDetailData(movie)}
+            <StyledButton
+              type="submit"
+              aria-label="search for the movie"
+              name="search-movie"
             >
-              {movie.poster_path ? (
-                <ImageDiv>
+              <Image
+                src={"/images/clarity_search-line.svg"}
+                width={25}
+                height={25}
+                alt="Search Icon"
+              />
+            </StyledButton>
+          </StyledSearchBarWrapper>
+          {/* Notes that only will show up if the search term matches one of the conditions */}
+          <StyledSpan>
+            {searchResults.results.length > 19 &&
+              "Der eingegeben Suchbegriff hat mehr als 20 Treffer. Bitte verfeinere deine Eingabe für bessere Suchergebnisse."}
+            {searchResults.total_pages === 0 &&
+              "Es wurde kein passender Eintrag zu deinem Suchbegriff gefunden. Bitte verwende einen anderen Suchbegriff."}
+          </StyledSpan>
+          {/* Preview of the picked Movie  */}
+          {pickedMovie !== undefined && (
+            <StyledPickedMoviePreview>
+              <>
+                <div>
                   <Image
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={movie.title}
-                    width={40}
-                    height={50}
+                    src={`https://image.tmdb.org/t/p/w500/${pickedMovie.poster_path}`}
+                    alt={pickedMovie.title}
+                    width={142}
+                    height={213}
                     priority
                   />
-                </ImageDiv>
-              ) : (
-                <ImageDiv></ImageDiv>
-              )}
-              {movie.title} ({movie.release_date?.slice(0, 4)})
-            </StyledSearchResult>
-          );
-        })}
-      </StyledSearchResultParent>
+                </div>
+                <div>
+                  <p>Deine aktuelle Filmauswahl:</p>
+                  <h2>{pickedMovie.title}</h2>
+                  <p>{pickedMovie.runtime} Minuten</p>
+                  <p>Aus dem Jahr: {pickedMovie.release_date.slice(0, 4)} </p>
+                </div>
+
+                <ReadMore>{pickedMovie.overview}</ReadMore>
+              </>
+            </StyledPickedMoviePreview>
+          )}
+        </StyledForm>
+      ) : currentStep === 1 ? (
+        <AddStepTwo onHandleNext={handleNext} />
+      ) : currentStep === 2 ? (
+        <p>Step 3</p>
+      ) : (
+        <p>step4</p>
+      )}
+      {/* Add movie Button */}
+      {currentStep !== 1 && (
+        <form onSubmit={() => handleNext(event, pickedMovie)}>
+          <button
+            type="submit"
+            disabled={pickedMovie !== undefined ? false : true}
+          >
+            Weiter
+          </button>
+        </form>
+      )}
+      {/* Movie list based on the search term */}
+      {currentStep === 0 && (
+        <StyledSearchResultParent aria-label="search results">
+          {searchResults.results.map((movie) => {
+            return (
+              <StyledSearchResult
+                key={movie.id}
+                onClick={() => getDetailData(movie)}
+              >
+                {movie.poster_path ? (
+                  <ImageDiv>
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                      alt={movie.title}
+                      width={40}
+                      height={50}
+                      priority
+                    />
+                  </ImageDiv>
+                ) : (
+                  <ImageDiv></ImageDiv>
+                )}
+                {movie.title} ({movie.release_date?.slice(0, 4)})
+              </StyledSearchResult>
+            );
+          })}
+        </StyledSearchResultParent>
+      )}
     </section>
   );
 }

@@ -12,6 +12,7 @@ export default function QuizSteps({
 }) {
   // sets the given answers in an array (e.g. Question 1 - short movies)
   const [updateAnswer, setUpdateAnswer] = useState(currentQuestion);
+  console.log(updateAnswer);
 
   const updateState = (id) => {
     const updatedItems = [...updateAnswer[currentStep].answerOptions];
