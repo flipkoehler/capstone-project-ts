@@ -7,9 +7,14 @@ const genresChildSchema = new Schema({
   name: { type: String, required: true },
 });
 
+const moodChildSchema = new Schema({
+  Number,
+});
+
 const movieSchema = new Schema({
   backdrop_path: { type: String, required: false },
   genres: [genresChildSchema],
+  mood: [moodChildSchema],
   id: { type: Number, required: true },
   imdb_id: { type: String, required: false },
   original_language: { type: String, required: false },

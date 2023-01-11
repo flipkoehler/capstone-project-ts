@@ -13,9 +13,6 @@ export default function QuizSteps({
   // sets the given answers in an array (e.g. Question 1 - short movies)
   const [updateAnswer, setUpdateAnswer] = useState(currentQuestion);
 
-  const [hasDetailViewClicked, setHasDetailViewClicked] = useState([0, false]);
-  // console.log("hasDetailViewClicked", hasDetailViewClicked);
-
   const updateState = (id) => {
     const updatedItems = [...updateAnswer[currentStep].answerOptions];
     const itemIndex = updatedItems.findIndex((obj) => obj.id === id);
@@ -25,15 +22,6 @@ export default function QuizSteps({
       answerOptions: updatedItems,
     });
   };
-
-  const updateDetailState = (answer, index) => {
-    const clickedAnswer = answer.value[index];
-    console.log(clickedAnswer);
-  };
-
-  function foldOutMoods(answer) {
-    setHasDetailViewClicked([answer.id, !hasDetailViewClicked[1]]);
-  }
 
   return (
     <form>
@@ -54,67 +42,27 @@ export default function QuizSteps({
       <StyledBottomDiv>
         <StyledAnswerWrapperParentDiv>
           {updateAnswer[currentStep].answerOptions.map((answer, index) => (
-            <StyledAnswerWrapper key={index}>
+            <StyledAnswerWrapper
+              key={index}
+              onClick={() => updateState(answer.id)}
+            >
               <StyledInput
                 type="checkbox"
-                id={Object.keys(answer.value)}
+                id="check"
                 value={answer.value}
                 checked={answer.checked}
                 readOnly
-                onClick={() => updateState(answer.id)}
               />
-              <StyledAnswer>
-                {currentStep === 2 ? (
-                  <div>
-                    {answer.answer}
-                    <StyledArrowImage
-                      src={"/images/clarity_caret-line.svg"}
-                      width={30}
-                      height={30}
-                      alt={"arrow"}
-                      onClick={() => foldOutMoods(answer)}
-                    />
-                  </div>
-                ) : (
-                  answer.answer
-                )}
-              </StyledAnswer>
-
+              <StyledAnswer>{answer.answer}</StyledAnswer>
               {(currentStep === 0) | 1 | 3 && (
                 <StyledSpan>{answer.information}</StyledSpan>
               )}
               {currentStep === 2 && (
-                <>
-                  <StyledSpan>
-                    {movieMood
-                      .filter((mood) => answer.value.includes(mood.id))
-                      .map((mood, index) => (index ? ", " : "") + mood.value)}
-                  </StyledSpan>
-                  {hasDetailViewClicked[0] === answer.id &&
-                    hasDetailViewClicked[1] === true && (
-                      <ul>
-                        {movieMood
-                          .filter((mood) => answer.value.includes(mood.id))
-                          .map((mood, index) => (
-                            <>
-                              <StyledDetailMoodContainerDiv key={index}>
-                                <StyledInput
-                                  type="checkbox"
-                                  id={answer.value}
-                                  value={answer.value}
-                                  checked={answer.checked}
-                                  readOnly
-                                  onClick={() =>
-                                    updateDetailState(answer, index)
-                                  }
-                                />
-                                <span>{mood.value}</span>
-                              </StyledDetailMoodContainerDiv>
-                            </>
-                          ))}
-                      </ul>
-                    )}
-                </>
+                <StyledSpan>
+                  {movieMood
+                    .filter((mood) => answer.value.includes(mood.id))
+                    .map((mood, index) => (index ? ", " : "") + mood.value)}
+                </StyledSpan>
               )}
             </StyledAnswerWrapper>
           ))}
@@ -153,7 +101,6 @@ export default function QuizSteps({
     </form>
   );
 }
-
 // CSS Styling
 
 // Headline
@@ -204,7 +151,6 @@ const StyledBottomDiv = styled.div`
 const StyledAnswerWrapperParentDiv = styled.div`
   max-width: 65%;
   flex: 65%;
-
   @media (max-width: ${quizBreakpoint}) {
     max-width: 100%;
   }
@@ -241,7 +187,7 @@ const StyledAnswer = styled.p`
 const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
-  margin-right: 0.5rem;
+  margin-top: 1rem;
 `;
 
 const StyledSpan = styled.span`
@@ -255,17 +201,4 @@ const StyledButtonDiv = styled.div`
   align-items: center;
   max-width: 600px;
   margin: 0 auto;
-`;
-
-const StyledArrowImage = styled(Image)`
-  background-color: hotpink;
-  position: absolute;
-  right: 2rem;
-  z-index: 1000;
-`;
-
-const StyledDetailMoodContainerDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
 `;

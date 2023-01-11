@@ -11,7 +11,7 @@ export default function AddAMovie() {
   const router = useRouter();
   const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
   const [currentStep, setCurrentStep] = useState(0);
-  console.log(currentStep);
+  console.log(pickedMovie, "step1");
 
   // 1 Step: Search for movies that match the searchterm
   async function handleSearch(event) {
@@ -49,14 +49,14 @@ export default function AddAMovie() {
     event.preventDefault();
     currentStep === 0
       ? setCurrentStep(currentStep + 1)
-      : currentStep === 1
-      ? setCurrentStep(currentStep + 1)
       : handleCreateData(event, passedData);
   }
 
   // 4 Step: Send the generated data to the database
   async function handleCreateData(event, passedData) {
     event.preventDefault();
+    console.log("wird ausgelöst", passedData);
+
     await fetch("/api/", {
       method: "POST",
       headers: {
@@ -134,7 +134,7 @@ export default function AddAMovie() {
           )}
         </StyledForm>
       ) : currentStep === 1 ? (
-        <AddStepTwo onHandleNext={handleNext} />
+        <AddStepTwo onHandleNext={handleNext} pickedMovie={pickedMovie} />
       ) : currentStep === 2 ? (
         <p>Step 3</p>
       ) : (
