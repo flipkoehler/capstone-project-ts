@@ -5,7 +5,6 @@ import styled from "styled-components";
 export default function AddStepTwo({ onHandleNext, pickedMovie }) {
   const [Step2PickedMovie, setStep2PickedMovie] = useState(pickedMovie);
   const [movieMoodData, setMovieDataMoods] = useState(movieMood);
-  console.log(Step2PickedMovie, "Step2PickedMovie");
 
   function handleCheck(clickedMood) {
     const newMovieMoodData = movieMoodData.map((mood) =>
@@ -23,6 +22,7 @@ export default function AddStepTwo({ onHandleNext, pickedMovie }) {
   return (
     <>
       <StyledMoodParentDiv>
+        <h3>Vergebe mindestens 2 Stimmungen die du mit dem Film verbindest</h3>
         {movieMoodData.map((mood) => {
           return (
             <StyledMoodDiv key={mood.id} onClick={() => handleCheck(mood)}>
@@ -39,9 +39,13 @@ export default function AddStepTwo({ onHandleNext, pickedMovie }) {
         })}
       </StyledMoodParentDiv>
 
-      <button onClick={(event) => onHandleNext(event, Step2PickedMovie)}>
-        weiter
-      </button>
+      {Step2PickedMovie.mood.length > 1 ? (
+        <button onClick={(event) => onHandleNext(event, Step2PickedMovie)}>
+          weiter
+        </button>
+      ) : (
+        <button disabled={true}>weiter</button>
+      )}
     </>
   );
 }
@@ -56,7 +60,7 @@ const StyledMoodDiv = styled.div`
   max-width: 15rem;
   padding: 0.8rem;
   margin: 0.2rem;
-  background-color: var(--lightGray);
+  background-color: var(--globalWhite);
   border-radius: 1rem;
   display: flex;
   align-items: center;

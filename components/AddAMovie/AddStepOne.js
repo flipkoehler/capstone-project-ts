@@ -4,10 +4,7 @@ import Image from "next/image";
 export default function AddStepOne({ onHandleSearch, searchResults }) {
   return (
     <StyledForm onSubmit={() => onHandleSearch(event)}>
-      <p>
-        Suche nach dem passenden Film und wähle aus der Ergebnisliste mit Klick
-        den richtigen Film aus.
-      </p>
+      <h3>Suche nach dem passenden Film.</h3>
       <label htmlFor="searchMovie"> </label>
       <StyledSearchBarWrapper>
         <StyledInput

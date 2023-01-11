@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import ReadMore from "../ReadMoreText/ReadMoreText";
 import { useRouter } from "next/router";
 import AddStepTwo from "./AddStepTwo";
 import AddStepOne from "./AddStepOne";
@@ -13,7 +12,7 @@ export default function AddAMovie() {
   const router = useRouter();
   const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
   const [currentStep, setCurrentStep] = useState(0);
-
+  console.log(searchResults);
   // 1 Step: Search for movies that match the searchterm
   async function handleSearch(event) {
     event.preventDefault();
@@ -69,9 +68,11 @@ export default function AddAMovie() {
   }
 
   return (
-    <>
-      <h1>Einen neuen Film hinzufügen 🪄</h1>
+    <StyledContentBox>
+      <h1>Film hinzufügen 🪄</h1>
       <p>Schritt {currentStep + 1} von 3</p>
+      {/* Preview of the picked Movie  */}
+      {pickedMovie !== undefined && <MoviePreview pickedMovie={pickedMovie} />}
       {/* Search Field  */}
       {currentStep === 0 ? (
         <AddStepOne
@@ -85,8 +86,7 @@ export default function AddAMovie() {
       ) : (
         <p>step4</p>
       )}
-      {/* Preview of the picked Movie  */}
-      {pickedMovie !== undefined && <MoviePreview pickedMovie={pickedMovie} />}
+
       {/* Add movie Button */}
       {currentStep !== 1 && (
         <form onSubmit={() => handleNext(event, pickedMovie)}>
@@ -99,36 +99,52 @@ export default function AddAMovie() {
         </form>
       )}
       {/* Movie list based on the search term */}
+
       {currentStep === 0 && (
-        <StyledSearchResultParent aria-label="search results">
-          {searchResults.results.map((movie) => {
-            return (
-              <StyledSearchResult
-                key={movie.id}
-                onClick={() => getDetailData(movie)}
-              >
-                {movie.poster_path ? (
-                  <ImageDiv>
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                      alt={movie.title}
-                      width={40}
-                      height={50}
-                      priority
-                    />
-                  </ImageDiv>
-                ) : (
-                  <ImageDiv></ImageDiv>
-                )}
-                {movie.title} ({movie.release_date?.slice(0, 4)})
-              </StyledSearchResult>
-            );
-          })}
-        </StyledSearchResultParent>
+        <>
+          {searchResults.results.length > 0 && (
+            <StyledHeadlineSearchResultsh2>
+              Deine Suchergebnisse:
+            </StyledHeadlineSearchResultsh2>
+          )}
+          <StyledSearchResultParent aria-label="search results">
+            {searchResults.results.map((movie) => {
+              return (
+                <StyledSearchResult
+                  key={movie.id}
+                  onClick={() => getDetailData(movie)}
+                >
+                  {movie.poster_path ? (
+                    <ImageDiv>
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                        alt={movie.title}
+                        width={40}
+                        height={50}
+                        priority
+                      />
+                    </ImageDiv>
+                  ) : (
+                    <ImageDiv></ImageDiv>
+                  )}
+                  {movie.title} ({movie.release_date?.slice(0, 4)})
+                </StyledSearchResult>
+              );
+            })}
+          </StyledSearchResultParent>
+        </>
       )}
-    </>
+    </StyledContentBox>
   );
 }
+
+const StyledContentBox = styled.div`
+  max-width: 900px;
+  margin: 2rem;
+  @media (max-width: 650px) {
+    margin: 2rem 1rem;
+  }
+`;
 
 // Search Result List
 const StyledSearchResultParent = styled.div`
@@ -151,6 +167,10 @@ const StyledSearchResult = styled.div`
   @media (max-width: 650px) {
     width: 100%;
   }
+`;
+
+const StyledHeadlineSearchResultsh2 = styled.h2`
+  margin-top: 2.5rem;
 `;
 
 const ImageDiv = styled.div`
