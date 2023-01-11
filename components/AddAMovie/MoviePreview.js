@@ -68,7 +68,7 @@ const StyledPickedMoviePreview = styled.div`
   justify-content: space-around;
   border: 2px solid var(--lightGray);
   padding: 1rem;
-  margin: 1.2rem;
+  margin: 0.2rem;
   border-radius: 1.2rem;
   box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
   background-color: var(--globalWhite);

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import AddStepTwo from "./AddStepTwo";
+import AddStepTwoAndThree from "./AddStepTwoAndThree";
 import AddStepOne from "./AddStepOne";
 import MoviePreview from "./MoviePreview";
 
@@ -47,7 +47,7 @@ export default function AddAMovie() {
   // 3 Step: set the current step and check where to "route" the user
   function handleNext(event, passedData) {
     event.preventDefault();
-    currentStep === 0
+    currentStep === 0 || currentStep === 1
       ? setCurrentStep(currentStep + 1)
       : handleCreateData(event, passedData);
   }
@@ -80,15 +80,25 @@ export default function AddAMovie() {
           searchResults={searchResults}
         />
       ) : currentStep === 1 ? (
-        <AddStepTwo onHandleNext={handleNext} pickedMovie={pickedMovie} />
+        <AddStepTwoAndThree
+          onHandleNext={handleNext}
+          pickedMovie={pickedMovie}
+          category={"mood"}
+        />
       ) : currentStep === 2 ? (
-        <p>Step 3</p>
+        <AddStepTwoAndThree
+          onHandleNext={handleNext}
+          pickedMovie={pickedMovie}
+          category={"occasion"}
+        />
+      ) : currentStep === 3 ? (
+        <p>Step 4</p>
       ) : (
-        <p>step4</p>
+        <p>Ende</p>
       )}
 
       {/* Add movie Button */}
-      {currentStep !== 1 && (
+      {currentStep === 0 && (
         <form onSubmit={() => handleNext(event, pickedMovie)}>
           <button
             type="submit"
