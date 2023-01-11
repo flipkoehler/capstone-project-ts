@@ -2,9 +2,11 @@ import styled from "styled-components";
 import Image from "next/image";
 
 export default function AddStepOne({ onHandleSearch, searchResults }) {
+  // this function is for searching a movie (searchbar and button)
+
   return (
     <StyledForm onSubmit={() => onHandleSearch(event)}>
-      <h3>Suche nach dem passenden Film.</h3>
+      <h3>Suche nach dem passenden Film</h3>
       <label htmlFor="searchMovie"> </label>
       <StyledSearchBarWrapper>
         <StyledInput

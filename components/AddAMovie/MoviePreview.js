@@ -6,6 +6,9 @@ import { useState } from "react";
 export default function MoviePreview({ pickedMovie }) {
   const [detailViewIsClicked, setDetailViewIsClicked] = useState(false);
 
+  // this function shows the user a preview of the movie. By clicking on the
+  // arrow it collapse the content
+
   return (
     <StyledPickedMoviePreview>
       <StyledPreviewDiv>

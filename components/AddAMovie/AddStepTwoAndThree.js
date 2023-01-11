@@ -16,6 +16,8 @@ export default function AddStepTwoAndThree({
   );
   const [checkedCount, setCheckedCount] = useState(0);
 
+  // this function is called when the user clicks on a checkbox.
+  // depending on the passed category it renders the mood or an occasion
   function handleCheck(clickedMood, passedArray, category) {
     const newMovieData = passedArray.map((item) =>
       clickedMood.id === item.id ? { ...item, checked: !item.checked } : item
@@ -36,16 +38,13 @@ export default function AddStepTwoAndThree({
   }
 
   return (
-    <>
+    <form onSubmit={(event) => onHandleNext(event, step3PickedMovie)}>
       <StyledMoodParentDiv>
         {category === "mood" ? (
-          <h3>
-            Vergebe mindestens 2 Stimmungen die du mit dem Film verbindest
-          </h3>
+          <h3>Welche Stimmungen verbindest du mit dem Film?</h3>
         ) : (
-          <h3>Mit wem kann man den Film gut schauen?</h3>
+          <h3>Mit wem kann man den Film schauen?</h3>
         )}
-
         {category === "mood" &&
           movieMoodData.map((mood) => {
             return (
@@ -68,6 +67,7 @@ export default function AddStepTwoAndThree({
           movieOccasionData.map((occasion) => {
             return (
               <StyledMoodDiv
+                key={occasion.id}
                 onClick={() =>
                   handleCheck(occasion, movieOccasionData, category)
                 }
@@ -85,14 +85,12 @@ export default function AddStepTwoAndThree({
           })}
       </StyledMoodParentDiv>
 
-      {checkedCount > 1 ? (
-        <button onClick={(event) => onHandleNext(event, step3PickedMovie)}>
-          weiter
-        </button>
+      {checkedCount >= 1 ? (
+        <button>weiter</button>
       ) : (
         <button disabled={true}>weiter</button>
       )}
-    </>
+    </form>
   );
 }
 

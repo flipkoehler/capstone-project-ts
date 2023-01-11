@@ -2,9 +2,9 @@ import { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import AddStepTwoAndThree from "./AddStepTwoAndThree";
 import AddStepOne from "./AddStepOne";
 import MoviePreview from "./MoviePreview";
+import AddStepTwoAndThree from "./AddStepTwoAndThree";
 
 export default function AddAMovie() {
   const [searchResults, setSearchResults] = useState({ results: [] });
@@ -12,7 +12,7 @@ export default function AddAMovie() {
   const router = useRouter();
   const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
   const [currentStep, setCurrentStep] = useState(0);
-  console.log(searchResults);
+
   // 1 Step: Search for movies that match the searchterm
   async function handleSearch(event) {
     event.preventDefault();
@@ -55,7 +55,6 @@ export default function AddAMovie() {
   // 4 Step: Send the generated data to the database
   async function handleCreateData(event, passedData) {
     event.preventDefault();
-    console.log("wird ausgelöst", passedData);
 
     await fetch("/api/", {
       method: "POST",
