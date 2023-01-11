@@ -11,7 +11,9 @@ export default function MoviePreview({ pickedMovie }) {
 
   return (
     <StyledPickedMoviePreview>
-      <StyledPreviewDiv>
+      <StyledPreviewDiv
+        onClick={() => setDetailViewIsClicked(!detailViewIsClicked)}
+      >
         <Image
           src={`https://image.tmdb.org/t/p/w500/${pickedMovie.poster_path}`}
           alt={pickedMovie.title}
@@ -33,7 +35,6 @@ export default function MoviePreview({ pickedMovie }) {
             width={50}
             height={50}
             priority
-            onClick={() => setDetailViewIsClicked(!detailViewIsClicked)}
           />
         ) : (
           <StyledImageArrow

@@ -41,9 +41,9 @@ export default function AddStepTwoAndThree({
     <form onSubmit={(event) => onHandleNext(event, step3PickedMovie)}>
       <StyledMoodParentDiv>
         {category === "mood" ? (
-          <h3>Welche Stimmungen verbindest du mit dem Film?</h3>
+          <StyledH3>Welche Stimmungen verbindest du mit dem Film?</StyledH3>
         ) : (
-          <h3>Mit wem kann man den Film schauen?</h3>
+          <StyledH3>Mit wem kann man den Film schauen?</StyledH3>
         )}
         {category === "mood" &&
           movieMoodData.map((mood) => {
@@ -103,7 +103,7 @@ const StyledMoodParentDiv = styled.div`
 const StyledMoodDiv = styled.div`
   max-width: 15rem;
   padding: 0.8rem;
-  margin: 0.2rem;
+  margin: 0.5rem;
   background-color: var(--globalWhite);
   border-radius: 1rem;
   display: flex;
@@ -115,4 +115,8 @@ const StyledInput = styled.input`
   width: 1.3rem;
   height: 1.3rem;
   margin-right: 1rem;
+`;
+
+const StyledH3 = styled.h3`
+  width: 100%;
 `;
