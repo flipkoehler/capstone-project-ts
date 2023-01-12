@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import styled from "styled-components";
-import Benefits from "../Benefits/Benefits";
 import Lottie from "lottie-react";
 import movieCouchRelaxe from "../../public/AwMMLBI1Tn.json";
 import Slider from "../Slider/Slider";
 import { mainPageSliderContent } from "../../assets/data/mainpageSliderContent";
+import Benefits from "../Benefits/Benefits";
+import { benefitsMain } from "../../assets/data/benefitsMain";
 
 export default function WelcomePage(): JSX.Element {
   return (
@@ -30,7 +31,7 @@ export default function WelcomePage(): JSX.Element {
       </StyledDivStart>
       <StyledH2>Und so kommst du zu deinem Film</StyledH2>
       <Slider sliderContent={mainPageSliderContent} />
-      <Benefits />
+      <Benefits benefitContent={benefitsMain} />
     </StyledContentBox>
   );
 }
