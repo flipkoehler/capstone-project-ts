@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import AddStepOne from "./AddStepOne";
 import MoviePreview from "./MoviePreview";
 import AddStepTwoAndThree from "./AddStepTwoAndThree";
+import AddStepFour from "./AddStepFour";
 
 export default function AddAMovie() {
   const [searchResults, setSearchResults] = useState({ results: [] });
@@ -47,8 +48,8 @@ export default function AddAMovie() {
   // 3 Step: set the current step and check where to "route" the user
   function handleNext(event, passedData) {
     event.preventDefault();
-    currentStep === 0 || currentStep === 1
-      ? setCurrentStep(currentStep + 1)
+    currentStep === 0 || currentStep === 1 || currentStep === 2
+      ? setCurrentStep(currentStep + 1) & setPickedMovie(passedData)
       : handleCreateData(event, passedData);
   }
 
@@ -69,7 +70,7 @@ export default function AddAMovie() {
   return (
     <StyledContentBox>
       <h1>Film hinzufügen 🪄</h1>
-      <p>Schritt {currentStep + 1} von 3</p>
+      <p>Schritt {currentStep + 1} von 4</p>
       {/* Preview of the picked Movie  */}
       {pickedMovie !== undefined && <MoviePreview pickedMovie={pickedMovie} />}
       {/* Search Field  */}
@@ -91,7 +92,7 @@ export default function AddAMovie() {
           category={"occasion"}
         />
       ) : currentStep === 3 ? (
-        <p>Step 4</p>
+        <AddStepFour onHandleNext={handleNext} pickedMovie={pickedMovie} />
       ) : (
         <p>Ende</p>
       )}

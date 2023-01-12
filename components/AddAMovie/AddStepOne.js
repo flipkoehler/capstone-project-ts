@@ -4,6 +4,10 @@ import Image from "next/image";
 export default function AddStepOne({ onHandleSearch, searchResults }) {
   // this function is for searching a movie (searchbar and button)
 
+  function handleLeave(event) {
+    console.log("testi", event.target.value);
+  }
+
   return (
     <StyledForm onSubmit={() => onHandleSearch(event)}>
       <h3>Suche nach dem passenden Film</h3>
@@ -15,6 +19,7 @@ export default function AddStepOne({ onHandleSearch, searchResults }) {
           placeholder='z.B.: "Napoleon Dynamite"'
           required
           aria-label="search for a movie"
+          onChange={(event) => handleLeave(event)}
         />
 
         <StyledButton
