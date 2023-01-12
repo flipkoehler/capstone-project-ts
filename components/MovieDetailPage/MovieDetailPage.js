@@ -202,15 +202,15 @@ const MovieTagsUlshort = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
   padding: 0;
-  margin: 0;
+  margin: 0 0 1rem 0;
   font-size: 0.8rem;
 `;
 
 const MovieTagsSmall = styled.li`
   color: var(--smokey-Black);
   list-style: none;
-  padding: 5px 20px;
-  margin: 1rem 1rem 0 0;
+  padding: 0.3rem 1.5rem;
+  margin: 0.5rem 0.5rem 0 0;
   background-color: var(--globalWhite);
   border-radius: 3rem;
   font-size: 0.9rem;
