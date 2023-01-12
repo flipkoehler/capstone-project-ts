@@ -1,14 +1,17 @@
 import { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import ReadMore from "../ReadMoreText/ReadMoreText";
 import { useRouter } from "next/router";
+import AddStepOne from "./AddStepOne";
+import MoviePreview from "./MoviePreview";
+import AddStepTwoAndThree from "./AddStepTwoAndThree";
 
 export default function AddAMovie() {
   const [searchResults, setSearchResults] = useState({ results: [] });
   const [pickedMovie, setPickedMovie] = useState();
   const router = useRouter();
   const TMDB_KEY = process.env.NEXT_PUBLIC_MOVIEAPI_KEY;
+  const [currentStep, setCurrentStep] = useState(0);
 
   // 1 Step: Search for movies that match the searchterm
   async function handleSearch(event) {
@@ -41,9 +44,18 @@ export default function AddAMovie() {
     }
   }
 
-  // 3 Step: Send the generated data to the database
+  // 3 Step: set the current step and check where to "route" the user
+  function handleNext(event, passedData) {
+    event.preventDefault();
+    currentStep === 0 || currentStep === 1
+      ? setCurrentStep(currentStep + 1)
+      : handleCreateData(event, passedData);
+  }
+
+  // 4 Step: Send the generated data to the database
   async function handleCreateData(event, passedData) {
     event.preventDefault();
+
     await fetch("/api/", {
       method: "POST",
       headers: {
@@ -55,156 +67,92 @@ export default function AddAMovie() {
   }
 
   return (
-    <section>
+    <StyledContentBox>
+      <h1>Film hinzufügen 🪄</h1>
+      <p>Schritt {currentStep + 1} von 3</p>
+      {/* Preview of the picked Movie  */}
+      {pickedMovie !== undefined && <MoviePreview pickedMovie={pickedMovie} />}
       {/* Search Field  */}
-      <StyledForm onSubmit={() => handleSearch(event)}>
-        <h1>Einen neuen Film hinzufügen 🪄</h1>
-        <p>
-          Suche nach dem passenden Film und wähle aus der Ergebnisliste mit
-          Klick den richtigen Film aus.
-        </p>
-        <label htmlFor="searchMovie"> </label>
-        <StyledSearchBarWrapper>
-          <StyledInput
-            type="text"
-            name="searchMovie"
-            placeholder='z.B.: "Napoleon Dynamite"'
-            required
-            aria-label="search for a movie"
-          />
+      {currentStep === 0 ? (
+        <AddStepOne
+          onHandleSearch={handleSearch}
+          searchResults={searchResults}
+        />
+      ) : currentStep === 1 ? (
+        <AddStepTwoAndThree
+          onHandleNext={handleNext}
+          pickedMovie={pickedMovie}
+          category={"mood"}
+        />
+      ) : currentStep === 2 ? (
+        <AddStepTwoAndThree
+          onHandleNext={handleNext}
+          pickedMovie={pickedMovie}
+          category={"occasion"}
+        />
+      ) : currentStep === 3 ? (
+        <p>Step 4</p>
+      ) : (
+        <p>Ende</p>
+      )}
 
-          <StyledButton
-            type="submit"
-            aria-label="search for the movie"
-            name="search-movie"
-          >
-            <Image
-              src={"/images/clarity_search-line.svg"}
-              width={25}
-              height={25}
-              alt="Search Icon"
-            />
-          </StyledButton>
-        </StyledSearchBarWrapper>
-        {/* Notes that only will show up if the search term matches one of the conditions */}
-        <StyledSpan>
-          {searchResults.results.length > 19 &&
-            "Der eingegeben Suchbegriff hat mehr als 20 Treffer. Bitte verfeinere deine Eingabe für bessere Suchergebnisse."}
-          {searchResults.total_pages === 0 &&
-            "Es wurde kein passender Eintrag zu deinem Suchbegriff gefunden. Bitte verwende einen anderen Suchbegriff."}
-        </StyledSpan>
-        {/* Preview of the picked Movie  */}
-        {pickedMovie !== undefined && (
-          <StyledPickedMoviePreview>
-            <>
-              <div>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500/${pickedMovie.poster_path}`}
-                  alt={pickedMovie.title}
-                  width={142}
-                  height={213}
-                  priority
-                />
-              </div>
-              <div>
-                <p>Deine aktuelle Filmauswahl:</p>
-                <h2>{pickedMovie.title}</h2>
-                <p>{pickedMovie.runtime} Minuten</p>
-                <p>Aus dem Jahr: {pickedMovie.release_date.slice(0, 4)} </p>
-              </div>
-
-              <ReadMore>{pickedMovie.overview}</ReadMore>
-            </>
-          </StyledPickedMoviePreview>
-        )}
-      </StyledForm>
       {/* Add movie Button */}
-      <form onSubmit={() => handleCreateData(event, pickedMovie)}>
-        <button
-          type="submit"
-          disabled={pickedMovie !== undefined ? false : true}
-        >
-          Film hinzufügen
-        </button>
-      </form>
+      {currentStep === 0 && (
+        <form onSubmit={() => handleNext(event, pickedMovie)}>
+          <button
+            type="submit"
+            disabled={pickedMovie !== undefined ? false : true}
+          >
+            Weiter
+          </button>
+        </form>
+      )}
       {/* Movie list based on the search term */}
-      <StyledSearchResultParent aria-label="search results">
-        {searchResults.results.map((movie) => {
-          return (
-            <StyledSearchResult
-              key={movie.id}
-              onClick={() => getDetailData(movie)}
-            >
-              {movie.poster_path ? (
-                <ImageDiv>
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={movie.title}
-                    width={40}
-                    height={50}
-                    priority
-                  />
-                </ImageDiv>
-              ) : (
-                <ImageDiv></ImageDiv>
-              )}
-              {movie.title} ({movie.release_date?.slice(0, 4)})
-            </StyledSearchResult>
-          );
-        })}
-      </StyledSearchResultParent>
-    </section>
+
+      {currentStep === 0 && (
+        <>
+          {searchResults.results.length > 0 && (
+            <StyledHeadlineSearchResultsh2>
+              Deine Suchergebnisse:
+            </StyledHeadlineSearchResultsh2>
+          )}
+          <StyledSearchResultParent aria-label="search results">
+            {searchResults.results.map((movie) => {
+              return (
+                <StyledSearchResult
+                  key={movie.id}
+                  onClick={() => getDetailData(movie)}
+                >
+                  {movie.poster_path ? (
+                    <ImageDiv>
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                        alt={movie.title}
+                        width={40}
+                        height={50}
+                        priority
+                      />
+                    </ImageDiv>
+                  ) : (
+                    <ImageDiv></ImageDiv>
+                  )}
+                  {movie.title} ({movie.release_date?.slice(0, 4)})
+                </StyledSearchResult>
+              );
+            })}
+          </StyledSearchResultParent>
+        </>
+      )}
+    </StyledContentBox>
   );
 }
 
-// Searchbar
-const StyledForm = styled.form`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const StyledSearchBarWrapper = styled.div`
-  display: flex;
-  border: 0.1rem solid var(--smokeyBlack);
-  border-radius: 1.5rem;
-  align-items: center;
-  width: 100%;
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  height: 1.5rem;
-  border: none;
-  margin-left: 0.5rem;
-  // eliminates the outline when focused and the background color when autofill is used
-  &:focus {
-    outline: none;
+const StyledContentBox = styled.div`
+  max-width: 900px;
+  margin: 2rem;
+  @media (max-width: 650px) {
+    margin: 2rem 1rem;
   }
-  &:-webkit-autofill,
-  -webkit-autofill:hover,
-  -webkit-autofill:focus {
-    box-shadow: 0 0 0px 4rem #ffff inset;
-  }
-`;
-const StyledButton = styled.button`
-  background-color: transparent;
-  box-shadow: none;
-  width: 4rem;
-  height: 2rem;
-  border: none;
-  margin: 0px;
-  &:hover {
-    background-color: transparent;
-    cursor: pointer;
-  }
-`;
-
-// Notes for the search result
-const StyledSpan = styled.span`
-  font-size: 0.8rem;
-  font-style: italic;
-  width: 100%;
-  margin-top: 1rem;
 `;
 
 // Search Result List
@@ -215,13 +163,14 @@ const StyledSearchResultParent = styled.div`
 
 const StyledSearchResult = styled.div`
   display: flex;
-  border: 2px solid var(--globalWhite);
-  background-color: var(--lightGray);
+  border: 2px solid var(--lightGray);
+  background-color: var(--globalWhite);
   width: 50%;
   padding: 3px;
 
   &:hover {
     background-color: var(--lightGray);
+    border: 2px solid var(--darkBlue);
     cursor: pointer;
   }
   @media (max-width: 650px) {
@@ -229,18 +178,10 @@ const StyledSearchResult = styled.div`
   }
 `;
 
-const ImageDiv = styled.div`
-  width: 60px;
+const StyledHeadlineSearchResultsh2 = styled.h2`
+  margin-top: 2.5rem;
 `;
 
-// Movie Preview Site
-const StyledPickedMoviePreview = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  border: 2px solid var(--lightGray);
-  padding: 1rem;
-  margin: 1.2rem;
-  border-radius: 1.2rem;
-  box-shadow: 0px -17px 20px rgba(0, 0, 0, 0.07);
+const ImageDiv = styled.div`
+  width: 60px;
 `;

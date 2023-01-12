@@ -18,8 +18,7 @@ export const questionAnswer = [
       {
         id: 2,
         answer: "Normale Lauflänge",
-        information:
-          "Der klassiche Durchschnitt. Nicht zu lang - nicht zu kurz",
+        information: "Der klassiche Durchschnitt",
         value: {
           min: 100,
           max: 139,
@@ -55,8 +54,7 @@ export const questionAnswer = [
       {
         id: 5,
         answer: "Oldies",
-        information:
-          "Perlen der Filmgeschichte. Manchmal auch in Schwarz weiß, aber gut geeignet für die heutige Zeit",
+        information: "Perlen der Filmgeschichte",
         value: {
           min: 0,
           max: 1987,
@@ -143,14 +141,14 @@ export const questionAnswer = [
     answerOptions: [
       {
         id: 15,
-        answer: "Ich schaue den Film alleine",
+        answer: "Ich schaue alleine",
         information: "Es werden alle Filme angezeigt",
         value: 1,
         checked: false,
       },
       {
         id: 16,
-        answer: "Zusammen mit Freunden",
+        answer: "Mit Freunden",
         information: "Ihr könnt zwischendurch auch mal quatschen",
         value: 3,
         checked: false,
@@ -171,7 +169,7 @@ export const questionAnswer = [
       },
       {
         id: 19,
-        answer: "Mit meiner Familie",
+        answer: "Mit der Familie",
         information: "weniger nackte Haut, weniger unangenehme Situationen",
         value: 5,
         checked: false,

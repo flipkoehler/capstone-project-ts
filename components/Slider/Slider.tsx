@@ -42,7 +42,7 @@ export default function Slider({ sliderContent }: SliderContentArrayType) {
         <StyledSliderContainerParentDiv>
           {sliderContent.map((content) => {
             return (
-              <StyledSliderItemDiv>
+              <StyledSliderItemDiv key={content.id}>
                 <StyledHeadlineDiv>
                   <StyledNumberDiv>{content.id}</StyledNumberDiv>
                   <h3>{content.title}</h3>

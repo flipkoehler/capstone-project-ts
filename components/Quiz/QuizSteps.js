@@ -101,7 +101,6 @@ export default function QuizSteps({
     </form>
   );
 }
-
 // CSS Styling
 
 // Headline
@@ -152,7 +151,6 @@ const StyledBottomDiv = styled.div`
 const StyledAnswerWrapperParentDiv = styled.div`
   max-width: 65%;
   flex: 65%;
-
   @media (max-width: ${quizBreakpoint}) {
     max-width: 100%;
   }
