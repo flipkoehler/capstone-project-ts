@@ -12,7 +12,6 @@ export default function MovieDetailPage({ passedMovie }) {
     <>
       <Header />
 
-      {/* Main Content Styling */}
       <MainContentDiv>
         <ImageWrap>
           <StyledImage
@@ -138,8 +137,18 @@ const StyledImage = styled(Image)`
   padding: 2rem;
 
   @media screen and (max-width: ${breakpoint}) {
+    max-height: 35rem;
+    object-fit: cover;
+    object-position: 0% top;
+    border-radius: 0px;
+    margin: 0 0 -5rem 0;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 450px) {
     max-height: 28rem;
     object-fit: cover;
+    object-position: 0% top;
     border-radius: 0px;
     margin: 0 0 -5rem 0;
     padding: 0;
@@ -155,7 +164,7 @@ const StyledH1 = styled.h1`
 const RecommendationContenBoxDiv = styled.section`
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem 1rem 5rem 1rem;
+  margin: 0 auto;
 `;
 
 const Styledh3 = styled.h3`
@@ -167,13 +176,13 @@ const CommentStyledSpan = styled.span`
   padding: 0 0.2rem;
   font-style: italic;
   flex-wrap: wrap;
-  flex: 60%;
+  flex: 70%;
 `;
 
 const RecommendationContent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex: 60%;
+  flex: 70%;
   @media screen and (max-width: ${breakpoint}) {
     flex: 100%;
   }
