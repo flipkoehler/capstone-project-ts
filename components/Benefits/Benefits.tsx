@@ -1,7 +1,18 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-export default function Benefits() {
+interface BenefitContent {
+  id: number;
+  value: string;
+  alt: string;
+  src: string;
+}
+
+type BenefitContentArrayType = {
+  benefitContent: BenefitContent[];
+};
+
+export default function Benefits({ benefitContent }: BenefitContentArrayType) {
   return (
     <>
       <StyledBoxAroundDiv>
